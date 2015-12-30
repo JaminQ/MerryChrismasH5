@@ -1110,8 +1110,10 @@
                         });
 
                         // 初始化第1页的操作
+                        music_part1.play(); // 强制播放，解决一些加载问题
                         setTimeout(function(){
                             $down_logo.fadeIn();
+                            music_part1.play(); // 强制播放，解决一些加载问题
                             $('#page1').removeClass('swiper-no-swiping');
                         }, 3000);
 
