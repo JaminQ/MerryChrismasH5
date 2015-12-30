@@ -5,99 +5,500 @@
     <title>Merry Chrismas</title>
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.2.7/css/swiper.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.0/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/swiper.min.css">
 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.2.7/js/swiper.min.js"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="lib/swiper.min.js"></script>
+    <script type="text/javascript" src="lib/jquery-1.11.2.min.js"></script>
 
     <style>
+        /***********************全局reset***********************/
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, font, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            outline: 0;
+            font-size: 100%;
+            vertical-align: baseline;
+            background: transparent;
+        }
+
+        body {
+            line-height: 1;
+        }
+
+        ol, ul {
+            list-style: none;
+        }
+
+        blockquote, q {
+            quotes: none;
+        }
+
+        blockquote:before, blockquote:after, q:before, q:after {
+            content: '';
+            content: none;
+        }
+
+        /* remember to define focus styles! */
+        :focus {
+            outline: 0;
+        }
+
+        /* remember to highlight inserts somehow! */
+        ins {
+            text-decoration: none;
+        }
+
+        del {
+            text-decoration: line-through;
+        }
+
+        /* tables still need 'cellspacing="0"' in the markup */
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        /* animate */
+        .animated {
+            -webkit-animation-duration: 1s;
+            animation-duration: 1s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+        }
+        .animate {
+            display: none;
+        }
+
+        @-webkit-keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+        .fadeIn {
+            -webkit-animation-name: fadeIn;
+            animation-name: fadeIn;
+        }
+
+        @-webkit-keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+            }
+        }
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+            }
+        }
+        .fadeOut {
+            -webkit-animation-name: fadeOut;
+            animation-name: fadeOut;
+        }
+
+        @-webkit-keyframes fadeInOut {
+            0% {
+                opacity: 0;
+            }
+
+            30% {
+                opacity: 1;
+            }
+
+            70% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+            }
+
+            30% {
+                opacity: 1;
+            }
+
+            70% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+        .fadeInOut {
+            -webkit-animation-name: fadeInOut;
+            animation-name: fadeInOut;
+        }
+        .duration1s {
+            -webkit-animation-duration: 1s;
+            animation-duration: 1s;
+        }
+        .duration2s {
+            -webkit-animation-duration: 2s;
+            animation-duration: 2s;
+        }
+        .duration3s {
+            -webkit-animation-duration: 3s;
+            animation-duration: 3s;
+        }
+        .duration4s {
+            -webkit-animation-duration: 4s;
+            animation-duration: 4s;
+        }
+        .duration5s {
+            -webkit-animation-duration: 5s;
+            animation-duration: 5s;
+        }
+        .duration6s {
+            -webkit-animation-duration: 6s;
+            animation-duration: 6s;
+        }
+        .duration7s {
+            -webkit-animation-duration: 7s;
+            animation-duration: 7s;
+        }
+        .duration8s {
+            -webkit-animation-duration: 8s;
+            animation-duration: 8s;
+        }
+        .duration9s {
+            -webkit-animation-duration: 9s;
+            animation-duration: 9s;
+        }
+        .duration10s {
+            -webkit-animation-duration: 10s;
+            animation-duration: 10s;
+        }
+        .delay1s {
+            -webkit-animation-delay: 1s;
+            animation-delay: 1s;
+        }
+        .delay2s {
+            -webkit-animation-delay: 2s;
+            animation-delay: 2s;
+        }
+        .delay3s {
+            -webkit-animation-delay: 3s;
+            animation-delay: 3s;
+        }
+        .delay4s {
+            -webkit-animation-delay: 4s;
+            animation-delay: 4s;
+        }
+        .delay5s {
+            -webkit-animation-delay: 5s;
+            animation-delay: 5s;
+        }
+        .delay6s {
+            -webkit-animation-delay: 6s;
+            animation-delay: 6s;
+        }
+        .delay7s {
+            -webkit-animation-delay: 7s;
+            animation-delay: 7s;
+        }
+        .delay8s {
+            -webkit-animation-delay: 8s;
+            animation-delay: 8s;
+        }
+        .delay9s {
+            -webkit-animation-delay: 9s;
+            animation-delay: 9s;
+        }
+        .delay10s {
+            -webkit-animation-delay: 10s;
+            animation-delay: 10s;
+        }
+        .delay11s {
+            -webkit-animation-delay: 11s;
+            animation-delay: 11s;
+        }
+        .delay12s {
+            -webkit-animation-delay: 12s;
+            animation-delay: 12s;
+        }
+        .delay13s {
+            -webkit-animation-delay: 13s;
+            animation-delay: 13s;
+        }
+        .delay14s {
+            -webkit-animation-delay: 14s;
+            animation-delay: 14s;
+        }
+        .delay15s {
+            -webkit-animation-delay: 15s;
+            animation-delay: 15s;
+        }
+        .delay16s {
+            -webkit-animation-delay: 16s;
+            animation-delay: 16s;
+        }
+        .delay17s {
+            -webkit-animation-delay: 17s;
+            animation-delay: 17s;
+        }
+        .delay18s {
+            -webkit-animation-delay: 18s;
+            animation-delay: 18s;
+        }
+        .delay19s {
+            -webkit-animation-delay: 19s;
+            animation-delay: 19s;
+        }
+        .delay20s {
+            -webkit-animation-delay: 20s;
+            animation-delay: 20s;
+        }
+        .delay25s {
+            -webkit-animation-delay: 25s;
+            animation-delay: 25s;
+        }
+        .delay30s {
+            -webkit-animation-delay: 30s;
+            animation-delay: 30s;
+        }
+        .delay35s {
+            -webkit-animation-delay: 35s;
+            animation-delay: 35s;
+        }
+        .delay38s {
+            -webkit-animation-delay: 38s;
+            animation-delay: 38s;
+        }
+
+        /* page styles */
         html, body {
             position: relative;
             height: 100%;
         }
         body {
-            background: #eee;
-            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+            font-family: Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif;
             font-size: 14px;
-            color:#000;
+            color: #000;
             margin: 0;
             padding: 0;
         }
+
         .swiper-container {
             width: 100%;
             height: 100%;
         }
         .swiper-slide {
-            background-position: center;
-            background-size: cover;
+            display: flex;
             text-align: center;
-            background-color: white;
+            justify-content: center;
+            align-items: center;
         }
-        .duration3s {
-            -webkit-animation-duration: 3s;
-            -o-animation-duration: 3s;
-            animation-duration: 3s;
+        .swiper-slide img {
+            width: 100%;
+            position: absolute;
+            left: 0;
         }
-        .delay2s {
-            -webkit-animation-delay: 2s;
-            -o-animation-delay: 2s;
-            animation-delay: 2s;
+        .swiper-slide img.bottom {
+            bottom: 0;
         }
-        .animate {
-            display: none;
+        .swiper-slide img.top {
+            top: 0;
         }
+
         #music {
             position: absolute;
             background-color: transparent;
             color: white;
             z-index: 999;
         }
+
         #page1 {
-            background-color: #D25E5F;
-            color: white;
+            background: #FBF4E5 url('images/0-1.png') bottom center no-repeat;
+            background-size: 100%;
         }
-        #page1 .test {
-            margin-top: 40%;
-        }
+
         #page2 {
-            background-color: #FED967;
-            color: white;
+            background: #FBF4E5 url('images/1-1.png') center center no-repeat;
+            background-size: 100%;
         }
-        #page2 .test {
-            margin-top: 40px;
-        }
+
         #page3 {
-            background-color: #FED967;
-            color: white;
+            background: #FDD86F url('images/2-1.png') center center no-repeat;
+            background-size: 100%;
         }
-        #page3 .test {
-            margin-top: 40px;
-        }
+
         #page4 {
-            background-color: #FFB367;
-            color: white;
+            background: #FDD86F url('images/3-1.png') center center no-repeat;
+            background-size: 100%;
         }
-        #page5 {
-            background-color: #FED967;
-            color: white;
+
+        #page5 .sub_page {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
         }
+
+        #page5 #page5_sub_page1 {
+            background: #FDD86F url('images/4-1.png');
+            background-size: 100%;
+            z-index: 99;
+        }
+        #page5 #page5_sub_page1 #redBagClick {
+            width: 25%;
+            height: 15%;
+            position: absolute;
+            bottom: 30.5%;
+            left: 37.5%;
+            border-radius: 50%;
+            cursor: pointer;
+            outline: none;
+        }
+
+        #page5 #page5_sub_page2 {
+            background: #FDD86F url('images/4-1.png');
+            background-size: 100%;
+            z-index: 98;
+        }
+        #page5 #page5_sub_page2 .question_wrapper {
+            position: absolute;
+            left: 0;
+            top: 44%;
+            width: 100%;
+        }
+        #page5 #page5_sub_page2 .question_wrapper #question_index {
+            color: white;
+            font-size: 20px;
+        }
+        #page5 #page5_sub_page2 .question_wrapper #question_title {
+            color: #F8D36A;
+            line-height: 22px;
+            width: 60%;
+            margin: 15px auto 0;
+            text-align: left;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #D34649;
+            box-shadow: 0 2px 1px #C63B3F inset, 0 -2px 1px #EB6668 inset;
+            white-space: pre-wrap;
+        }
+        #page5 #page5_sub_page2 .question_wrapper #question_item {
+            color: #F8D36A;
+            overflow: hidden;
+            width: 60%;
+            margin: 25px auto 0;
+        }
+        #page5 #page5_sub_page2 .question_wrapper #question_item div {
+            float: left;
+            width: 50%;
+            text-align: left;
+            box-sizing: border-box;
+            display: flex;
+            align-items: flex-start;
+        }
+        #page5 #page5_sub_page2 .question_wrapper #question_item div#question_item1 {
+            padding-right: 2%;
+        }
+        #page5 #page5_sub_page2 .question_wrapper #question_item div#question_item2 {
+            padding-left: 2%;
+        }
+        #page5 #page5_sub_page2 .question_wrapper #question_item div i {
+            width: 20px;
+            height: 20px;
+            border-radius: 5px;
+            background-color: #D34649;
+            box-shadow: 0 2px 1px #C63B3F inset, 0 -2px 1px #EB6668 inset;
+            display: inline-block;
+        }
+        #page5 #page5_sub_page2 .question_wrapper #question_item div i.current {
+            background: #D34649 url('images/5-2.png') center center no-repeat;
+            background-size: 15px 20px;
+        }
+        #page5 #page5_sub_page2 .question_wrapper #question_item div span {
+            display: inline-block;
+            line-height: 20px;
+            margin-left: 8px;
+        }
+
+        #page5 #page5_sub_page3 {
+            background: #FBF4E5 url('images/6-1.png') center center no-repeat;
+            background-size: 100%;
+            z-index: 97;
+        }
+        #page5 #page5_sub_page3 p {
+            position: absolute;
+            width: 100%;
+            bottom: 30%;
+            color: #886C50;
+            font-size: 16px;
+        }
+        #page5 #page5_sub_page3 p em {
+            font-size: 32px;
+            display: inline-block;
+            margin: 0 8px;
+            color: #FD7073;
+            font-style: normal;
+        }
+
         #page6 {
-            background-color: #FED967;
-            color: white;
+            background-color: #FBF4E5;
         }
-        #page7 {
-            background-color: #FBF4E4;
-            color: white;
+
+        #page7 .sub_page {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
         }
-        #page8 {
-            background-color: #FBF4E4;
-            color: white;
+
+        #page7 #page7_sub_page1 {
+            background: #FBF4E5 url('images/8-1.png') center center no-repeat;
+            background-size: 100%;
+            z-index: 99;
         }
-        #page9 {
-            background-color: #FBF4E4;
-            color: white;
+        #page7 #page7_sub_page1 #redBagOtherClick {
+            width: 64%;
+            height: 52%;
+            position: absolute;
+            bottom: 24%;
+            left: 18%;
+            cursor: pointer;
+            outline: none;
+        }
+
+        #page7 #page7_sub_page2 {
+            background: #FBF4E5 url('images/9-1.png') center center no-repeat;
+            background-size: 100%;
+            z-index: 98;
         }
     </style>
 </head>
@@ -106,397 +507,596 @@
     <div class="swiper-container">
         <div class="swiper-wrapper">
             <div id="page1" class="swiper-slide">
-                <div class="test">
-                    <p class="animated fadeIn duration3s">快过年了</p>
-                    <p class="animated fadeIn duration3s delay2s">你有多久没回家了？</p>
-                </div>
+                <img class="animated fadeIn duration3s" src="images/0-2.png" />
             </div>
             <div id="page2" class="swiper-slide">
-                <p class="animate test">2</p>
+                <img class="animate fadeInOut duration5s" src="images/1-2.png" />
+                <img class="animate fadeInOut duration5s delay5s" src="images/1-3.png" />
+                <img class="animate fadeInOut duration5s delay10s" src="images/1-4.png" />
+                <img class="animate fadeIn duration1s delay13s bottom" src="images/1-5.png" />
+                <img class="animate fadeIn duration1s delay14s" src="images/1-6.png" />
             </div>
             <div id="page3" class="swiper-slide">
-                <p class="test">3</p>
+                <img class="animate fadeInOut duration5s" src="images/2-2.png" />
+                <img class="animate fadeInOut duration5s delay5s" src="images/2-3.png" />
+                <img class="animate fadeIn duration3s delay10s" src="images/2-4.png" />
             </div>
             <div id="page4" class="swiper-slide">
-                <p>4</p>
+                <img class="animate fadeInOut duration5s" src="images/3-2.png" />
+                <img class="animate fadeInOut duration5s delay5s" src="images/3-3.png" />
+                <img class="animate fadeIn duration3s delay10s" src="images/3-4.png" />
             </div>
             <div id="page5" class="swiper-slide">
-                <p>5</p>
+                <div id="page5_sub_page1" class="sub_page swiper-no-swiping">
+                    <img class="bottom" src="images/4-2.png" />
+                    <div id="redBagClick"></div>
+                </div>
+                <div id="page5_sub_page2" class="sub_page swiper-no-swiping">
+                    <img class="bottom" src="images/5-1.png" />
+                    <div class="question_wrapper">
+                        <p id="question_index"></p>
+                        <p id="question_title"></p>
+                        <div id="question_item">
+                            <div id="question_item1" class="item">
+                                <i></i>
+                                <span></span>
+                            </div>
+                            <div id="question_item2" class="item">
+                                <i></i>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="page5_sub_page3" class="sub_page">
+                    <p>您是第<em>356</em>位帮助我回家的人</p>
+                </div>
+                <div id="page5_sub_page4" class="sub_page"></div>
             </div>
-            <div id="page5" class="swiper-slide">
-                <p>6</p>
+            <div id="page6" class="swiper-slide">
+                <img class="animate fadeInOut duration5s" src="images/7-1.png" />
+                <img class="animate fadeInOut duration5s delay5s" src="images/7-2.png" />
+                <img class="animate fadeInOut duration5s delay10s" src="images/7-3.png" />
+                <img class="animate fadeInOut duration5s delay15s" src="images/7-4.png" />
+                <img class="animate fadeInOut duration5s delay20s" src="images/7-5.png" />
+                <img class="animate fadeInOut duration5s delay25s" src="images/7-6.png" />
+                <img class="animate fadeInOut duration5s delay30s" src="images/7-7.png" />
+                <img class="animate fadeIn duration3s delay35s top" src="images/7-8.png" />
+                <img class="animate fadeIn duration3s delay38s bottom" src="images/7-9.png" />
             </div>
-            <div id="page5" class="swiper-slide">
-                <p>7</p>
-            </div>
-            <div id="page5" class="swiper-slide">
-                <p>8</p>
-            </div>
-            <div id="page5" class="swiper-slide">
-                <p>9</p>
+            <div id="page7" class="swiper-slide swiper-no-swiping">
+                <div id="page7_sub_page1" class="sub_page">
+                    <div id="redBagOtherClick"></div>
+                </div>
+                <div id="page7_sub_page2" class="sub_page">
+                    
+                </div>
             </div>
         </div>
     </div>
 
     <script>
         $(function() {
-            // 题目
-            var question_list = [{
-                "question": "古有“桃园三结义”，今有俄罗斯主导的欧亚经济联盟。于2015年1月1日正式启动的欧亚经济联盟中最初“桃园三结义”的三国分别是( )",
-                "answer": [{
-                    "content": "俄罗斯、白俄罗斯、哈萨克斯坦",
-                    "correct": true
-                }, {
-                    "content": "俄罗斯、黑俄罗斯、加里敦斯坦",
-                    "correct": false
-                }]
-            }, {
-                "question": "2015年1月7日，法国著名讽刺杂志《查理周刊》被恐怖分子袭击，造成12人死亡的惨剧引起全球关注，《查理周刊》起名为Charlie Hebdo是( )",
-                "answer": [{
-                    "content": "为纪念法国著名的戴高乐将军（Charles André Joseph Marie de Gaulle）",
-                    "correct": true
-                }, {
-                    "content": "因为英国查尔斯王子（(HRH Prince Charles)创立了该杂志",
-                    "correct": false
-                }]
-            }, {
-                "question": "泰国前总理英拉是政坛难得一见的人气美女政治家，却于今年1月23日被弹劾。其被控原因在大米收购项目中存在渎职行为，导致泰国失去了( )",
-                "answer": [{
-                    "content": "世界头号大米出口国的桂冠",
-                    "correct": true
-                }, {
-                    "content": "欧洲头号大米出口国的桂冠",
-                    "correct": false
-                }]
-            }, {
-                "question": "李克强国务院总理应瑞士联邦政府邀请出席世界经济论坛2015年年会，李克强曾提到瑞士达沃斯是世界的滑雪圣地。滑雪的三要素分别是( )",
-                "answer": [{
-                    "content": "速度、平衡、勇气",
-                    "correct": true
-                }, {
-                    "content": "更快、更高、更强",
-                    "correct": false
-                }]
-            }, {
-                "question": "2015年2月12日，乌克兰在俄、德、法、乌四国会谈上表示，会谈期间有( )辆坦克由俄罗斯开进乌克兰领土",
-                "answer": [{
-                    "content": "50",
-                    "correct": true
-                }, {
-                    "content": "1亿",
-                    "correct": false
-                }]
-            }, {
-                "question": "2015年2月22日，一艘载有约150名乘客的渡船在( )的帕德玛河上与一艘货船相撞后沉没。",
-                "answer": [{
-                    "content": "布吉岛",
-                    "correct": false
-                }, {
-                    "content": "孟加拉",
-                    "correct": true
-                }]
-            }, {
-                "question": "2015年2月28日，( )前第一副总理涅姆佐夫身中4枪身亡。",
-                "answer": [{
-                    "content": "毛里求斯",
-                    "correct": false
-                }, {
-                    "content": "俄罗斯",
-                    "correct": true
-                }]
-            }, {
-                "question": "2015年3月29日，新加坡前总理李光耀去世，为纪念他，今年新加坡票选出的年度汉字是( )",
-                "answer": [{
-                    "content": "高",
-                    "correct": false
-                }, {
-                    "content": "耀",
-                    "correct": true
-                }]
-            }, {
-                "question": "第七届美洲国家首脑会议上,与奥巴马相会的古巴领导人劳尔•卡斯特罗是( )的弟弟",
-                "answer": [{
-                    "content": "“打不倒的大胡子”菲德尔•卡斯特罗",
-                    "correct": true
-                }, {
-                    "content": "足球运动员冈萨洛•卡斯特罗",
-                    "correct": false
-                }]
-            }, {
-                "question": "希拉里.克林顿正式宣布参加2016年美国总统选举，这次她的竞争对手不包括( )",
-                "answer": [{
-                    "content": "比尔•克林顿",
-                    "correct": true
-                }, {
-                    "content": "伯尼•桑德斯",
-                    "correct": false
-                }]
-            }, {
-                "question": "今年4月20日，习大大又对我们的老朋友巴基斯坦进行了国事访问。在巴基斯坦，描述中巴友谊最耳熟能详的一句话是( )",
-                "answer": [{
-                    "content": "“中巴友谊比山高、比海深、比蜜甜、比钢硬。”",
-                    "correct": true
-                }, {
-                    "content": "“桃花潭水深千尺，不及汪伦送我情”",
-                    "correct": false
-                }]
-            }, {
-                "question": "2015年5月9日，俄罗斯迎来了卫国战争胜利70周年纪念日的好日子。( )的兵哥哥在红场接受检阅时，现场响起《喀秋莎》歌曲。",
-                "answer": [{
-                    "content": "中国",
-                    "correct": true
-                }, {
-                    "content": "蒙古",
-                    "correct": false
-                }]
-            }, {
-                "question": "时光荏苒，斗转星移，可人类，还是那个贪吃的人类，甚至连第42届米兰世博会，也开始以( )为主题了。",
-                "answer": [{
-                    "content": "食物",
-                    "correct": true
-                }, {
-                    "content": "贪吃蛇",
-                    "correct": false
-                }]
-            }, {
-                "question": "命运真是一个奇妙的玩意，中东的那只单峰骆驼一定没有想到，自己身上的MERS冠状病毒居然会不远万里，跑到( )旅了一趟游。",
-                "answer": [{
-                    "content": "韩国",
-                    "correct": true
-                }, {
-                    "content": "火星",
-                    "correct": false
-                }]
-            }, {
-                "question": "中韩两国在2015年6月1日签署了《中华人民共和国政府和大韩民国政府自由贸易协定》之后，我们可以享受的优惠是( )",
-                "answer": [{
-                    "content": "买“千颂伊同款”口红不用再剁手",
-                    "correct": true
-                }, {
-                    "content": "一大波泰剧向中国市场来袭",
-                    "correct": false
-                }]
-            }, {
-                "question": "不怕神一样的对手，就怕猪一样的队友。今年，足球教皇也崩溃了一下。2015年6月3日，连任仅( )的国际足联主席布拉特宣布辞职。",
-                "answer": [{
-                    "content": "四天",
-                    "correct": true
-                }, {
-                    "content": "四十年",
-                    "correct": false
-                }]
-            }, {
-                "question": "听说美国心塞了？万万没想到，亚投行接到的第28份“申请书”，竟是来自美国的“好哥们”——( )",
-                "answer": [{
-                    "content": "腐国",
-                    "correct": true
-                }, {
-                    "content": "霓虹国",
-                    "correct": false
-                }]
-            }, {
-                "question": "习大大应普京邀请，参加了7月8日金砖国家领导人第七次会晤。热情友好的俄罗斯小伙伴按传统敬献( )，请习大大品尝。",
-                "answer": [{
-                    "content": "面包和盐",
-                    "correct": true
-                }, {
-                    "content": "馒头和葱",
-                    "correct": false
-                }]
-            }, {
-                "question": "有一个国家，它有阳光沙滩和帅哥美女，偏偏没有美国大使馆。今年7月，它和美国恢复外交关系，( )人民也是有美国大使馆的人了。",
-                "answer": [{
-                    "content": "英国",
-                    "correct": false
-                }, {
-                    "content": "古巴",
-                    "correct": true
-                }]
-            }, {
-                "question": "美国“新视野”号探测器近距离飞过冥王星，历经( )，终于与冥王星“相见”，简直比牛郎织女还要悲惨。",
-                "answer": [{
-                    "content": "9年",
-                    "correct": true
-                }, {
-                    "content": "3天",
-                    "correct": false
-                }]
-            }, {
-                "question": "7月31日，国际奥委会主席巴赫宣布：( )获得2022年冬季奥运会举办权，成为史上最酷炫的“双奥”城市。",
-                "answer": [{
-                    "content": "北京",
-                    "correct": true
-                }, {
-                    "content": "东京",
-                    "correct": false
-                }]
-            }, {
-                "question": "伊朗核问题六国在7月１４日达成了全面解决伊朗核问题的协议，这对世界来说是件( )的事情。",
-                "answer": [{
-                    "content": "累觉不爱",
-                    "correct": false
-                }, {
-                    "content": "喜大普奔",
-                    "correct": true
-                }]
-            }, {
-                "question": "日本首相( )发表战后70周年讲话中没有直接向中国人民道歉，也怪不得安倍昭惠深夜与男艺人幽会。",
-                "answer": [{
-                    "content": "安倍晋三",
-                    "correct": true
-                }, {
-                    "content": "蜡笔小新",
-                    "correct": false
-                }]
-            }, {
-                "question": "难民问题对欧洲来说是严峻的挑战。民间纷纷伸出援助之手，德国汉堡人民成立捐助组织，卷福男神呼吁大家捐助( )。",
-                "answer": [{
-                    "content": "叙利亚",
-                    "correct": true
-                }, {
-                    "content": "美国",
-                    "correct": false
-                }]
-            }, {
-                "question": "今年是中国人民抗日战争胜利暨世界人民反法西斯战争胜利７０周年， 9月３日中国政府在( )举行盛大阅兵仪式。",
-                "answer": [{
-                    "content": "天安门广场",
-                    "correct": true
-                }, {
-                    "content": "人民广场",
-                    "correct": false
-                }]
-            }, {
-                "question": "岛国又闹腾了！12万日本群众抗议政府执行新安保法，反对首相的标语被绑在气球上升上了天空，但这也未能阻止其通过新安保法，早知道应该把( )挂在气球上。",
-                "answer": [{
-                    "content": "安倍晋三",
-                    "correct": true
-                }, {
-                    "content": "苍井空",
-                    "correct": false
-                }]
-            }, {
-                "question": "9月22日，模范CP习大大携手彭麻麻访问美国，９月23日，国家主席习近平参观美国塔科马市林肯中学，接受学生们赠送的礼物( )。",
-                "answer": [{
-                    "content": "１号橄榄球球服",
-                    "correct": true
-                }, {
-                    "content": "美式橄榄球",
-                    "correct": false
-                }]
-            }, {
-                "question": "9月28日，美国航天局宣布，在火星表面发现了有( )活动的证据。",
-                "answer": [{
-                    "content": "液态水",
-                    "correct": true
-                }, {
-                    "content": "雾霾",
-                    "correct": false
-                }]
-            }, {
-                "question": "9月3日，法国司法当局证实，在西印度洋留尼汪岛发现的机翼残骸属于去年３月失踪的( )航班。",
-                "answer": [{
-                    "content": "马航ＭＨ３７０",
-                    "correct": true
-                }, {
-                    "content": "法航客机",
-                    "correct": false
-                }]
-            }, {
-                "question": "土豪国( )今年发生了一件悲剧的事情，其圣城麦加附近发生朝觐者踩踏事故，致上千人死亡，愿逝者安息。",
-                "answer": [{
-                    "content": "沙特阿拉伯",
-                    "correct": true
-                }, {
-                    "content": "津巴布韦",
-                    "correct": false
-                }]
-            }, {
-                "question": "8月30日，俄罗斯开始在叙利亚境内展开针对( )的军事行动。9月，俄罗斯女主播便在报道天气时，说叙利亚最近天气“最适合被俄罗斯空袭”，真是吓坏宝宝了。",
-                "answer": [{
-                    "content": "ISIS",
-                    "correct": true
-                }, {
-                    "content": "本拉登",
-                    "correct": false
-                }]
-            }, {
-                "question": "10月5日，( )获得2015年诺贝尔生理学或医学奖，喜大普奔！",
-                "answer": [{
-                    "content": "屠呦呦",
-                    "correct": true
-                }, {
-                    "content": "莫言",
-                    "correct": false
-                }]
-            }, {
-                "question": "10月10日,朝鲜举行阅兵活动,庆祝朝鲜劳动党建党70周年。网友称，朝鲜的( )是魔鬼的步伐，摩擦摩擦！",
-                "answer": [{
-                    "content": "鹅式步伐",
-                    "correct": true
-                }, {
-                    "content": "小碎步",
-                    "correct": false
-                }]
-            }, {
-                "question": "( )和11个亚太国家就“跨太平洋战略经济伙伴协定”协议达成一致。",
-                "answer": [{
-                    "content": "泰国",
-                    "correct": false
-                }, {
-                    "content": "美国",
-                    "correct": true
-                }]
-            }, {
-                "question": "史上最强自拍新鲜出炉！在习大大访英期间，英超球员( )晒出与习大大和卡梅伦的自拍，简直人生赢家！",
-                "answer": [{
-                    "content": "史努比",
-                    "correct": false
-                }, {
-                    "content": "阿圭罗",
-                    "correct": true
-                }]
-            }, {
-                "question": "今年10月，( )教科文组织将《南京大屠杀档案》列入世界记忆名录，勿忘国耻，铭记历史。",
-                "answer": [{
-                    "content": "欧盟",
-                    "correct": false
-                }, {
-                    "content": "联合国",
-                    "correct": true
-                }]
-            }, {
-                "question": "荷兰安全委员会就马航MH17( )发布最终调查报告，解答事故相关的几大疑云。但有关幕后黑手的身份，暂未知晓。",
-                "answer": [{
-                    "content": "空难",
-                    "correct": true
-                }, {
-                    "content": "地震",
-                    "correct": false
-                }]
-            }, {
-                "question": "10月17日，美国军舰( )放着宽阔的国际航道不走，绕道中国南沙群岛有关岛礁邻近海域，真是赤裸裸的挑衅。",
-                "answer": [{
-                    "content": "“拉森号”",
-                    "correct": true
-                }, {
-                    "content": "泰坦尼克号",
-                    "correct": false
-                }]
-            }];
+            $.ajax({
+                "url": "http://wx.china.cn/prizesn.do",
+                "dataType": "jsonp",
+                "success": function(json) {
+                    if(json.result == 'success'){
+                        // 题目
+                        var question_list = [{
+                            "question": "15年，(    )三国签署了今年启动的欧亚经济联盟条约",
+                            "answer": [{
+                                "content": "俄 白 哈",
+                                "correct": true
+                            }, {
+                                "content": "魏 蜀 吴",
+                                "correct": false
+                            }]
+                        }, {
+                            "question": "15年，法国讽刺杂志(    )遭恐袭引全球关注",
+                            "answer": [{
+                                "content": "《查理周刊》",
+                                "correct": true
+                            }, {
+                                "content": "《时尚芭莎》",
+                                "correct": false
+                            }]
+                        }, {
+                            "question": "15年，泰国前总理英拉因(    )被弹劾",
+                            "answer": [{
+                                "content": "大米收购案",
+                                "correct": true
+                            }, {
+                                "content": "长得美",
+                                "correct": false
+                            }]
+                        }, {
+                            "question": "15年，滑雪胜地(    )举行世界经济论坛2015年年会",
+                            "answer": [{
+                                "content": "瑞士达沃斯",
+                                "correct": true
+                            }, {
+                                "content": "迪士尼",
+                                "correct": false
+                            }]
+                        }, {
+                            "question": "15年，俄德法乌四国会谈间50辆(    )由俄开进乌领土",
+                            "answer": [{
+                                "content": "坦克",
+                                "correct": true
+                            }, {
+                                "content": "变形金刚",
+                                "correct": false
+                            }]
+                        }, {
+                            "question": "15年，载有约150名乘客的渡船在(    )帕德玛河沉没",
+                            "answer": [{
+                                "content": "孟加拉",
+                                "correct": true
+                            }, {
+                                "content": "布吉岛",
+                                "correct": false
+                            }]
+                        }, {
+                            "question": "15年，(    )前总理李光耀去世",
+                            "answer": [{
+                                "content": "新加坡",
+                                "correct": true
+                            }, {
+                                "content": "吉隆坡",
+                                "correct": false
+                            }]
+                        }, {
+                            "question": "15年，美古两国领导人时隔(    )再聚首",
+                            "answer": [{
+                                "content": "半世纪",
+                                "correct": true
+                            }, {
+                                "content": "5千年",
+                                "correct": false
+                            }]
+                        }, {
+                            "question": "15年，希拉里正式宣布参加2016年美国(    )",
+                            "answer": [{
+                                "content": "总统大选",
+                                "correct": true
+                            }, {
+                                "content": "州长大选",
+                                "correct": false
+                            }]
+                        }, {
+                            "question": "15年，习大大又对老朋友(    )进行了国事访问",
+                            "answer": [{
+                                "content": "巴基斯坦",
+                                "correct": true
+                            }, {
+                                "content": "巴勒斯坦",
+                                "correct": false
+                            }]
+                        }, {
+                            "question": "15年，俄罗斯迎来纪念(    )胜利70周年",
+                            "answer": [{
+                                "content": "卫国战争",
+                                "correct": true
+                            }, {
+                                "content": "抗日战争",
+                                "correct": false
+                            }]
+                        }, {
+                            "question": "吃货天堂——第42届米兰世博会主题为( )",
+                            "answer": [{
+                                "content": "食物",
+                                "correct": true
+                            }, {
+                                "content": "贪吃蛇",
+                                "correct": false
+                            }]
+                        }, {
+                            "question": "15年，1只中东骆驼带着MERS病毒到(    )旅了趟游",
+                            "answer": [{
+                                "content": "火星",
+                                "correct": true
+                            }, {
+                                "content": "韩国",
+                                "correct": false
+                            }]
+                        }, {
+                            "question": "15年，中韩FTA签署，买(    )同款终于不用再剁手",
+                            "answer": [{
+                                "content": "千颂伊",
+                                "correct": true
+                            }, {
+                                "content": "琅琊榜",
+                                "correct": false
+                            }]
+                        }, {
+                            "question": "15年，连任仅(    )的国际足联主席布拉特辞职",
+                            "answer": [{
+                                "content": "四天",
+                                "correct": true
+                            }, {
+                                "content": "四十年",
+                                "correct": false
+                            }]
+                        }, {
+                            "question": "美国心塞了？“好哥们”(    )抢先加入亚投行",
+                            "answer": [{
+                                "content": "腐国",
+                                "correct": true
+                            }, {
+                                "content": "霓虹国",
+                                "correct": false
+                            }]
+                        }, {
+                            "question": "习大大应(    )邀请，参加金砖国家领导人第七次会晤",
+                            "answer": [{
+                                "content": "普京",
+                                "correct": true
+                            }, {
+                                "content": "朴槿惠",
+                                "correct": false
+                            }]
+                        }, {
+                            "question": "15年，(    )和美国恢复外交后有了美国大使馆",
+                            "answer": [{
+                                "content": "英国",
+                                "correct": false
+                            }, {
+                                "content": "古巴",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "“新视野”号探测器历经(    )“终见”冥王星",
+                            "answer": [{
+                                "content": "9年",
+                                "correct": true
+                            }, {
+                                "content": "3天",
+                                "correct": false
+                            }]
+                        }, {
+                            "question": "史上最酷“双奥”城市(    )将举办2022年冬奥会",
+                            "answer": [{
+                                "content": "北京",
+                                "correct": true
+                            }, {
+                                "content": "东京",
+                                "correct": false
+                            }]
+                        }, {
+                            "question": "伊朗核问题六国今年达成全面协议，各国(    )",
+                            "answer": [{
+                                "content": "累觉不爱",
+                                "correct": false
+                            }, {
+                                "content": "喜大普奔",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "(    )发表战后70周年讲话，未直接向中国道歉",
+                            "answer": [{
+                                "content": "小泉",
+                                "correct": false
+                            }, {
+                                "content": "安倍晋三",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "15年，难民涌入欧洲，卷福男神呼吁捐助(    )",
+                            "answer": [{
+                                "content": "美国",
+                                "correct": false
+                            }, {
+                                "content": "叙利亚",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "抗战胜利70周年， 中国在(    )举行盛大阅兵",
+                            "answer": [{
+                                "content": "人民广场",
+                                "correct": false
+                            }, {
+                                "content": "天安门广场",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "(    )不顾民众抗议反对，强行通过新安保法",
+                            "answer": [{
+                                "content": "奥巴马",
+                                "correct": true
+                            }, {
+                                "content": "安倍晋三",
+                                "correct": false
+                            }]
+                        }, {
+                            "question": "15年，模范CP习大大彭麻麻访美，获学生赠(    )",
+                            "answer": [{
+                                "content": "和服",
+                                "correct": false
+                            }, {
+                                "content": "橄榄球球服",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "15年，美航天局宣布火星表面有(    )活动的证据",
+                            "answer": [{
+                                "content": "雾霾",
+                                "correct": false
+                            }, {
+                                "content": "液态水",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "15年，法国宣布发现14年失踪的马航(    )残骸",
+                            "answer": [{
+                                "content": "DL007",
+                                "correct": false
+                            }, {
+                                "content": "MH370",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "今年，土豪国(    )的圣城麦加发生朝觐者踩踏事故",
+                            "answer": [{
+                                "content": "柬埔寨",
+                                "correct": false
+                            }, {
+                                "content": "沙特阿拉伯",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "15年，俄罗斯在叙利亚展开针对(    )的军事行动",
+                            "answer": [{
+                                "content": "基地组织",
+                                "correct": false
+                            }, {
+                                "content": "ISIS",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "(    )获得2015年诺贝尔生理学或医学奖",
+                            "answer": [{
+                                "content": "村上春树",
+                                "correct": false
+                            }, {
+                                "content": "屠呦呦",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "网传朝鲜15年阅兵(    )是魔鬼的步伐 摩擦摩擦",
+                            "answer": [{
+                                "content": "小碎步",
+                                "correct": false
+                            }, {
+                                "content": "鹅式步伐",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "(    )和11个亚太国家达成TPP协议",
+                            "answer": [{
+                                "content": "泰国",
+                                "correct": false
+                            }, {
+                                "content": "美国",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "英超球员(    )晒与习大大和卡梅伦的最强自拍",
+                            "answer": [{
+                                "content": "鲁尼",
+                                "correct": false
+                            }, {
+                                "content": "阿圭罗",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "15年，《南京大屠杀档案》被列入世界(    )",
+                            "answer": [{
+                                "content": "文化遗产",
+                                "correct": false
+                            }, {
+                                "content": "记忆名录",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "15年，美军舰(    )到中国南海海域 公然挑衅！",
+                            "answer": [{
+                                "content": "泰坦尼克号",
+                                "correct": false
+                            }, {
+                                "content": "拉森号",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "全球聚焦(    )，两岸领导人时隔66年首会面",
+                            "answer": [{
+                                "content": "习奥会",
+                                "correct": false
+                            }, {
+                                "content": "习马会",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "(    )出席2015年APEC，爸爸你咋不上天呢？",
+                            "answer": [{
+                                "content": "王思聪",
+                                "correct": false
+                            }, {
+                                "content": "马云",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "15年，习大大参加在星月之国(    )举办的G20峰会",
+                            "answer": [{
+                                "content": "彩云国",
+                                "correct": false
+                            }, {
+                                "content": "土耳其",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "15年(    )发生后，世界掀起共同打击恐怖主义热潮",
+                            "answer": [{
+                                "content": "9·11事件",
+                                "correct": false
+                            }, {
+                                "content": "巴黎恐袭",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "土耳其击毁战斗民族(    )战机，土耳其烤肉卒",
+                            "answer": [{
+                                "content": "白俄罗斯",
+                                "correct": false
+                            }, {
+                                "content": "俄罗斯",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "马云在(    )演讲称，雾霾太可怕,想回外星去",
+                            "answer": [{
+                                "content": "火星",
+                                "correct": false
+                            }, {
+                                "content": "巴黎气候大会",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "习大大乌镇视察互联网之光博览会问过啥？",
+                            "answer": [{
+                                "content": "小笼包",
+                                "correct": false
+                            }, {
+                                "content": "微信红包",
+                                "correct": true
+                            }]
+                        }];
 
-            // init swiper
-            var swiper = new Swiper('.swiper-container', {
-                effect: 'fade',
-                direction: 'vertical',
-                onSlideChangeEnd: function(swiper){
-                    var animate = $('.swiper-slide-active .animate');
-                    if(animate.length > 0){
-                        animate.removeClass('animate').addClass('animated fadeIn duration3s');
-                        setTimeout(function(){
-                            animate.removeClass('fadeIn').addClass('fadeOut');
-                        }, 3000);
+                        var key = json.sn, // 兑换码
+                            question_current, // 随机挑选的题目
+                            question_current_index = 1, // 当前题目的题号
+                            $question_index = $('#question_index'), // 题号DOM
+                            $question_title = $('#question_title'), // 题目DOM
+                            $question_item1 = $('#question_item1'), // 选项1DOM
+                            $question_item1_span = $question_item1.find('span'), // 选项1内容DOM
+                            $question_item2 = $('#question_item2'), // 选项2DOM
+                            $question_item2_span = $question_item2.find('span'), // 选项2内容DOM
+                            answer_status = true; // 是否可以答题
+
+                        // 随机挑选题目
+                        question_current = (function(list){
+                            var current_list_index = [], // 用于保存题号
+                                current_list = [], // 用于保存题目
+                                length = list.length,
+                                temp,
+                                i = 11; // 随机挑11道题，并外加最后1题，共12题
+
+                            while(i > 0){
+                                temp = Math.floor(Math.random() * (length - 2)); // 因为最后一题是固定的，所以要减2
+                                if($.inArray(temp, current_list_index) == -1){
+                                    current_list_index.push(temp);
+                                    i--;
+                                }
+                            }
+
+                            current_list_index.push(length - 1); // 增加最后1道题
+
+                            // 将题号转化为对应的题目
+                            for(i = 0, length = current_list_index.length; i < length; i++){
+                                current_list.push(list[current_list_index[i]]);
+                            }
+
+                            return current_list;
+                        })(question_list);
+
+                        // init swiper
+                        var swiper = new Swiper('.swiper-container', {
+                            effect: 'fade',
+                            direction: 'vertical',
+                            noSwiping: true,
+                            onSlideChangeEnd: function(swiper){
+                                var animate = $('.swiper-slide-active .animate');
+                                if(animate.length > 0){
+                                    animate.removeClass('animate').addClass('animated');
+                                }
+                            }
+                        });
+
+                        // init 第1道题目
+                        $question_index.html('第一题');
+                        $question_title.html(question_current[0].question);
+                        (question_current[0].answer[0].correct) ? ($question_item1.addClass('correct')) : ($question_item2.addClass('correct'));
+                        $question_item1_span.html('A.' + question_current[0].answer[0].content);
+                        $question_item2_span.html('B.' + question_current[0].answer[1].content);
+
+                        // 绑定红包点击事件
+                        $('#redBagClick').on('click', function(e){
+                            $('#page5_sub_page1').fadeOut(1000);
+                        });
+
+                        // 绑定答题事件
+                        $('#question_item .item').on('click', function(e){
+                            if(answer_status){
+                                // 将状态设置为不可答题，避免重复答题
+                                answer_status = false;
+
+                                var currentTarget = $(e.currentTarget);
+
+                                currentTarget.find('i').addClass('current');
+
+                                if(currentTarget.hasClass('correct')){
+                                    // TODO: 回答正确的逻辑
+                                    console.log('correct');
+                                }else{
+                                    // TODO: 回答错误的逻辑
+                                    console.log('incorrect');
+                                }
+
+                                setTimeout(function(){
+                                    if(question_current_index != 12){
+                                        // 渲染下一道题
+                                        switch(question_current_index){
+                                            case 1: $question_index.html('第二题'); break;
+                                            case 2: $question_index.html('第三题'); break;
+                                            case 3: $question_index.html('第四题'); break;
+                                            case 4: $question_index.html('第五题'); break;
+                                            case 5: $question_index.html('第六题'); break;
+                                            case 6: $question_index.html('第七题'); break;
+                                            case 7: $question_index.html('第八题'); break;
+                                            case 8: $question_index.html('第九题'); break;
+                                            case 9: $question_index.html('第十题'); break;
+                                            case 10: $question_index.html('第十一题'); break;
+                                            case 11: $question_index.html('第十二题'); break;
+                                        }
+                                        $question_title.html(question_current[question_current_index].question);
+                                        (question_current[question_current_index].answer[0].correct) ? ($question_item1.addClass('correct')) : ($question_item2.addClass('correct'));
+                                        $question_item1_span.html('A.' + question_current[question_current_index].answer[0].content);
+                                        $question_item2_span.html('B.' + question_current[question_current_index].answer[1].content);
+                                        question_current_index++; // 题号自增
+
+                                        currentTarget.find('i').removeClass('current'); // 删除选中状态
+
+                                        // 将状态设置为可答题
+                                        answer_status = true;
+                                    }else{
+                                        // 已经答完题了，跳转到下一页
+                                        $('#page5_sub_page2').fadeOut();
+                                    }
+                                }, 1000);
+                            }
+                        });
+
+                        // 绑定另一个红包点击事件
+                        $('#redBagOtherClick').on('click', function(e){
+                            $('#page7_sub_page1').fadeOut(1000);
+                        });
+                    }else{
+                        // TODO: 显示错误页面
                     }
+                },
+                "error": function(json) {
+                    console.log("操作失败：" + json);
+                    // TODO: 显示错误页面
                 }
             });
         });
