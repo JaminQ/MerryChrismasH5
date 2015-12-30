@@ -545,24 +545,24 @@
     <div class="swiper-container">
         <div class="swiper-wrapper">
             <div id="page1" class="swiper-slide">
-                <img class="animated fadeIn duration3s" src="images/0-2.png" />
+                <img class="animated fadeIn duration3s center" src="images/0-2.png" />
             </div>
             <div id="page2" class="swiper-slide">
-                <img class="animate fadeInOut duration3s" src="images/1-2.png" />
-                <img class="animate fadeInOut duration3s delay3s" src="images/1-3.png" />
-                <img class="animate fadeInOut duration3s delay6s" src="images/1-4.png" />
+                <img class="animate fadeInOut duration3s center" src="images/1-2.png" />
+                <img class="animate fadeInOut duration3s delay3s center" src="images/1-3.png" />
+                <img class="animate fadeInOut duration3s delay6s center" src="images/1-4.png" />
                 <img class="animate fadeIn duration1s delay9s bottom" src="images/1-5.png" />
-                <img class="animate fadeIn duration1s delay10s" src="images/1-6.png" />
+                <img class="animate fadeIn duration1s delay10s center" src="images/1-6.png" />
             </div>
             <div id="page3" class="swiper-slide">
-                <img class="animate fadeInOut duration3s" src="images/2-2.png" />
-                <img class="animate fadeInOut duration3s delay3s" src="images/2-3.png" />
-                <img class="animate fadeIn duration1s delay6s" src="images/2-4.png" />
+                <img class="animate fadeInOut duration3s center" src="images/2-2.png" />
+                <img class="animate fadeInOut duration3s delay3s center" src="images/2-3.png" />
+                <img class="animate fadeIn duration1s delay6s center" src="images/2-4.png" />
             </div>
             <div id="page4" class="swiper-slide">
-                <img class="animate fadeInOut duration3s" src="images/3-2.png" />
-                <img class="animate fadeInOut duration3s delay3s" src="images/3-3.png" />
-                <img class="animate fadeIn duration1s delay6s" src="images/3-4.png" />
+                <img class="animate fadeInOut duration3s center" src="images/3-2.png" />
+                <img class="animate fadeInOut duration3s delay3s center" src="images/3-3.png" />
+                <img class="animate fadeIn duration1s delay6s center" src="images/3-4.png" />
             </div>
             <div id="page5" class="swiper-slide">
                 <div id="page5_sub_page1" class="sub_page swiper-no-swiping">
@@ -594,13 +594,13 @@
                 <div id="page5_sub_page4" class="sub_page"></div>
             </div>
             <div id="page6" class="swiper-slide">
-                <img class="animate fadeInOut duration3s" src="images/7-1.png" />
-                <img class="animate fadeInOut duration3s delay3s" src="images/7-2.png" />
-                <img class="animate fadeInOut duration3s delay6s" src="images/7-3.png" />
-                <img class="animate fadeInOut duration3s delay9s" src="images/7-4.png" />
-                <img class="animate fadeInOut duration3s delay12s" src="images/7-5.png" />
-                <img class="animate fadeInOut duration3s delay15s" src="images/7-6.png" />
-                <img class="animate fadeInOut duration3s delay18s" src="images/7-7.png" />
+                <img class="animate fadeInOut duration3s center" src="images/7-1.png" />
+                <img class="animate fadeInOut duration3s delay3s center" src="images/7-2.png" />
+                <img class="animate fadeInOut duration3s delay6s center" src="images/7-3.png" />
+                <img class="animate fadeInOut duration3s delay9s center" src="images/7-4.png" />
+                <img class="animate fadeInOut duration3s delay12s center" src="images/7-5.png" />
+                <img class="animate fadeInOut duration3s delay15s center" src="images/7-6.png" />
+                <img class="animate fadeInOut duration3s delay18s center" src="images/7-7.png" />
                 <img class="animate fadeIn duration1s delay21s top" src="images/7-8.png" />
                 <img class="animate fadeIn duration1s delay22s bottom" src="images/7-9.png" />
             </div>
@@ -1228,7 +1228,8 @@
                             redBagClick_real_bottom = (redBagClick_bottom / img_height) * real_height,
                             redBagOtherClick_real_height = (redBagOtherClick_height / img_height) * real_height,
                             redBagOtherClick_real_bottom = (redBagOtherClick_bottom / img_height) * real_height + diff_height / 2,
-                            two_dimensional_code_real_top = (clientWidth / img_width) * two_dimensional_code_top + diff_height;
+                            two_dimensional_code_real_top = (clientWidth / img_width) * two_dimensional_code_top + diff_height,
+                            center_real_top = diff_height / 2;
                         $('#page5_sub_page2 .question_wrapper').css({
                             "top": question_real_top + 'px'
                         });
@@ -1243,6 +1244,9 @@
                         });
                         $('#two_dimensional_code').css({
                             "top": two_dimensional_code_real_top + 'px'
+                        });
+                        $('.swiper-slide .center').css({
+                            "top": center_real_top
                         });
                     }else{
                         $('body')[0].innerHTML = '听说服务器挂了，请重试~';
