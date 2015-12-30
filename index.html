@@ -339,12 +339,12 @@
             background-color: transparent;
             color: white;
             z-index: 999;
-            height: 20px;
-            width: 20px;
-            background: transparent url('images/music.png') center center no-repeat;
-            background-size: auto 20px;
-            top: 10px;
-            left: 10px;
+            height: 5%;
+            width: 5%;
+            background: transparent url('images/music-1.png') center center no-repeat;
+            background-size: 100%;
+            top: 3%;
+            left: 3%;
         }
 
         #page1 {
@@ -505,6 +505,15 @@
             background: #FBF4E5 url('images/9-1.png') center center no-repeat;
             background-size: 100%;
             z-index: 98;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #page7 #page7_sub_page2 .two_dimensional_code {
+            width: 40%;
+            position: static;
+            z-index: 99999;
+            margin-top: -20%;
         }
     </style>
 </head>
@@ -593,7 +602,9 @@
                     <div id="redBagOtherClick"></div>
                 </div>
                 <div id="page7_sub_page2" class="sub_page">
-                    
+                    <img class="top" src="images/9-2.png" />
+                    <img class="two_dimensional_code" src="images/9-3.png" />
+                    <img class="bottom" src="images/9-5.png" />
                 </div>
             </div>
         </div>
@@ -1070,16 +1081,23 @@
                         });
 
                         // 音乐按钮点击事件
-                        $('#music').on('click', function(){
+                        $('#music').on('click', function(e){
                             console.log(swiper.activeIndex);
                             if(music_status){
+                                // 暂停音乐逻辑
                                 music_status = false;
                                 music_part1.pause();
                                 music_part2.pause();
                                 music_part3.pause();
                                 music_correct.pause();
                                 music_incorrect.pause();
+
+                                $(e.target).css({
+                                    "background": "transparent url('images/music-2.png') center center no-repeat",
+                                    "background-size": "auto 20px"
+                                });
                             }else{
+                                // 播放音乐逻辑
                                 music_status = true;
                                 switch(swiper.activeIndex){
                                     case 0:
@@ -1089,6 +1107,11 @@
                                     case 4: music_part2.play(); break;
                                     default: music_part3.play();
                                 }
+
+                                $(e.target).css({
+                                    "background": "transparent url('images/music-1.png') center center no-repeat",
+                                    "background-size": "auto 20px"
+                                });
                             }
                         });
 
@@ -1129,7 +1152,7 @@
                                 }
 
                                 setTimeout(function(){
-                                    if(question_current_index != 4){
+                                    if(question_current_index != 12){
                                         // 隐藏图片
                                         $img_correct.hide();
                                         $img_incorrect.hide();
