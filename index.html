@@ -283,6 +283,14 @@
             -webkit-animation-delay: 20s;
             animation-delay: 20s;
         }
+        .delay21s {
+            -webkit-animation-delay: 21s;
+            animation-delay: 21s;
+        }
+        .delay22s {
+            -webkit-animation-delay: 22s;
+            animation-delay: 22s;
+        }
         .delay25s {
             -webkit-animation-delay: 25s;
             animation-delay: 25s;
@@ -385,6 +393,8 @@
             left: 37.5%;
             border-radius: 50%;
             cursor: pointer;
+            opacity: 0.3;
+            background-color: black;
         }
 
         #page5 #page5_sub_page2 {
@@ -494,6 +504,8 @@
             position: absolute;
             left: 18%;
             cursor: pointer;
+            opacity: 0.3;
+            background-color: black;
         }
 
         #page7 #page7_sub_page2 {
@@ -514,7 +526,7 @@
 </head>
 <body>
     <div id="music">
-        <audio id="music_part1" autoplay loop preload>
+        <audio id="music_part1" loop preload>
             <source src="music/part1.mp3" type="audio/mpeg">
         </audio>
         <audio id="music_part2" loop preload>
@@ -536,21 +548,21 @@
                 <img class="animated fadeIn duration3s" src="images/0-2.png" />
             </div>
             <div id="page2" class="swiper-slide">
-                <img class="animate fadeInOut duration5s" src="images/1-2.png" />
-                <img class="animate fadeInOut duration5s delay5s" src="images/1-3.png" />
-                <img class="animate fadeInOut duration5s delay10s" src="images/1-4.png" />
-                <img class="animate fadeIn duration1s delay13s bottom" src="images/1-5.png" />
-                <img class="animate fadeIn duration1s delay14s" src="images/1-6.png" />
+                <img class="animate fadeInOut duration3s" src="images/1-2.png" />
+                <img class="animate fadeInOut duration3s delay3s" src="images/1-3.png" />
+                <img class="animate fadeInOut duration3s delay6s" src="images/1-4.png" />
+                <img class="animate fadeIn duration1s delay9s bottom" src="images/1-5.png" />
+                <img class="animate fadeIn duration1s delay10s" src="images/1-6.png" />
             </div>
             <div id="page3" class="swiper-slide">
-                <img class="animate fadeInOut duration5s" src="images/2-2.png" />
-                <img class="animate fadeInOut duration5s delay5s" src="images/2-3.png" />
-                <img class="animate fadeIn duration3s delay10s" src="images/2-4.png" />
+                <img class="animate fadeInOut duration3s" src="images/2-2.png" />
+                <img class="animate fadeInOut duration3s delay3s" src="images/2-3.png" />
+                <img class="animate fadeIn duration1s delay6s" src="images/2-4.png" />
             </div>
             <div id="page4" class="swiper-slide">
-                <img class="animate fadeInOut duration5s" src="images/3-2.png" />
-                <img class="animate fadeInOut duration5s delay5s" src="images/3-3.png" />
-                <img class="animate fadeIn duration3s delay10s" src="images/3-4.png" />
+                <img class="animate fadeInOut duration3s" src="images/3-2.png" />
+                <img class="animate fadeInOut duration3s delay3s" src="images/3-3.png" />
+                <img class="animate fadeIn duration1s delay6s" src="images/3-4.png" />
             </div>
             <div id="page5" class="swiper-slide">
                 <div id="page5_sub_page1" class="sub_page swiper-no-swiping">
@@ -582,15 +594,15 @@
                 <div id="page5_sub_page4" class="sub_page"></div>
             </div>
             <div id="page6" class="swiper-slide">
-                <img class="animate fadeInOut duration5s" src="images/7-1.png" />
-                <img class="animate fadeInOut duration5s delay5s" src="images/7-2.png" />
-                <img class="animate fadeInOut duration5s delay10s" src="images/7-3.png" />
-                <img class="animate fadeInOut duration5s delay15s" src="images/7-4.png" />
-                <img class="animate fadeInOut duration5s delay20s" src="images/7-5.png" />
-                <img class="animate fadeInOut duration5s delay25s" src="images/7-6.png" />
-                <img class="animate fadeInOut duration5s delay30s" src="images/7-7.png" />
-                <img class="animate fadeIn duration3s delay35s top" src="images/7-8.png" />
-                <img class="animate fadeIn duration3s delay38s bottom" src="images/7-9.png" />
+                <img class="animate fadeInOut duration3s" src="images/7-1.png" />
+                <img class="animate fadeInOut duration3s delay3s" src="images/7-2.png" />
+                <img class="animate fadeInOut duration3s delay6s" src="images/7-3.png" />
+                <img class="animate fadeInOut duration3s delay9s" src="images/7-4.png" />
+                <img class="animate fadeInOut duration3s delay12s" src="images/7-5.png" />
+                <img class="animate fadeInOut duration3s delay15s" src="images/7-6.png" />
+                <img class="animate fadeInOut duration3s delay18s" src="images/7-7.png" />
+                <img class="animate fadeIn duration1s delay21s top" src="images/7-8.png" />
+                <img class="animate fadeIn duration1s delay22s bottom" src="images/7-9.png" />
             </div>
             <div id="page7" class="swiper-slide swiper-no-swiping">
                 <div id="page7_sub_page1" class="sub_page">
@@ -598,7 +610,7 @@
                 </div>
                 <div id="page7_sub_page2" class="sub_page">
                     <img class="top" src="images/9-2.png" />
-                    <img class="two_dimensional_code" src="images/9-3.png" />
+                    <img id="two_dimensional_code" class="two_dimensional_code" src="images/9-3.png" />
                     <img class="bottom" src="images/9-5.png" />
                 </div>
             </div>
@@ -1027,7 +1039,7 @@
                             music_part3 = document.getElementById('music_part3'),
                             $img_correct = $('#img_correct'),
                             $img_incorrect = $('#img_incorrect'),
-                            music_status = true; // 音乐全局播放状态
+                            music_status = false; // 音乐全局播放状态
 
                         // 默认隐藏图片
                         $img_correct.hide();
@@ -1039,7 +1051,7 @@
                                 current_list = [], // 用于保存题目
                                 length = list.length,
                                 temp,
-                                i = 11; // 随机挑11道题，并外加最后1题，共12题
+                                i = 9; // 随机挑9道题，并外加最后1题，共10题
 
                             while(i > 0){
                                 temp = Math.floor(Math.random() * (length - 2)); // 因为最后一题是固定的，所以要减2
@@ -1154,7 +1166,7 @@
                                 }
 
                                 setTimeout(function(){
-                                    if(question_current_index != 12){
+                                    if(question_current_index != 1){
                                         // 隐藏图片
                                         $img_correct.hide();
                                         $img_incorrect.hide();
@@ -1174,8 +1186,6 @@
                                             case 7: $question_index.html('第八题'); break;
                                             case 8: $question_index.html('第九题'); break;
                                             case 9: $question_index.html('第十题'); break;
-                                            case 10: $question_index.html('第十一题'); break;
-                                            case 11: $question_index.html('第十二题'); break;
                                         }
                                         $question_title.html(question_current[question_current_index].question);
                                         (question_current[question_current_index].answer[0].correct) ? ($question_item1.addClass('correct')) : ($question_item2.addClass('correct'));
@@ -1210,13 +1220,15 @@
                             question_top = 501,
                             redBagOtherClick_height = 585,
                             redBagOtherClick_bottom = 273,
+                            two_dimensional_code_top = 459,
                             real_height = (clientWidth / img_width) * img_height,
                             diff_height = clientHeight - real_height,
                             question_real_top = (clientWidth / img_width) * question_top + diff_height,
                             redBagClick_real_width = (redBagClick_width / img_width) * clientWidth,
                             redBagClick_real_bottom = (redBagClick_bottom / img_height) * real_height,
                             redBagOtherClick_real_height = (redBagOtherClick_height / img_height) * real_height,
-                            redBagOtherClick_real_bottom = (redBagOtherClick_bottom / img_height) * real_height + diff_height / 2;
+                            redBagOtherClick_real_bottom = (redBagOtherClick_bottom / img_height) * real_height + diff_height / 2,
+                            two_dimensional_code_real_top = (clientWidth / img_width) * two_dimensional_code_top + diff_height;
                         $('#page5_sub_page2 .question_wrapper').css({
                             "top": question_real_top + 'px'
                         });
@@ -1228,6 +1240,9 @@
                         $('#redBagOtherClick').css({
                             "height": redBagOtherClick_real_height,
                             "bottom": redBagOtherClick_real_bottom + 'px'
+                        });
+                        $('#two_dimensional_code').css({
+                            "top": two_dimensional_code_real_top + 'px'
                         });
                     }else{
                         $('body')[0].innerHTML = '听说服务器挂了，请重试~';
