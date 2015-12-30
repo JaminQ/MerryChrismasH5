@@ -339,6 +339,12 @@
             background-color: transparent;
             color: white;
             z-index: 999;
+            height: 20px;
+            width: 20px;
+            background: transparent url('images/music.png') center center no-repeat;
+            background-size: auto 20px;
+            top: 10px;
+            left: 10px;
         }
 
         #page1 {
@@ -503,7 +509,23 @@
     </style>
 </head>
 <body>
-    <p id="music">哈哈哈</p>
+    <div id="music">
+        <audio id="music_part1" autoplay loop preload>
+            <source src="music/part1.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="music_part2" loop preload>
+            <source src="music/part2.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="music_correct" preload>
+            <source src="music/correct.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="music_incorrect" preload>
+            <source src="music/incorrect.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="music_part3" loop preload>
+            <source src="music/part3.mp3" type="audio/mpeg">
+        </audio>
+    </div>
     <div class="swiper-container">
         <div class="swiper-wrapper">
             <div id="page1" class="swiper-slide">
@@ -547,6 +569,8 @@
                             </div>
                         </div>
                     </div>
+                    <img id="img_incorrect" class="bottom" src="images/5-3.png" />
+                    <img id="img_correct" class="bottom" src="images/5-4.png" />
                 </div>
                 <div id="page5_sub_page3" class="sub_page">
                     <p>您是第<em>356</em>位帮助我回家的人</p>
@@ -981,7 +1005,19 @@
                             $question_item1_span = $question_item1.find('span'), // 选项1内容DOM
                             $question_item2 = $('#question_item2'), // 选项2DOM
                             $question_item2_span = $question_item2.find('span'), // 选项2内容DOM
-                            answer_status = true; // 是否可以答题
+                            answer_status = true, // 是否可以答题
+                            music_part1 = document.getElementById('music_part1'),
+                            music_part2 = document.getElementById('music_part2'),
+                            music_correct = document.getElementById('music_correct'),
+                            music_incorrect = document.getElementById('music_incorrect'),
+                            music_part3 = document.getElementById('music_part3'),
+                            $img_correct = $('#img_correct'),
+                            $img_incorrect = $('#img_incorrect'),
+                            music_status = true; // 音乐全局播放状态
+
+                        // 默认隐藏图片
+                        $img_correct.hide();
+                        $img_incorrect.hide();
 
                         // 随机挑选题目
                         question_current = (function(list){
@@ -1019,6 +1055,40 @@
                                 if(animate.length > 0){
                                     animate.removeClass('animate').addClass('animated');
                                 }
+                                if(swiper.activeIndex == 4){
+                                    if(music_status){
+                                        music_part1.pause();
+                                        music_part2.play();
+                                    }
+                                }else if(swiper.activeIndex == 5){
+                                    if(music_status){
+                                        music_part2.pause();
+                                        music_part3.play();
+                                    }
+                                }
+                            }
+                        });
+
+                        // 音乐按钮点击事件
+                        $('#music').on('click', function(){
+                            console.log(swiper.activeIndex);
+                            if(music_status){
+                                music_status = false;
+                                music_part1.pause();
+                                music_part2.pause();
+                                music_part3.pause();
+                                music_correct.pause();
+                                music_incorrect.pause();
+                            }else{
+                                music_status = true;
+                                switch(swiper.activeIndex){
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3: music_part1.play(); break;
+                                    case 4: music_part2.play(); break;
+                                    default: music_part3.play();
+                                }
                             }
                         });
 
@@ -1045,15 +1115,29 @@
                                 currentTarget.find('i').addClass('current');
 
                                 if(currentTarget.hasClass('correct')){
-                                    // TODO: 回答正确的逻辑
-                                    console.log('correct');
+                                    // 回答正确的逻辑
+                                    if(music_status){
+                                        music_correct.play();
+                                    }
+                                    $img_correct.show();
                                 }else{
-                                    // TODO: 回答错误的逻辑
-                                    console.log('incorrect');
+                                    // 回答错误的逻辑
+                                    if(music_status){
+                                        music_incorrect.play();
+                                    }
+                                    $img_incorrect.show();
                                 }
 
                                 setTimeout(function(){
-                                    if(question_current_index != 12){
+                                    if(question_current_index != 4){
+                                        // 隐藏图片
+                                        $img_correct.hide();
+                                        $img_incorrect.hide();
+
+                                        // 去掉原来的correct类
+                                        $question_item1.removeClass('correct');
+                                        $question_item2.removeClass('correct');
+
                                         // 渲染下一道题
                                         switch(question_current_index){
                                             case 1: $question_index.html('第二题'); break;
