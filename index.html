@@ -513,14 +513,10 @@
             background-size: 100%;
             z-index: 98;
             display: flex;
-            align-items: center;
-            justify-content: center;
         }
         #page7 #page7_sub_page2 .two_dimensional_code {
-            width: 40%;
-            position: static;
+            position: absolute;
             z-index: 99999;
-            margin-top: -20%;
         }
     </style>
 </head>
@@ -1220,33 +1216,31 @@
                             question_top = 501,
                             redBagOtherClick_height = 585,
                             redBagOtherClick_bottom = 273,
+                            two_dimensional_code_width = 181,
                             two_dimensional_code_top = 459,
                             real_height = (clientWidth / img_width) * img_height,
-                            diff_height = clientHeight - real_height,
-                            question_real_top = (clientWidth / img_width) * question_top + diff_height,
-                            redBagClick_real_width = (redBagClick_width / img_width) * clientWidth,
-                            redBagClick_real_bottom = (redBagClick_bottom / img_height) * real_height,
-                            redBagOtherClick_real_height = (redBagOtherClick_height / img_height) * real_height,
-                            redBagOtherClick_real_bottom = (redBagOtherClick_bottom / img_height) * real_height + diff_height / 2,
-                            two_dimensional_code_real_top = (clientWidth / img_width) * two_dimensional_code_top + diff_height,
-                            center_real_top = diff_height / 2;
+                            diff_height = clientHeight - real_height;
                         $('#page5_sub_page2 .question_wrapper').css({
-                            "top": question_real_top + 'px'
+                            "top": (clientWidth / img_width) * question_top + diff_height / 2 + 'px'
                         });
                         $('#redBagClick').css({
-                            "width": redBagClick_real_width,
-                            "height": redBagClick_real_width,
-                            "bottom": redBagClick_real_bottom + 'px'
+                            "width": (redBagClick_width / img_width) * clientWidth,
+                            "height": (redBagClick_width / img_width) * clientWidth,
+                            "bottom": (redBagClick_bottom / img_height) * real_height + 'px'
                         });
                         $('#redBagOtherClick').css({
-                            "height": redBagOtherClick_real_height,
-                            "bottom": redBagOtherClick_real_bottom + 'px'
+                            "height": (redBagOtherClick_height / img_height) * real_height,
+                            "bottom": (redBagOtherClick_bottom / img_height) * real_height + diff_height / 2 + 'px'
                         });
                         $('#two_dimensional_code').css({
-                            "top": two_dimensional_code_real_top + 'px'
+                            "width": (two_dimensional_code_width / img_width) * clientWidth,
+                            "height": (two_dimensional_code_width / img_width) * clientWidth,
+                            "top": (clientWidth / img_width) * two_dimensional_code_top + diff_height / 2 + 'px',
+                            "left": '50%',
+                            "margin-left": '-' + ((two_dimensional_code_width / img_width) * clientWidth) / 2 + 'px'
                         });
                         $('.swiper-slide .center').css({
-                            "top": center_real_top
+                            "top": diff_height / 2
                         });
                     }else{
                         $('body')[0].innerHTML = '听说服务器挂了，请重试~';
