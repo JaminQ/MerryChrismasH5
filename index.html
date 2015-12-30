@@ -336,8 +336,6 @@
             left: 37.5%;
             border-radius: 50%;
             cursor: pointer;
-            opacity: 0.3;
-            background-color: black;
         }
 
         #page5 #page5_sub_page2 {
@@ -446,8 +444,6 @@
             position: absolute;
             left: 18%;
             cursor: pointer;
-            opacity: 0.3;
-            background-color: black;
         }
 
         #page7 #page7_sub_page2 {
@@ -1249,7 +1245,7 @@
                             real_height = (clientWidth / img_width) * img_height,
                             diff_height = clientHeight - real_height;
                         $('#page5_sub_page2 .question_wrapper').css({
-                            "top": (clientWidth / img_width) * question_top + diff_height / 2 + 'px'
+                            "top": (clientWidth / img_width) * question_top + diff_height + 'px'
                         });
                         $('#redBagClick').css({
                             "width": (redBagClick_width / img_width) * clientWidth,
