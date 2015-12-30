@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Merry Chrismas</title>
+    <title>“智”回家的你：新年到！和我一起分享年终奖</title>
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <link rel="stylesheet" type="text/css" href="lib/swiper.min.css">
 
     <script type="text/javascript" src="lib/swiper.min.js"></script>
     <script type="text/javascript" src="lib/jquery-1.11.2.min.js"></script>
+    <!-- <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script> -->
 
     <style>
         /***********************全局reset***********************/
@@ -306,7 +307,7 @@
         }
         body {
             font-family: Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif;
-            font-size: 14px;
+            font-size: 0.625em;
             color: #000;
             margin: 0;
             padding: 0;
@@ -380,14 +381,10 @@
             z-index: 99;
         }
         #page5 #page5_sub_page1 #redBagClick {
-            width: 25%;
-            height: 15%;
             position: absolute;
-            bottom: 30.5%;
             left: 37.5%;
             border-radius: 50%;
             cursor: pointer;
-            outline: none;
         }
 
         #page5 #page5_sub_page2 {
@@ -398,16 +395,16 @@
         #page5 #page5_sub_page2 .question_wrapper {
             position: absolute;
             left: 0;
-            top: 44%;
             width: 100%;
         }
         #page5 #page5_sub_page2 .question_wrapper #question_index {
             color: white;
-            font-size: 20px;
+            font-size: 2em;
         }
         #page5 #page5_sub_page2 .question_wrapper #question_title {
             color: #F8D36A;
-            line-height: 22px;
+            line-height: 1.6em;
+            font-size: 1.4em;
             width: 60%;
             margin: 15px auto 0;
             text-align: left;
@@ -451,7 +448,8 @@
         }
         #page5 #page5_sub_page2 .question_wrapper #question_item div span {
             display: inline-block;
-            line-height: 20px;
+            font-size: 1.4em;
+            line-height: 1.4em;
             margin-left: 8px;
         }
 
@@ -465,10 +463,10 @@
             width: 100%;
             bottom: 30%;
             color: #886C50;
-            font-size: 16px;
+            font-size: 1.6em;
         }
         #page5 #page5_sub_page3 p em {
-            font-size: 32px;
+            font-size: 2em;
             display: inline-block;
             margin: 0 8px;
             color: #FD7073;
@@ -493,12 +491,9 @@
         }
         #page7 #page7_sub_page1 #redBagOtherClick {
             width: 64%;
-            height: 52%;
             position: absolute;
-            bottom: 24%;
             left: 18%;
             cursor: pointer;
-            outline: none;
         }
 
         #page7 #page7_sub_page2 {
@@ -519,7 +514,7 @@
 </head>
 <body>
     <div id="music">
-        <audio id="music_part1" autoplay loop preload>
+        <audio id="music_part1" loop preload>
             <source src="music/part1.mp3" type="audio/mpeg">
         </audio>
         <audio id="music_part2" loop preload>
@@ -537,7 +532,7 @@
     </div>
     <div class="swiper-container">
         <div class="swiper-wrapper">
-            <div id="page1" class="swiper-slide">
+            <!-- <div id="page1" class="swiper-slide">
                 <img class="animated fadeIn duration3s" src="images/0-2.png" />
             </div>
             <div id="page2" class="swiper-slide">
@@ -596,7 +591,7 @@
                 <img class="animate fadeInOut duration5s delay30s" src="images/7-7.png" />
                 <img class="animate fadeIn duration3s delay35s top" src="images/7-8.png" />
                 <img class="animate fadeIn duration3s delay38s bottom" src="images/7-9.png" />
-            </div>
+            </div> -->
             <div id="page7" class="swiper-slide swiper-no-swiping">
                 <div id="page7_sub_page1" class="sub_page">
                     <div id="redBagOtherClick"></div>
@@ -617,6 +612,14 @@
                 "dataType": "jsonp",
                 "success": function(json) {
                     if(json.result == 'success'){
+                        // var wx_res;
+                        // wx.checkJsApi({
+                        //     jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage'],
+                        //     success: function(res) {
+                        //         console.log(res);
+                        //     }
+                        // });
+
                         // 题目
                         var question_list = [{
                             "question": "15年，(    )三国签署了今年启动的欧亚经济联盟条约",
@@ -1082,7 +1085,6 @@
 
                         // 音乐按钮点击事件
                         $('#music').on('click', function(e){
-                            console.log(swiper.activeIndex);
                             if(music_status){
                                 // 暂停音乐逻辑
                                 music_status = false;
@@ -1094,7 +1096,7 @@
 
                                 $(e.target).css({
                                     "background": "transparent url('images/music-2.png') center center no-repeat",
-                                    "background-size": "auto 20px"
+                                    "background-size": "100%"
                                 });
                             }else{
                                 // 播放音乐逻辑
@@ -1110,7 +1112,7 @@
 
                                 $(e.target).css({
                                     "background": "transparent url('images/music-1.png') center center no-repeat",
-                                    "background-size": "auto 20px"
+                                    "background-size": "100%"
                                 });
                             }
                         });
@@ -1197,13 +1199,42 @@
                         $('#redBagOtherClick').on('click', function(e){
                             $('#page7_sub_page1').fadeOut(1000);
                         });
+
+                        // 处理适配
+                        var clientWidth = document.body.clientWidth,
+                            clientHeight = document.body.clientHeight,
+                            img_width = 640,
+                            img_height = 1136,
+                            redBagClick_width = 165;
+                            redBagClick_bottom = 350,
+                            question_top = 501,
+                            redBagOtherClick_height = 585,
+                            redBagOtherClick_bottom = 273,
+                            real_height = (clientWidth / img_width) * img_height,
+                            diff_height = clientHeight - real_height,
+                            question_real_top = (clientWidth / img_width) * question_top + diff_height,
+                            redBagClick_real_width = (redBagClick_width / img_width) * clientWidth,
+                            redBagClick_real_bottom = (redBagClick_bottom / img_height) * real_height,
+                            redBagOtherClick_real_height = (redBagOtherClick_height / img_height) * real_height,
+                            redBagOtherClick_real_bottom = (redBagOtherClick_bottom / img_height) * real_height + diff_height / 2;
+                        $('#page5_sub_page2 .question_wrapper').css({
+                            "top": question_real_top + 'px'
+                        });
+                        $('#redBagClick').css({
+                            "width": redBagClick_real_width,
+                            "height": redBagClick_real_width,
+                            "bottom": redBagClick_real_bottom + 'px'
+                        });
+                        $('#redBagOtherClick').css({
+                            "height": redBagOtherClick_real_height,
+                            "bottom": redBagOtherClick_real_bottom + 'px'
+                        });
                     }else{
-                        // TODO: 显示错误页面
+                        $('body')[0].innerHTML = '听说服务器挂了，请重试~';
                     }
                 },
                 "error": function(json) {
-                    console.log("操作失败：" + json);
-                    // TODO: 显示错误页面
+                    $('body')[0].innerHTML = '听说服务器挂了，请重试~';
                 }
             });
         });
