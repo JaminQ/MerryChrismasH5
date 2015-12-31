@@ -9,7 +9,7 @@
 
     <script type="text/javascript" src="lib/swiper.min.js"></script>
     <script type="text/javascript" src="lib/jquery-1.11.2.min.js"></script>
-    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <!-- <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script> -->
 
     <style>
         /***********************全局reset***********************/
@@ -973,8 +973,7 @@
                         }];
 
                         var key = json.sn, // 兑换码
-                            // num = json.id, // 参与人数
-                            num = 222,
+                            num = json.id, // 参与人数
                             question_current, // 随机挑选的题目
                             question_current_index = 1, // 当前题目的题号
                             $question_index = $('#question_index'), // 题号DOM
@@ -1295,8 +1294,8 @@
                         });
 
                         // 微信JSSDK接口用到的参数
-                        var imgUrl = "图片地址";
-                        var lineLink = "网址";
+                        var imgUrl = "";
+                        var lineLink = "http://h5.china.com.cn/cxwb/20151230/zhihui2015special/index.html";
                         var descContent = '再见2015，相聚2016';
                         var shareTitle = '“智”回家的你';
 
