@@ -1405,7 +1405,7 @@
                                 });
 
                                 // 微信JSSDK接口用到的参数
-                                var imgUrl = "";
+                                var imgUrl = "http://h5.china.com.cn/cxwb/20151230/zhihui2015special/images/share.jpg";
                                 var lineLink = "http://h5.china.com.cn/cxwb/20151230/zhihui2015special/index.html";
                                 var descContent = '再见2015，相聚2016';
                                 var shareTitle = '“智”回家的你';
@@ -1428,8 +1428,6 @@
                                     "link": lineLink,
                                     "imgUrl": imgUrl,
                                     success: function () {
-                                        $('#share_tips').hide();
-                                        $('#key_wrapper').show();
                                     }
                                 });
                             });
