@@ -1280,10 +1280,12 @@
 
                                 setTimeout(function(){
                                     if(question_current_index != 10){
-                                        // 处理iPhone6以下的多个音频同时播放问题
-                                        music_correct.pause();
-                                        music_incorrect.pause();
-                                        music_part2.play();
+                                        if(music_status){
+                                            // 处理iPhone6以下的多个音频同时播放问题
+                                            music_correct.pause();
+                                            music_incorrect.pause();
+                                            music_part2.play();
+                                        }
 
                                         // 隐藏图片
                                         $img_correct.hide();
@@ -1316,10 +1318,12 @@
                                         // 将状态设置为可答题
                                         answer_status = true;
                                     }else{
-                                        // 处理iPhone6以下的多个音频同时播放问题
-                                        music_correct.pause();
-                                        music_incorrect.pause();
-                                        music_part2.play();
+                                        if(music_status){
+                                            // 处理iPhone6以下的多个音频同时播放问题
+                                            music_correct.pause();
+                                            music_incorrect.pause();
+                                            music_part2.play();
+                                        }
 
                                         // 已经答完题了，跳转到下一页
                                         $('#page5_sub_page2').fadeOut();
