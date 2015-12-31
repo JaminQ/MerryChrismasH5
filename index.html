@@ -811,10 +811,10 @@
                             "question": "15年，(    )和美国恢复外交后有了美国大使馆",
                             "answer": [{
                                 "content": "英国",
-                                "correct": false
+                                "correct": true
                             }, {
                                 "content": "古巴",
-                                "correct": true
+                                "correct": false
                             }]
                         }, {
                             "question": "“新视野”号探测器历经(    )“终见”冥王星",
@@ -846,7 +846,7 @@
                         }, {
                             "question": "(    )发表战后70周年讲话，未直接向中国道歉",
                             "answer": [{
-                                "content": "小泉",
+                                "content": "蜡笔小新",
                                 "correct": false
                             }, {
                                 "content": "安倍晋三",
@@ -874,10 +874,10 @@
                             "question": "(    )不顾民众抗议反对，强行通过新安保法",
                             "answer": [{
                                 "content": "奥巴马",
-                                "correct": true
+                                "correct": false
                             }, {
                                 "content": "安倍晋三",
-                                "correct": false
+                                "correct": true
                             }]
                         }, {
                             "question": "15年，模范CP习大大彭麻麻访美，获学生赠(    )",
@@ -1260,6 +1260,7 @@
 
                                 currentTarget.find('i').addClass('current');
 
+                                music_part2.pause();
                                 if(currentTarget.hasClass('correct')){
                                     // 回答正确的逻辑
                                     if(music_status){
@@ -1276,6 +1277,11 @@
 
                                 setTimeout(function(){
                                     if(question_current_index != 10){
+                                        // 处理iPhone6以下的多个音频同时播放问题
+                                        music_correct.pause();
+                                        music_incorrect.pause();
+                                        music_part2.play();
+
                                         // 隐藏图片
                                         $img_correct.hide();
                                         $img_incorrect.hide();
@@ -1307,6 +1313,11 @@
                                         // 将状态设置为可答题
                                         answer_status = true;
                                     }else{
+                                        // 处理iPhone6以下的多个音频同时播放问题
+                                        music_correct.pause();
+                                        music_incorrect.pause();
+                                        music_part2.play();
+
                                         // 已经答完题了，跳转到下一页
                                         $('#page5_sub_page2').fadeOut();
                                         $up_logo.fadeIn();
