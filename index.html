@@ -282,7 +282,7 @@
             background-color: transparent;
             color: white;
             z-index: 999;
-            height: 5%;
+            height: 8%;
             width: 5%;
             background: transparent url('images/music-1.png') center center no-repeat;
             background-size: 100%;
@@ -473,6 +473,78 @@
             width: 12em;
             margin: 0 auto;
         }
+
+        @media screen and (max-height: 420px) {
+            .swiper-slide img {
+                width: 80%;
+                left: 10%;
+            }
+            #page1 {
+                background-size: 80%;
+            }
+
+            #page2 {
+                background-size: 80%;
+            }
+
+            #page3 {
+                background-size: 80%;
+            }
+
+            #page4 {
+                background-size: 80%;
+            }
+
+            #page5 #page5_sub_page2 .question_wrapper #question_index {
+                font-size: 1.5em;
+            }
+            #page5 #page5_sub_page2 .question_wrapper #question_title {
+                line-height: 1.4em;
+                font-size: 1.2em;
+                width: 50%;
+                margin: 10px auto 0;
+                padding: 5px;
+            }
+            #page5 #page5_sub_page2 .question_wrapper #question_item {
+                width: 50%;
+                margin: 15px auto 0;
+            }
+            #page5 #page5_sub_page2 .question_wrapper #question_item div#question_item1 {
+                padding-right: 2%;
+            }
+            #page5 #page5_sub_page2 .question_wrapper #question_item div#question_item2 {
+                padding-left: 2%;
+            }
+            #page5 #page5_sub_page2 .question_wrapper #question_item div i {
+                width: 15px;
+                height: 15px;
+                margin-right: 4px;
+            }
+            #page5 #page5_sub_page2 .question_wrapper #question_item div i.current {
+                background-size: 10px 15px;
+            }
+            #page5 #page5_sub_page2 .question_wrapper #question_item div span {
+                font-size: 1.2em;
+                line-height: 1.2em;
+            }
+            #page5 #page5_sub_page1 #redBagClick {
+                left: 40%;
+            }
+            #page7 #page7_sub_page1 {
+                background-size: 80%;
+            }
+            #page7 #page7_sub_page1 #redBagOtherClick {
+                width: 51.2%;
+                left: 24.4%;
+            }
+
+            #page7 #page7_sub_page2 {
+                background-size: 80%;
+            }
+            #page7 #page7_sub_page2 #key_wrapper {
+                background-size: 80%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -569,7 +641,6 @@
                     <div id="key_wrapper">
                         <p id="key"></p>
                     </div>
-                    <button id="test" style="position: absolute; bottom: 0; left: 0; display: none;">呈现兑换码</button>
                 </div>
             </div>
         </div>
@@ -1261,8 +1332,11 @@
                             redBagOtherClick_height = 585,
                             redBagOtherClick_bottom = 273,
                             two_dimensional_code_width = 181,
-                            two_dimensional_code_top = 459,
-                            real_height = (clientWidth / img_width) * img_height,
+                            two_dimensional_code_top = 459;
+                        if(clientHeight <= 420){
+                            clientWidth = clientWidth * 0.8;
+                        }
+                        var real_height = (clientWidth / img_width) * img_height,
                             diff_height = clientHeight - real_height;
                         $('#page5_sub_page2 .question_wrapper').css({
                             "top": (clientWidth / img_width) * question_top + diff_height + 'px'
@@ -1287,40 +1361,82 @@
                             "top": diff_height / 2
                         });
 
-                        // 兑换码出现逻辑
-                        $('#test').on('click', function(){
-                            $('#share_tips').hide();
-                            $('#key_wrapper').show();
-                        });
-
-                        // 微信JSSDK接口用到的参数
-                        var imgUrl = "";
-                        var lineLink = "http://h5.china.com.cn/cxwb/20151230/zhihui2015special/index.html";
-                        var descContent = '再见2015，相聚2016';
-                        var shareTitle = '“智”回家的你';
-
-                        // 分享到朋友圈
-                        wx.onMenuShareTimeline({
-                            "title": shareTitle,
-                            "link": lineLink,
-                            "imgUrl": imgUrl,
-                            success: function () {
-                                $('#share_tips').hide();
-                                $('#key_wrapper').show();
+                        $.ajax({
+                            async:true,
+                            type:"GET",
+                            url:"http://m.china.com.cn/h5/pai/doCheck?url="+encodeURIComponent(window.location.href),
+                            success:function(data){
+                                setData(data);
+                            },
+                            error:function(msg){
                             }
                         });
 
-                        // 分享给朋友
-                        wx.onMenuShareAppMessage({
-                            "title": shareTitle,
-                            "desc": descContent,
-                            "link": lineLink,
-                            "imgUrl": imgUrl,
-                            success: function () {
-                                $('#share_tips').hide();
-                                $('#key_wrapper').show();
-                            }
-                        });
+                        function setData(data){
+                            wx.config({
+                                debug: false,
+                                appId: data.appId,
+                                timestamp: data.timestamp,
+                                nonceStr: data.nonceStr,
+                                signature: data.signature,
+                                jsApiList: [
+                                    'checkJsApi',
+                                    'onMenuShareTimeline',
+                                    'onMenuShareAppMessage',
+                                    'onMenuShareQQ',
+                                    'onMenuShareWeibo'
+                                ]
+                            });
+                            wx.ready(function () {
+                                // 1 判断当前版本是否支持指定 JS 接口，支持批量判断
+                                wx.checkJsApi({
+                                    jsApiList: [
+                                        'getNetworkType',
+                                        'previewImage'
+                                    ],
+                                    success: function (res) {
+                                    }
+                                });
+                                wx.showMenuItems({
+                                    menuList: [
+                                        'menuItem:share:appMessage',
+                                        'menuItem:share:timeline'
+                                    ] // 要显示的菜单项，所有menu项见附录3
+                                });
+
+                                // 微信JSSDK接口用到的参数
+                                var imgUrl = "";
+                                var lineLink = "http://h5.china.com.cn/cxwb/20151230/zhihui2015special/index.html";
+                                var descContent = '再见2015，相聚2016';
+                                var shareTitle = '“智”回家的你';
+
+                                // 分享到朋友圈
+                                wx.onMenuShareTimeline({
+                                    "title": shareTitle,
+                                    "link": lineLink,
+                                    "imgUrl": imgUrl,
+                                    success: function () {
+                                        $('#share_tips').hide();
+                                        $('#key_wrapper').show();
+                                    }
+                                });
+
+                                // 分享给朋友
+                                wx.onMenuShareAppMessage({
+                                    "title": shareTitle,
+                                    "desc": descContent,
+                                    "link": lineLink,
+                                    "imgUrl": imgUrl,
+                                    success: function () {
+                                        $('#share_tips').hide();
+                                        $('#key_wrapper').show();
+                                    }
+                                });
+                            });
+
+                            wx.error(function (res) {
+                            });
+                        }
                     }else{
                         $('body')[0].innerHTML = '听说服务器挂了，请重试~';
                     }
