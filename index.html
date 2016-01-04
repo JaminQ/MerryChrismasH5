@@ -6,7 +6,7 @@
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <script src="lib/pace.min.js"></script>
-    <link href="lib/pace-theme-barber-shop.css" rel="stylesheet" />
+    <link href="lib/pace-theme-loading-bar.css" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="lib/swiper.min.css">
 
@@ -262,6 +262,9 @@
             width: 100%;
             height: 100%;
         }
+        .swiper-wrapper {
+            background-color: #FBF4E5;
+        }
         .swiper-slide {
             display: flex;
             text-align: center;
@@ -291,6 +294,12 @@
             background-size: 100%;
             top: 3%;
             left: 3%;
+            visibility: hidden;
+        }
+        #music .nothing {
+            background-image: url('images/music-2.png');
+            position: absolute;
+            visibility: hidden;
         }
 
         #up_logo{
@@ -305,6 +314,7 @@
         #page1 {
             background: #FBF4E5 url('images/0-1.png') bottom center no-repeat;
             background-size: 100%;
+            visibility: hidden;
         }
 
         #page2 {
@@ -552,7 +562,7 @@
 </head>
 <body>
     <div id="music">
-        <audio id="music_part1" autoplay loop preload>
+        <audio id="music_part1" loop preload>
             <source src="music/part1.mp3" type="audio/mpeg">
         </audio>
         <audio id="music_part2" loop preload>
@@ -567,6 +577,7 @@
         <audio id="music_part3" loop preload>
             <source src="music/part3.mp3" type="audio/mpeg">
         </audio>
+        <div class="nothing"></div>
     </div>
     <div id="up_logo">
         <img class="animated infinite slideOutUp bottom" src="images/up.png" />
@@ -574,7 +585,7 @@
     <div class="swiper-container">
         <div class="swiper-wrapper">
             <div id="page1" class="swiper-slide swiper-no-swiping">
-                <img class="animated fadeIn duration3s center" src="images/0-2.png" />
+                <img class="animate fadeIn duration3s center" src="images/0-2.png" />
             </div>
             <div id="page2" class="swiper-slide swiper-no-swiping">
                 <img class="animate fadeInOut duration3s center" src="images/1-2.png" />
@@ -1149,7 +1160,9 @@
                                         $up_logo.fadeOut();
                                         if(music_status){
                                             music_part2.pause();
-                                            music_part1.play();
+                                            if(music_part1.paused){
+                                                music_part1.play();
+                                            }
                                         }
                                         if(play_list[3]){
                                             setTimeout(function(){
@@ -1167,7 +1180,9 @@
                                         if(music_status){
                                             music_part1.pause();
                                             music_part3.pause();
-                                            music_part2.play();
+                                            if(music_part2.paused){
+                                                music_part2.play();
+                                            }
                                         }
                                         if(!play_list[4]){
                                             $up_logo.fadeIn();
@@ -1178,7 +1193,9 @@
                                         $up_logo.fadeOut();
                                         if(music_status){
                                             music_part2.pause();
-                                            music_part3.play();
+                                            if(music_part3.paused){
+                                                music_part3.play();
+                                            }
                                         }
                                         if(play_list[5]){
                                             setTimeout(function(){
@@ -1198,14 +1215,6 @@
                                 }
                             }
                         });
-
-                        // 初始化第1页的操作
-                        music_part1.play(); // 强制播放，解决一些加载问题
-                        setTimeout(function(){
-                            $up_logo.fadeIn();
-                            music_part1.play(); // 强制播放，解决一些加载问题
-                            $('#page1').removeClass('swiper-no-swiping');
-                        }, 3000);
 
                         // 音乐按钮点击事件
                         $('#music').on('click', function(e){
@@ -1229,9 +1238,23 @@
                                     case 0:
                                     case 1:
                                     case 2:
-                                    case 3: music_part1.play(); break;
-                                    case 4: music_part2.play(); break;
-                                    default: music_part3.play();
+                                    case 3: {
+                                        if(music_part1.paused){
+                                            music_part1.play();
+                                        }
+                                        break;
+                                    }
+                                    case 4: {
+                                        if(music_part2.paused){
+                                            music_part2.play();
+                                        }
+                                        break;
+                                    }
+                                    default: {
+                                        if(music_part3.paused){
+                                            music_part3.play();
+                                        }
+                                    }
                                 }
 
                                 $(e.target).css({
@@ -1263,7 +1286,6 @@
 
                                 currentTarget.find('i').addClass('current');
 
-                                music_part2.pause();
                                 if(currentTarget.hasClass('correct')){
                                     // 回答正确的逻辑
                                     if(music_status){
@@ -1282,9 +1304,9 @@
                                     if(question_current_index != 10){
                                         if(music_status){
                                             // 处理iPhone6以下的多个音频同时播放问题
-                                            music_correct.pause();
-                                            music_incorrect.pause();
-                                            music_part2.play();
+                                            if(music_part2.paused){
+                                                music_part2.play();
+                                            }
                                         }
 
                                         // 隐藏图片
@@ -1320,9 +1342,9 @@
                                     }else{
                                         if(music_status){
                                             // 处理iPhone6以下的多个音频同时播放问题
-                                            music_correct.pause();
-                                            music_incorrect.pause();
-                                            music_part2.play();
+                                            if(music_part2.paused){
+                                                music_part2.play();
+                                            }
                                         }
 
                                         // 已经答完题了，跳转到下一页
@@ -1453,6 +1475,26 @@
                             wx.error(function (res) {
                             });
                         }
+
+                        // 页面加载好后开始播放
+                        Pace.once('done', function(){
+                            // 初始化第1页的操作
+                            $('#page1 img').removeClass('animate').addClass('animated');
+                            $('.swiper-wrapper').css({
+                                'background-color': 'transparent'
+                            });
+                            $('#page1').css({
+                                'visibility': 'visible'
+                            });
+                            $('#music').css({
+                                'visibility': 'visible'
+                            });
+                            music_part1.play();
+                            setTimeout(function(){
+                                $up_logo.fadeIn();
+                                $('#page1').removeClass('swiper-no-swiping');
+                            }, 3000);
+                        });
                     }else{
                         $('body')[0].innerHTML = '听说服务器挂了，请重试~';
                     }
