@@ -554,6 +554,8 @@
             background-image: url('images/music-2.png');
             position: absolute;
             visibility: hidden;
+            width: 0;
+            height: 0;
         }
 
         #up_logo{
@@ -1485,7 +1487,7 @@
                                 music_correct.pause();
                                 music_incorrect.pause();
 
-                                $(e.target).removeClass('on').addClass('off');
+                                $('#music').removeClass('on').addClass('off');
                             }else{
                                 // 播放音乐逻辑
                                 music_status = true;
@@ -1512,7 +1514,7 @@
                                     }
                                 }
 
-                                $(e.target).removeClass('off').addClass('on');
+                                $('#music').removeClass('off').addClass('on');
                             }
                         });
 
