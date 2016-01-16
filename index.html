@@ -527,7 +527,7 @@
             visibility: hidden;
         }
         #music .nothing {
-            background: transparent url('images/music-2.png') center center no-repeat;
+            background-image: url('images/music-2.png');
             position: absolute;
             visibility: hidden;
         }
@@ -1462,8 +1462,7 @@
                                 music_incorrect.pause();
 
                                 $(e.target).css({
-                                    "background": "transparent url('images/music-2.png') center center no-repeat",
-                                    "background-size": "100%"
+                                    "background": "url('images/music-2.png') 50% 50% / 100% no-repeat transparent"
                                 });
                             }else{
                                 // 播放音乐逻辑
@@ -1492,8 +1491,7 @@
                                 }
 
                                 $(e.target).css({
-                                    "background": "transparent url('images/music-1.png') center center no-repeat",
-                                    "background-size": "100%"
+                                    "background": "url('images/music-1.png') 50% 50% / 100% no-repeat transparent"
                                 });
                             }
                         });
