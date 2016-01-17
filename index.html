@@ -12,7 +12,7 @@
 
     <script type="text/javascript" src="lib/swiper.min.js"></script>
     <script type="text/javascript" src="lib/jquery-2.1.3.min.js"></script>
-    <!-- <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script> -->
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <link rel="shortcut icon" href="http://h5.china.com.cn/cxwb/20151230/zhihui2015special/images/share.jpg" />
 
     <style>
@@ -551,13 +551,6 @@
             background: transparent url('images/music-2.png') center center no-repeat;
             background-size: 100%;
         }
-        #music .nothing {
-            background-image: url('images/music-2.png');
-            position: absolute;
-            visibility: hidden;
-            width: 0;
-            height: 0;
-        }
 
         #up_logo{
             position: absolute;
@@ -744,6 +737,10 @@
             margin: 0 auto;
         }
 
+        .nothing {
+            display: none;
+        }
+
         @media screen and (max-height: 420px) {
             .swiper-slide img {
                 width: 80%;
@@ -834,15 +831,14 @@
         <audio id="music_part3" loop preload>
             <source src="music/part3.mp3" type="audio/mpeg">
         </audio>
-        <div class="nothing"></div>
     </div>
     <div id="up_logo">
         <img class="animated infinite slideOutUp bottom" src="images/up.png" />
     </div>
     <div class="swiper-container">
-        <div class="swiper-wrapper">
+        <div id="swiper-wrapper" class="swiper-wrapper">
             <div id="page1" class="swiper-slide swiper-no-swiping">
-                <img class="animate fadeIn duration3s center" src="images/0-2.png" />
+                <img id="page1_img" class="animate fadeIn duration3s center" src="images/0-2.png" />
             </div>
             <div id="page2" class="swiper-slide swiper-no-swiping">
                 <img class="animate fadeInOut duration3s center" src="images/1-2.png" />
@@ -916,8 +912,29 @@
             </div>
         </div>
     </div>
+    <div class="nothing">
+        <img src="images/music-2.png" />
+        <img src="images/5-2.png" />
+    </div>
 
     <script>
+        // helper function
+        function byId(id, context){
+            context = context || document;
+            return context.getElementById(id);
+        };
+
+        function byClassName(className, context){
+            context = context || document;
+            return context.getElementsByClassName(className);
+        }
+
+        function byTagName(tagName, context){
+            context = context || document;
+            return context.getElementsByTagName(tagName);
+        }
+
+        // here we go
         $(function() {
             $.ajax({
                 "url": "http://wx.china.cn/prizesn.do",
@@ -1318,27 +1335,27 @@
                             num = json.id, // 参与人数
                             question_current, // 随机挑选的题目
                             question_current_index = 1, // 当前题目的题号
-                            $question_index = $('#question_index'), // 题号DOM
-                            $question_title = $('#question_title'), // 题目DOM
-                            $question_item1 = $('#question_item1'), // 选项1DOM
-                            $question_item1_span = $question_item1.find('span'), // 选项1内容DOM
-                            $question_item2 = $('#question_item2'), // 选项2DOM
-                            $question_item2_span = $question_item2.find('span'), // 选项2内容DOM
+                            question_index = byId('question_index'), // 题号DOM
+                            question_title = byId('question_title'), // 题目DOM
+                            question_item1 = byId('question_item1'), // 选项1DOM
+                            question_item1_span = byTagName('span', question_item1)[0], // 选项1内容DOM
+                            question_item2 = byId('question_item2'), // 选项2DOM
+                            question_item2_span = byTagName('span', question_item2)[0], // 选项2内容DOM
                             answer_status = true, // 是否可以答题
-                            music_part1 = document.getElementById('music_part1'),
-                            music_part2 = document.getElementById('music_part2'),
-                            music_correct = document.getElementById('music_correct'),
-                            music_incorrect = document.getElementById('music_incorrect'),
-                            music_part3 = document.getElementById('music_part3'),
-                            $img_correct = $('#img_correct'),
-                            $img_incorrect = $('#img_incorrect'),
+                            music_part1 = byId('music_part1'),
+                            music_part2 = byId('music_part2'),
+                            music_correct = byId('music_correct'),
+                            music_incorrect = byId('music_incorrect'),
+                            music_part3 = byId('music_part3'),
+                            img_correct = byId('img_correct'),
+                            img_incorrect = byId('img_incorrect'),
                             music_status = true, // 音乐全局播放状态
-                            $up_logo = $('#up_logo'),
+                            $up_logo = $('#up_logo'), // 上划箭头
                             play_list = [false, true, true, true, true, true]; // 记录各页播放状态
 
                         // 默认隐藏图片
-                        $img_correct.hide();
-                        $img_incorrect.hide();
+                        img_correct.style.display = 'none';
+                        img_incorrect.style.display = 'none';
 
                         // 随机挑选题目
                         question_current = (function(list){
@@ -1367,10 +1384,10 @@
                         })(question_list);
 
                         // 初始化参与人数
-                        $('#num').html(num);
+                        byId('num').innerHTML = num;
 
                         // 初始化兑换码
-                        $('#key').html(key);
+                        byId('key').innerHTML = key;
 
                         // init swiper
                         var swiper = new Swiper('.swiper-container', {
@@ -1378,9 +1395,9 @@
                             direction: 'vertical',
                             noSwiping: true,
                             onSlideChangeEnd: function(swiper){
-                                var animate = $('.swiper-slide-active .animate');
-                                if(animate.length > 0){
-                                    animate.removeClass('animate').addClass('animated');
+                                var animate = byClassName('animate', byClassName('swiper-slide-active')[0]);
+                                while(animate.length > 0){
+                                    animate[0].className = animate[0].className.replace(/animate/, 'animated');
                                 }
                                 switch(swiper.activeIndex){
                                     case 0: {
@@ -1392,7 +1409,7 @@
                                         if(play_list[1]){
                                             setTimeout(function(){
                                                 $up_logo.fadeIn();
-                                                $('#page2').removeClass('swiper-no-swiping');
+                                                byId('page2').classList.remove('swiper-no-swiping');
                                             }, 11000);
                                         }else{
                                             $up_logo.fadeIn();
@@ -1405,7 +1422,7 @@
                                         if(play_list[2]){
                                             setTimeout(function(){
                                                 $up_logo.fadeIn();
-                                                $('#page3').removeClass('swiper-no-swiping');
+                                                byId('page3').classList.remove('swiper-no-swiping');
                                             }, 7000);
                                         }else{
                                             $up_logo.fadeIn();
@@ -1424,7 +1441,7 @@
                                         if(play_list[3]){
                                             setTimeout(function(){
                                                 $up_logo.fadeIn();
-                                                $('#page4').removeClass('swiper-no-swiping');
+                                                byId('page4').classList.remove('swiper-no-swiping');
                                             }, 7000);
                                         }else{
                                             $up_logo.fadeIn();
@@ -1457,7 +1474,7 @@
                                         if(play_list[5]){
                                             setTimeout(function(){
                                                 $up_logo.fadeIn();
-                                                $('#page6').removeClass('swiper-no-swiping');
+                                                byId('page6').classList.remove('swiper-no-swiping');
                                             }, 23000);
                                         }else{
                                             $up_logo.fadeIn();
@@ -1488,7 +1505,7 @@
                                 music_correct.pause();
                                 music_incorrect.pause();
 
-                                $('#music').removeClass('on').addClass('off');
+                                byId('music').className = byId('music').className.replace(/on/, 'off');
                             }else{
                                 // 播放音乐逻辑
                                 music_status = true;
@@ -1515,16 +1532,18 @@
                                     }
                                 }
 
-                                $('#music').removeClass('off').addClass('on');
+                                byId('music').className = byId('music').className.replace(/off/, 'on');
                             }
                         });
 
                         // init 第1道题目
-                        $question_index.html('第一题');
-                        $question_title.html(question_current[0].question);
-                        (question_current[0].answer[0].correct) ? ($question_item1.addClass('correct')) : ($question_item2.addClass('correct'));
-                        $question_item1_span.html('A.' + question_current[0].answer[0].content);
-                        $question_item2_span.html('B.' + question_current[0].answer[1].content);
+                        (function(){
+                            question_index.innerHTML = '第一题';
+                            question_title.innerHTML = question_current[0].question;
+                            (question_current[0].answer[0].correct) ? (question_item1.classList.add('correct')) : (question_item2.classList.add('correct'));
+                            question_item1_span.innerHTML = 'A.' + question_current[0].answer[0].content;
+                            question_item2_span.innerHTML = 'B.' + question_current[0].answer[1].content;
+                        })();
 
                         // 绑定红包点击事件
                         $('#redBagClick').on('click', function(e){
@@ -1537,58 +1556,58 @@
                                 // 将状态设置为不可答题，避免重复答题
                                 answer_status = false;
 
-                                var currentTarget = $(e.currentTarget);
+                                var currentTarget = e.currentTarget,
+                                    current_i_classList = byTagName('i', currentTarget)[0].classList;
 
-                                currentTarget.find('i').addClass('current');
+                                current_i_classList.add('current');
 
-                                if(currentTarget.hasClass('correct')){
+                                if(/correct/.test(currentTarget.classList)){
                                     // 回答正确的逻辑
                                     if(music_status){
                                         music_correct.play();
                                     }
-                                    $img_correct.show();
+                                    img_correct.style.display = 'block';
                                 }else{
                                     // 回答错误的逻辑
                                     if(music_status){
                                         music_incorrect.play();
                                     }
-                                    $img_incorrect.show();
+                                    img_incorrect.style.display = 'block';
                                 }
 
                                 setTimeout(function(){
-                                    if(question_current_index != 10){
+                                    if(question_current_index != 1){
                                         if(music_status){
                                             // 处理iPhone6以下的多个音频同时播放问题
                                             music_part2.play();
                                         }
 
                                         // 隐藏图片
-                                        $img_correct.hide();
-                                        $img_incorrect.hide();
+                                        img_correct.style.display = 'none';
+                                        img_incorrect.style.display = 'none';
 
                                         // 去掉原来的correct类
-                                        $question_item1.removeClass('correct');
-                                        $question_item2.removeClass('correct');
+                                        /correct/.test(question_item1.className) ? question_item1.classList.remove('correct') : question_item2.classList.remove('correct');
 
                                         // 渲染下一道题
                                         switch(question_current_index){
-                                            case 1: $question_index.html('第二题'); break;
-                                            case 2: $question_index.html('第三题'); break;
-                                            case 3: $question_index.html('第四题'); break;
-                                            case 4: $question_index.html('第五题'); break;
-                                            case 5: $question_index.html('第六题'); break;
-                                            case 6: $question_index.html('第七题'); break;
-                                            case 7: $question_index.html('第八题'); break;
-                                            case 8: $question_index.html('第九题'); break;
-                                            case 9: $question_index.html('第十题'); break;
+                                            case 1: question_index.innerHTML = '第二题'; break;
+                                            case 2: question_index.innerHTML = '第三题'; break;
+                                            case 3: question_index.innerHTML = '第四题'; break;
+                                            case 4: question_index.innerHTML = '第五题'; break;
+                                            case 5: question_index.innerHTML = '第六题'; break;
+                                            case 6: question_index.innerHTML = '第七题'; break;
+                                            case 7: question_index.innerHTML = '第八题'; break;
+                                            case 8: question_index.innerHTML = '第九题'; break;
+                                            case 9: question_index.innerHTML = '第十题'; break;
                                         }
-                                        $question_title.html(question_current[question_current_index].question);
-                                        (question_current[question_current_index].answer[0].correct) ? ($question_item1.addClass('correct')) : ($question_item2.addClass('correct'));
-                                        $question_item1_span.html('A.' + question_current[question_current_index].answer[0].content);
-                                        $question_item2_span.html('B.' + question_current[question_current_index].answer[1].content);
+                                        question_title.innerHTML = question_current[question_current_index].question;
+                                        question_current[question_current_index].answer[0].correct ? question_item1.classList.add('correct') : question_item2.classList.add('correct');
+                                        question_item1_span.innerHTML = 'A.' + question_current[question_current_index].answer[0].content;
+                                        question_item2_span.innerHTML = 'B.' + question_current[question_current_index].answer[1].content;
                                         question_current_index++; // 题号自增
 
-                                        currentTarget.find('i').removeClass('current'); // 删除选中状态
+                                        current_i_classList.remove('current'); // 删除选中状态
 
                                         // 将状态设置为可答题
                                         answer_status = true;
@@ -1613,138 +1632,136 @@
                         });
 
                         // 处理适配
-                        var clientWidth = document.body.clientWidth,
-                            clientHeight = document.body.clientHeight,
-                            img_width = 640,
-                            img_height = 1136,
-                            redBagClick_width = 165;
-                            redBagClick_bottom = 350,
-                            question_top = 510,
-                            redBagOtherClick_height = 585,
-                            redBagOtherClick_bottom = 273,
-                            two_dimensional_code_width = 181,
-                            two_dimensional_code_top = 459;
-                        if(clientHeight <= 420){
-                            clientWidth = clientWidth * 0.8;
-                        }
-                        var real_height = (clientWidth / img_width) * img_height,
-                            diff_height = clientHeight - real_height;
-                        $('#page5_sub_page2 .question_wrapper').css({
-                            "top": (clientWidth / img_width) * question_top + diff_height + 'px'
-                        });
-                        $('#redBagClick').css({
-                            "width": (redBagClick_width / img_width) * clientWidth,
-                            "height": (redBagClick_width / img_width) * clientWidth,
-                            "bottom": (redBagClick_bottom / img_height) * real_height + 'px'
-                        });
-                        $('#redBagOtherClick').css({
-                            "height": (redBagOtherClick_height / img_height) * real_height,
-                            "bottom": (redBagOtherClick_bottom / img_height) * real_height + diff_height / 2 + 'px'
-                        });
-                        $('#two_dimensional_code').css({
-                            "width": (two_dimensional_code_width / img_width) * clientWidth,
-                            "height": (two_dimensional_code_width / img_width) * clientWidth,
-                            "top": (clientWidth / img_width) * two_dimensional_code_top + diff_height / 2 + 'px',
-                            "left": '50%',
-                            "margin-left": '-' + ((two_dimensional_code_width / img_width) * clientWidth) / 2 + 'px'
-                        });
-                        $('.swiper-slide .center').css({
-                            "top": diff_height / 2
-                        });
+                        (function(){
+                            var clientWidth = document.body.clientWidth,
+                                clientHeight = document.body.clientHeight,
+                                img_width = 640,
+                                img_height = 1136,
+                                redBagClick_width = 165;
+                                redBagClick_bottom = 350,
+                                question_top = 510,
+                                redBagOtherClick_height = 585,
+                                redBagOtherClick_bottom = 273,
+                                two_dimensional_code_width = 181,
+                                two_dimensional_code_top = 459;
+                            if(clientHeight <= 420){
+                                clientWidth = clientWidth * 0.8;
+                            }
+                            var real_height = (clientWidth / img_width) * img_height,
+                                diff_height = clientHeight - real_height;
+                            $('#page5_sub_page2 .question_wrapper').css({
+                                "top": (clientWidth / img_width) * question_top + diff_height + 'px'
+                            });
+                            $('#redBagClick').css({
+                                "width": (redBagClick_width / img_width) * clientWidth,
+                                "height": (redBagClick_width / img_width) * clientWidth,
+                                "bottom": (redBagClick_bottom / img_height) * real_height + 'px'
+                            });
+                            $('#redBagOtherClick').css({
+                                "height": (redBagOtherClick_height / img_height) * real_height,
+                                "bottom": (redBagOtherClick_bottom / img_height) * real_height + diff_height / 2 + 'px'
+                            });
+                            $('#two_dimensional_code').css({
+                                "width": (two_dimensional_code_width / img_width) * clientWidth,
+                                "height": (two_dimensional_code_width / img_width) * clientWidth,
+                                "top": (clientWidth / img_width) * two_dimensional_code_top + diff_height / 2 + 'px',
+                                "left": '50%',
+                                "margin-left": '-' + ((two_dimensional_code_width / img_width) * clientWidth) / 2 + 'px'
+                            });
+                            $('.swiper-slide .center').css({
+                                "top": diff_height / 2
+                            });
+                        })();
 
                         // 微信JSSDK
-                        // $.ajax({
-                        //     async:true,
-                        //     type:"GET",
-                        //     url:"http://m.china.com.cn/h5/pai/doCheck?url="+encodeURIComponent(window.location.href),
-                        //     success:function(data){
-                        //         setData(data);
-                        //     },
-                        //     error:function(msg){
-                        //     }
-                        // });
+                        $.ajax({
+                            async:true,
+                            type:"GET",
+                            url:"http://m.china.com.cn/h5/pai/doCheck?url="+encodeURIComponent(window.location.href),
+                            success:function(data){
+                                setData(data);
+                            },
+                            error:function(msg){
+                            }
+                        });
 
-                        // function setData(data){
-                        //     wx.config({
-                        //         debug: false,
-                        //         appId: data.appId,
-                        //         timestamp: data.timestamp,
-                        //         nonceStr: data.nonceStr,
-                        //         signature: data.signature,
-                        //         jsApiList: [
-                        //             'checkJsApi',
-                        //             'onMenuShareTimeline',
-                        //             'onMenuShareAppMessage',
-                        //             'onMenuShareQQ',
-                        //             'onMenuShareWeibo'
-                        //         ]
-                        //     });
-                        //     wx.ready(function () {
-                        //         // 1 判断当前版本是否支持指定 JS 接口，支持批量判断
-                        //         wx.checkJsApi({
-                        //             jsApiList: [
-                        //                 'getNetworkType',
-                        //                 'previewImage'
-                        //             ],
-                        //             success: function (res) {
-                        //             }
-                        //         });
-                        //         wx.showMenuItems({
-                        //             menuList: [
-                        //                 'menuItem:share:appMessage',
-                        //                 'menuItem:share:timeline'
-                        //             ] // 要显示的菜单项，所有menu项见附录3
-                        //         });
+                        function setData(data){
+                            wx.config({
+                                debug: false,
+                                appId: data.appId,
+                                timestamp: data.timestamp,
+                                nonceStr: data.nonceStr,
+                                signature: data.signature,
+                                jsApiList: [
+                                    'checkJsApi',
+                                    'onMenuShareTimeline',
+                                    'onMenuShareAppMessage',
+                                    'onMenuShareQQ',
+                                    'onMenuShareWeibo'
+                                ]
+                            });
+                            wx.ready(function () {
+                                // 1 判断当前版本是否支持指定 JS 接口，支持批量判断
+                                wx.checkJsApi({
+                                    jsApiList: [
+                                        'getNetworkType',
+                                        'previewImage'
+                                    ],
+                                    success: function (res) {
+                                    }
+                                });
+                                wx.showMenuItems({
+                                    menuList: [
+                                        'menuItem:share:appMessage',
+                                        'menuItem:share:timeline'
+                                    ] // 要显示的菜单项，所有menu项见附录3
+                                });
 
-                        //         // 微信JSSDK接口用到的参数
-                        //         var imgUrl = "http://h5.china.com.cn/cxwb/20151230/zhihui2015special/images/share.jpg";
-                        //         var lineLink = "http://h5.china.com.cn/cxwb/20151230/zhihui2015special/index.html";
-                        //         var descContent = '再见2015，相聚2016';
-                        //         var shareTitle = '“智”回家的你：马上领取红包，再见2015，相聚2016';
+                                // 微信JSSDK接口用到的参数
+                                var imgUrl = "http://h5.china.com.cn/cxwb/20151230/zhihui2015special/images/share.jpg";
+                                var lineLink = "http://h5.china.com.cn/cxwb/20151230/zhihui2015special/index.html";
+                                var descContent = '再见2015，相聚2016';
+                                var shareTitle = '“智”回家的你：马上领取红包，再见2015，相聚2016';
 
-                        //         // 分享到朋友圈
-                        //         wx.onMenuShareTimeline({
-                        //             "title": shareTitle,
-                        //             "link": lineLink,
-                        //             "imgUrl": imgUrl,
-                        //             success: function () {
-                        //                 $('#share_tips').hide();
-                        //                 $('#key_wrapper').show();
-                        //             }
-                        //         });
+                                // 分享到朋友圈
+                                wx.onMenuShareTimeline({
+                                    "title": shareTitle,
+                                    "link": lineLink,
+                                    "imgUrl": imgUrl,
+                                    success: function () {
+                                        $('#share_tips').hide();
+                                        $('#key_wrapper').show();
+                                    }
+                                });
 
-                        //         // 分享给朋友
-                        //         wx.onMenuShareAppMessage({
-                        //             "title": shareTitle,
-                        //             "desc": descContent,
-                        //             "link": lineLink,
-                        //             "imgUrl": imgUrl,
-                        //             success: function () {
-                        //             }
-                        //         });
-                        //     });
+                                // 分享给朋友
+                                wx.onMenuShareAppMessage({
+                                    "title": shareTitle,
+                                    "desc": descContent,
+                                    "link": lineLink,
+                                    "imgUrl": imgUrl,
+                                    success: function () {
+                                    }
+                                });
+                            });
 
-                        //     wx.error(function (res) {
-                        //     });
-                        // }
+                            wx.error(function (res) {
+                            });
+                        }
 
                         // 页面加载好后开始播放
                         Pace.once('done', function(){
                             // 初始化第1页的操作
-                            $('#page1 img').removeClass('animate').addClass('animated');
-                            $('.swiper-wrapper').css({
-                                'background-color': 'transparent'
-                            });
-                            $('#page1').css({
-                                'visibility': 'visible'
-                            });
-                            $('#music').css({
-                                'visibility': 'visible'
-                            });
+                            var img = byId('page1_img');
+                            img.className = img.className.replace(/animate/, 'animated');
+                            byId('swiper-wrapper').style.backgroundColor = 'transparent';
+                            byId('page1').style.visibility = 'visible';
+                            byId('music').style.visibility = 'visible';
                             music_part1.play();
+
                             setTimeout(function(){
                                 $up_logo.fadeIn();
-                                $('#page1').removeClass('swiper-no-swiping');
+                                byId('page1').classList.remove('swiper-no-swiping');
                             }, 3000);
                         });
                     }else{
