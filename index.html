@@ -12,7 +12,7 @@
 
     <script type="text/javascript" src="lib/swiper.min.js"></script>
     <script type="text/javascript" src="lib/jquery-2.1.3.min.js"></script>
-    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <!-- <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script> -->
     <link rel="shortcut icon" href="http://h5.china.com.cn/cxwb/20151230/zhihui2015special/images/share.jpg" />
 
     <style>
@@ -1350,7 +1350,7 @@
                             img_correct = byId('img_correct'),
                             img_incorrect = byId('img_incorrect'),
                             music_status = true, // 音乐全局播放状态
-                            $up_logo = $('#up_logo'), // 上划箭头
+                            up_logo = byId('up_logo'), // 上划箭头
                             play_list = [false, true, true, true, true, true]; // 记录各页播放状态
 
                         // 默认隐藏图片
@@ -1383,6 +1383,15 @@
                             return current_list;
                         })(question_list);
 
+                        // init 第1道题目
+                        (function(){
+                            question_index.innerHTML = '第一题';
+                            question_title.innerHTML = question_current[0].question;
+                            (question_current[0].answer[0].correct) ? (question_item1.classList.add('correct')) : (question_item2.classList.add('correct'));
+                            question_item1_span.innerHTML = 'A.' + question_current[0].answer[0].content;
+                            question_item2_span.innerHTML = 'B.' + question_current[0].answer[1].content;
+                        })();
+
                         // 初始化参与人数
                         byId('num').innerHTML = num;
 
@@ -1402,14 +1411,14 @@
                                 switch(swiper.activeIndex){
                                     case 1: {
                                         if(play_list[1]){
-                                            $up_logo.fadeOut();
+                                            up_logo.style.display = 'none';
                                             play_list[1] = false;
                                         }
                                         break;
                                     }
                                     case 2: {
                                         if(play_list[2]){
-                                            $up_logo.fadeOut();
+                                            up_logo.style.display = 'none';
                                             play_list[2] = false;
                                         }
                                         break;
@@ -1422,7 +1431,7 @@
                                             }
                                         }
                                         if(play_list[3]){
-                                            $up_logo.fadeOut();
+                                            up_logo.style.display = 'none';
                                             play_list[3] = false;
                                         }
                                         break;
@@ -1436,7 +1445,7 @@
                                             }
                                         }
                                         if(play_list[4]){
-                                            $up_logo.fadeOut();
+                                            up_logo.style.display = 'none';
                                             play_list[4] = false;
                                         }
                                         break;
@@ -1449,25 +1458,25 @@
                                             }
                                         }
                                         if(play_list[5]){
-                                            $up_logo.fadeOut();
+                                            up_logo.style.display = 'none';
                                             play_list[5] = false;
                                         }
                                         break;
                                     }
                                     case 6: {
-                                        $up_logo.fadeOut();
+                                        up_logo.style.display = 'none';
                                         break;
                                     }
                                 }
                             }
                         });
 
-                        $('body').on('touchmove', function (event) {
-                            event.preventDefault();
+                        byTagName('body')[0].addEventListener('touchmove', function (e) {
+                            e.preventDefault();
                         });
 
                         // 音乐按钮点击事件
-                        $('#music').on('click', function(e){
+                        byId('music').addEventListener('click', function(e){
                             if(music_status){
                                 // 暂停音乐逻辑
                                 music_status = false;
@@ -1508,27 +1517,18 @@
                             }
                         });
 
-                        // init 第1道题目
-                        (function(){
-                            question_index.innerHTML = '第一题';
-                            question_title.innerHTML = question_current[0].question;
-                            (question_current[0].answer[0].correct) ? (question_item1.classList.add('correct')) : (question_item2.classList.add('correct'));
-                            question_item1_span.innerHTML = 'A.' + question_current[0].answer[0].content;
-                            question_item2_span.innerHTML = 'B.' + question_current[0].answer[1].content;
-                        })();
-
                         // 绑定animationend事件
-                        $('#swiper-wrapper').on('animationend', function(e){
+                        byId('swiper-wrapper').addEventListener('animationend', function(e){
                             var target = e.target;
                             if(/end/.test(target.classList)){
-                                $up_logo.fadeIn();
+                                up_logo.style.display = 'block';
                                 byId('page' + e.target.dataset.index).classList.remove('swiper-no-swiping');
                             }
                         });
 
                         // 绑定红包点击事件
-                        $('#redBagClick').on('click', function(e){
-                            $('#page5_sub_page1').fadeOut();
+                        byId('redBagClick').addEventListener('click', function(e){
+                            byId('page5_sub_page1').style.display = 'none';
                         });
 
                         // 绑定答题事件
@@ -1599,8 +1599,8 @@
                                         }
 
                                         // 已经答完题了，跳转到下一页
-                                        $('#page5_sub_page2').fadeOut();
-                                        $up_logo.fadeIn();
+                                        byId('page5_sub_page2').style.display = 'none';
+                                        up_logo.style.display = 'block';
                                         play_list[4] = false;
                                     }
                                 }, 1500);
@@ -1608,8 +1608,8 @@
                         });
 
                         // 绑定另一个红包点击事件
-                        $('#redBagOtherClick').on('click', function(e){
-                            $('#page7_sub_page1').fadeOut();
+                        byId('redBagOtherClick').addEventListener('click', function(e){
+                            byId('page7_sub_page1').style.display = 'none';
                         });
 
                         // 处理适配
@@ -1655,80 +1655,80 @@
                         })();
 
                         // 微信JSSDK
-                        $.ajax({
-                            async:true,
-                            type:"GET",
-                            url:"http://m.china.com.cn/h5/pai/doCheck?url="+encodeURIComponent(window.location.href),
-                            success:function(data){
-                                setData(data);
-                            },
-                            error:function(msg){
-                            }
-                        });
+                        // $.ajax({
+                        //     async:true,
+                        //     type:"GET",
+                        //     url:"http://m.china.com.cn/h5/pai/doCheck?url="+encodeURIComponent(window.location.href),
+                        //     success:function(data){
+                        //         setData(data);
+                        //     },
+                        //     error:function(msg){
+                        //     }
+                        // });
 
-                        function setData(data){
-                            wx.config({
-                                debug: false,
-                                appId: data.appId,
-                                timestamp: data.timestamp,
-                                nonceStr: data.nonceStr,
-                                signature: data.signature,
-                                jsApiList: [
-                                    'checkJsApi',
-                                    'onMenuShareTimeline',
-                                    'onMenuShareAppMessage',
-                                    'onMenuShareQQ',
-                                    'onMenuShareWeibo'
-                                ]
-                            });
-                            wx.ready(function () {
-                                // 1 判断当前版本是否支持指定 JS 接口，支持批量判断
-                                wx.checkJsApi({
-                                    jsApiList: [
-                                        'getNetworkType',
-                                        'previewImage'
-                                    ],
-                                    success: function (res) {
-                                    }
-                                });
-                                wx.showMenuItems({
-                                    menuList: [
-                                        'menuItem:share:appMessage',
-                                        'menuItem:share:timeline'
-                                    ] // 要显示的菜单项，所有menu项见附录3
-                                });
+                        // function setData(data){
+                        //     wx.config({
+                        //         debug: false,
+                        //         appId: data.appId,
+                        //         timestamp: data.timestamp,
+                        //         nonceStr: data.nonceStr,
+                        //         signature: data.signature,
+                        //         jsApiList: [
+                        //             'checkJsApi',
+                        //             'onMenuShareTimeline',
+                        //             'onMenuShareAppMessage',
+                        //             'onMenuShareQQ',
+                        //             'onMenuShareWeibo'
+                        //         ]
+                        //     });
+                        //     wx.ready(function () {
+                        //         // 1 判断当前版本是否支持指定 JS 接口，支持批量判断
+                        //         wx.checkJsApi({
+                        //             jsApiList: [
+                        //                 'getNetworkType',
+                        //                 'previewImage'
+                        //             ],
+                        //             success: function (res) {
+                        //             }
+                        //         });
+                        //         wx.showMenuItems({
+                        //             menuList: [
+                        //                 'menuItem:share:appMessage',
+                        //                 'menuItem:share:timeline'
+                        //             ] // 要显示的菜单项，所有menu项见附录3
+                        //         });
 
-                                // 微信JSSDK接口用到的参数
-                                var imgUrl = "http://h5.china.com.cn/cxwb/20151230/zhihui2015special/images/share.jpg";
-                                var lineLink = "http://h5.china.com.cn/cxwb/20151230/zhihui2015special/index.html";
-                                var descContent = '再见2015，相聚2016';
-                                var shareTitle = '“智”回家的你：马上领取红包，再见2015，相聚2016';
+                        //         // 微信JSSDK接口用到的参数
+                        //         var imgUrl = "http://h5.china.com.cn/cxwb/20151230/zhihui2015special/images/share.jpg";
+                        //         var lineLink = "http://h5.china.com.cn/cxwb/20151230/zhihui2015special/index.html";
+                        //         var descContent = '再见2015，相聚2016';
+                        //         var shareTitle = '“智”回家的你：马上领取红包，再见2015，相聚2016';
 
-                                // 分享到朋友圈
-                                wx.onMenuShareTimeline({
-                                    "title": shareTitle,
-                                    "link": lineLink,
-                                    "imgUrl": imgUrl,
-                                    success: function () {
-                                        $('#share_tips').hide();
-                                        $('#key_wrapper').show();
-                                    }
-                                });
+                        //         // 分享到朋友圈
+                        //         wx.onMenuShareTimeline({
+                        //             "title": shareTitle,
+                        //             "link": lineLink,
+                        //             "imgUrl": imgUrl,
+                        //             success: function () {
+                        //                 byId('share_tips').style.display = 'none';
+                        //                 byId('key_wrapper').style.display = 'block';
+                        //             }
+                        //         });
 
-                                // 分享给朋友
-                                wx.onMenuShareAppMessage({
-                                    "title": shareTitle,
-                                    "desc": descContent,
-                                    "link": lineLink,
-                                    "imgUrl": imgUrl,
-                                    success: function () {
-                                    }
-                                });
-                            });
+                        //         // 分享给朋友
+                        //         wx.onMenuShareAppMessage({
+                        //             "title": shareTitle,
+                        //             "desc": descContent,
+                        //             "link": lineLink,
+                        //             "imgUrl": imgUrl,
+                        //             success: function () {
+                        //             }
+                        //         });
+                        //     });
 
-                            wx.error(function (res) {
-                            });
-                        }
+                        //     wx.error(function (res) {
+                        //     });
+                        // }
 
                         // 页面加载好后开始播放
                         Pace.once('done', function(){
