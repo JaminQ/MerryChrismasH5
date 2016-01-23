@@ -1140,10 +1140,7 @@
                             img_incorrect = byId('img_incorrect'),
                             music_status = true, // 音乐全局播放状态
                             up_logo = byId('up_logo'), // 上划箭头
-                            play_list = [false, true, true, true, true, true, true], // 记录各页播放状态
-                            index,
-                            animate,
-                            animated;
+                            play_list = [false, true, true, true, true, true, true]; // 记录各页播放状态
 
                         // 默认隐藏图片
                         img_correct.style.display = 'none';
@@ -1196,21 +1193,13 @@
                             direction: 'vertical',
                             noSwiping: true,
                             onSlideChangeEnd: function(swiper){
-                                index = swiper.activeIndex;
+                                var index = swiper.activeIndex;
                                 if(play_list[index]){
                                     up_logo.style.display = 'none';
                                     play_list[index] = false;
-                                    animate = byClassName('animate', byId('page' + (index + 1)));
-                                    animated = byClassName('animated', byId('page' + (index)));
+                                    var animate = byClassName('animate', byId('page' + (index + 1)));
                                     while(animate.length > 0){
                                         animate[0].className = animate[0].className.replace(/animate/, 'animated');
-                                    }
-                                    while(animated.length > 0){
-                                        if(/finish/.test(animated[0].className)){
-                                            animated[0].className = 'finish';
-                                        }else{
-                                            animated[0].className = 'animate';
-                                        }
                                     }
                                 }
                                 switch(index){
@@ -1296,8 +1285,18 @@
                         byId('swiper-wrapper').addEventListener('webkitAnimationEnd', function(e){
                             var target = e.target;
                             if(/end/.test(target.classList)){
+                                var index = target.dataset.index,
+                                    animated = byClassName('animated', byId('page' + index));
+
                                 up_logo.style.display = 'block';
-                                byId('page' + e.target.dataset.index).classList.remove('swiper-no-swiping');
+                                byId('page' + index).classList.remove('swiper-no-swiping');
+                                while(animated.length > 0){
+                                    if(/finish/.test(animated[0].className)){
+                                        animated[0].className = 'finish';
+                                    }else{
+                                        animated[0].className = 'animate';
+                                    }
+                                }
                             }
                         });
 
