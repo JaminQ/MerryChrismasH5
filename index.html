@@ -683,7 +683,7 @@
                 <img class="animate fadeInOut duration3s delay12s center" src="images/7-5.png" />
                 <img class="animate fadeInOut duration3s delay15s center" src="images/7-6.png" />
                 <img class="animate fadeInOut duration3s delay18s center" src="images/7-7.png" />
-                <img class="animate fadeIn duration1s delay21s top" src="images/7-8.png" />
+                <img class="animate fadeIn duration1s delay21s top finish" src="images/7-8.png" />
                 <img class="animate fadeIn duration1s delay22s bottom end finish" src="images/7-9.png" data-index="6" />
             </div>
             <div id="page7" class="swiper-slide swiper-no-swiping">
@@ -1286,13 +1286,21 @@
                             var target = e.target;
                             if(/end/.test(target.classList)){
                                 var index = target.dataset.index,
-                                    animated = byClassName('animated', byId('page' + index));
+                                    animated = byClassName('animated', byId('page' + index)),
+                                    className;
 
                                 up_logo.style.display = 'block';
                                 byId('page' + index).classList.remove('swiper-no-swiping');
                                 while(animated.length > 0){
-                                    if(/finish/.test(animated[0].className)){
-                                        animated[0].className = 'finish';
+                                    className = animated[0].className;
+                                    if(/finish/.test(className)){
+                                        if(/bottom/.test(className)){
+                                            animated[0].className = 'finish bottom';
+                                        }else if(/top/.test(className)){
+                                            animated[0].className = 'finish top';
+                                        }else{
+                                            animated[0].className = 'finish';
+                                        }
                                     }else{
                                         animated[0].className = 'animate';
                                     }
