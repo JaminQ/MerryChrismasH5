@@ -1518,11 +1518,10 @@
                         });
 
                         // 绑定animationend事件
-                        byId('swiper-wrapper').addEventListener('animationend', function(e){
+                        $('#swiper-wrapper').on('animationend', function(e){
                             var target = e.target;
-                            alert();
                             if(/end/.test(target.classList)){
-                                up_logo.style.display = 'block';
+                                $('#up_logo').fadeIn();
                                 byId('page' + e.target.dataset.index).classList.remove('swiper-no-swiping');
                             }
                         });
