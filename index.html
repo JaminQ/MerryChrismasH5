@@ -4,17 +4,13 @@
     <meta charset="UTF-8">
     <title>“智”回家的你</title>
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
     <script src="lib/pace.min.js"></script>
     <link href="lib/pace-theme-loading-bar.css" rel="stylesheet" />
-
     <link rel="stylesheet" type="text/css" href="lib/swiper.min.css">
-
     <script type="text/javascript" src="lib/swiper.min.js"></script>
     <script type="text/javascript" src="lib/jquery-2.1.3.min.js"></script>
-    <!-- <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script> -->
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <link rel="shortcut icon" href="http://h5.china.com.cn/cxwb/20151230/zhihui2015special/images/share.jpg" />
-
     <style>
         /***********************全局reset***********************/
         html, body, div, span, applet, object, iframe,
@@ -34,44 +30,32 @@
             vertical-align: baseline;
             background: transparent;
         }
-
         body {
             line-height: 1;
         }
-
         ol, ul {
             list-style: none;
         }
-
         blockquote, q {
             quotes: none;
         }
-
         blockquote:before, blockquote:after, q:before, q:after {
             content: '';
             content: none;
         }
-
-        /* remember to define focus styles! */
         :focus {
             outline: 0;
         }
-
-        /* remember to highlight inserts somehow! */
         ins {
             text-decoration: none;
         }
-
         del {
             text-decoration: line-through;
         }
-
-        /* tables still need 'cellspacing="0"' in the markup */
         table {
             border-collapse: collapse;
             border-spacing: 0;
         }
-
         * {
             -webkit-tap-highlight-color: rgba(0,0,0,0);
             -moz-tap-highlight-color: rgba(0,0,0,0);
@@ -82,8 +66,6 @@
             -ms-tap-highlight-color: transparent;
             tap-highlight-color: transparent;
         }
-
-        /* animate */
         .animated {
             -webkit-animation-fill-mode: both;
             animation-fill-mode: both;
@@ -100,19 +82,17 @@
             -ms-perspective: 1000;
             perspective: 1000;
         }
-        .animate {
-            display: none;
-        }
         .animated.infinite {
             -webkit-animation-iteration-count: infinite;
             animation-iteration-count: infinite;
         }
-
+        .animate {
+            display: none;
+        }
         @-webkit-keyframes fadeIn {
             from {
                 opacity: 0;
             }
-
             to {
                 opacity: 1;
             }
@@ -121,7 +101,6 @@
             from {
                 opacity: 0;
             }
-
             to {
                 opacity: 1;
             }
@@ -130,12 +109,10 @@
             -webkit-animation-name: fadeIn;
             animation-name: fadeIn;
         }
-
         @-webkit-keyframes fadeOut {
             from {
                 opacity: 1;
             }
-
             to {
                 opacity: 0;
             }
@@ -144,7 +121,6 @@
             from {
                 opacity: 1;
             }
-
             to {
                 opacity: 0;
             }
@@ -153,20 +129,16 @@
             -webkit-animation-name: fadeOut;
             animation-name: fadeOut;
         }
-
         @-webkit-keyframes fadeInOut {
             0% {
                 opacity: 0;
             }
-
             30% {
                 opacity: 1;
             }
-
             70% {
                 opacity: 1;
             }
-
             100% {
                 opacity: 0;
             }
@@ -175,15 +147,12 @@
             0% {
                 opacity: 0;
             }
-
             30% {
                 opacity: 1;
             }
-
             70% {
                 opacity: 1;
             }
-
             100% {
                 opacity: 0;
             }
@@ -192,7 +161,6 @@
             -webkit-animation-name: fadeInOut;
             animation-name: fadeInOut;
         }
-
         @-webkit-keyframes slideOutUp {
             from {
                 -webkit-transform: translate3d(0, 0, 0);
@@ -200,7 +168,6 @@
                 -ms-transform: translate3d(0, 0, 0);
                 transform: translate3d(0, 0, 0);
             }
-
             to {
                 visibility: hidden;
                 -webkit-transform: translate3d(0, -100%, 0);
@@ -216,7 +183,6 @@
                 -ms-transform: translate3d(0, 0, 0);
                 transform: translate3d(0, 0, 0);
             }
-
             to {
                 visibility: hidden;
                 -webkit-transform: translate3d(0, -100%, 0);
@@ -229,7 +195,6 @@
             -webkit-animation-name: slideOutUp;
             animation-name: slideOutUp;
         }
-
         .duration1s {
             -webkit-animation-duration: 1s;
             animation-duration: 1s;
@@ -282,8 +247,6 @@
             -webkit-animation-delay: 22s;
             animation-delay: 22s;
         }
-
-        /* page styles */
         html, body {
             position: relative;
             height: 100%;
@@ -295,7 +258,6 @@
             margin: 0;
             padding: 0;
         }
-
         .swiper-container {
             width: 100%;
             height: 100%;
@@ -320,7 +282,6 @@
         .swiper-slide img.top {
             top: 0;
         }
-
         #music {
             position: absolute;
             background-color: transparent;
@@ -349,35 +310,29 @@
             margin-left: -30px;
             display: none;
         }
-
         #page1 {
             background: #FBF4E5 url('images/0-1.png') bottom center no-repeat;
             background-size: 100%;
             visibility: hidden;
         }
-
         #page2 {
             background: #FBF4E5 url('images/1-1.png') center center no-repeat;
             background-size: 100%;
         }
-
         #page3 {
             background: #FDD86F url('images/2-1.png') center center no-repeat;
             background-size: 100%;
         }
-
         #page4 {
             background: #FDD86F url('images/3-1.png') center center no-repeat;
             background-size: 100%;
         }
-
         #page5 .sub_page {
             width: 100%;
             height: 100%;
             position: absolute;
             left: 0;
         }
-
         #page5 #page5_sub_page1 {
             background: #FDD86F url('images/4-1.png');
             background-size: 100%;
@@ -389,7 +344,6 @@
             border-radius: 50%;
             cursor: pointer;
         }
-
         #page5 #page5_sub_page2 {
             background: #FDD86F url('images/4-1.png');
             background-size: 100%;
@@ -453,7 +407,6 @@
             font-size: 1.4em;
             line-height: 1.4em;
         }
-
         #page5 #page5_sub_page3 {
             background: #FBF4E5 url('images/6-1.png') center center no-repeat;
             background-size: 100%;
@@ -478,18 +431,15 @@
         #img_correct, #img_incorrect {
             display: none;
         }
-
         #page6 {
             background-color: #FBF4E5;
         }
-
         #page7 .sub_page {
             width: 100%;
             height: 100%;
             position: absolute;
             left: 0;
         }
-
         #page7 #page7_sub_page1 {
             background: #FBF4E5 url('images/8-1.png') center center no-repeat;
             background-size: 100%;
@@ -501,7 +451,6 @@
             left: 18%;
             cursor: pointer;
         }
-
         #page7 #page7_sub_page2 {
             background: #FBF4E5 url('images/9-1.png') center center no-repeat;
             background-size: 100%;
@@ -528,7 +477,6 @@
             width: 12em;
             margin: 0 auto;
         }
-
         @media screen and (max-height: 420px) {
             .swiper-slide img {
                 width: 80%;
@@ -537,19 +485,15 @@
             #page1 {
                 background-size: 80%;
             }
-
             #page2 {
                 background-size: 80%;
             }
-
             #page3 {
                 background-size: 80%;
             }
-
             #page4 {
                 background-size: 80%;
             }
-
             #page5 #page5_sub_page2 .question_wrapper #question_index {
                 font-size: 1.5em;
             }
@@ -592,7 +536,6 @@
                 width: 51.2%;
                 left: 24.4%;
             }
-
             #page7 #page7_sub_page2 {
                 background-size: 80%;
             }
@@ -706,17 +649,17 @@
 
     <script>
         // helper function
-        function byId(id, context){
+        function byId(id, context) {
             context = context || document;
             return context.getElementById(id);
         };
 
-        function byClassName(className, context){
+        function byClassName(className, context) {
             context = context || document;
             return context.getElementsByClassName(className);
         }
 
-        function byTagName(tagName, context){
+        function byTagName(tagName, context) {
             context = context || document;
             return context.getElementsByTagName(tagName);
         }
@@ -726,8 +669,8 @@
             $.ajax({
                 "url": "http://wx.china.cn/prizesn.do",
                 "dataType": "jsonp",
-                "success": function(json) {
-                    if(json.result == 'success'){
+                success: function(json) {
+                    if (json.result == 'success') {
                         // 题目
                         var question_list = [{
                             "question": "15年，(    )三国签署了今年启动的欧亚经济联盟条约",
@@ -1125,16 +1068,16 @@
                             play_list = [false, true, true, true, true, true, true]; // 记录各页播放状态
 
                         // 随机挑选题目
-                        question_current = (function(list){
+                        question_current = (function(list) {
                             var current_list_index = [], // 用于保存题号
                                 current_list = [], // 用于保存题目
                                 length = list.length,
                                 temp,
                                 i = 9; // 随机挑9道题，并外加最后1题，共10题
 
-                            while(i > 0){
+                            while (i > 0) {
                                 temp = Math.floor(Math.random() * (length - 2)); // 因为最后一题是固定的，所以要减2
-                                if($.inArray(temp, current_list_index) == -1){
+                                if ($.inArray(temp, current_list_index) == -1) {
                                     current_list_index.push(temp);
                                     i--;
                                 }
@@ -1143,7 +1086,7 @@
                             current_list_index.push(length - 1); // 增加最后1道题
 
                             // 将题号转化为对应的题目
-                            for(i = 0, length = current_list_index.length; i < length; i++){
+                            for (i = 0, length = current_list_index.length; i < length; i++) {
                                 current_list.push(list[current_list_index[i]]);
                             }
 
@@ -1152,7 +1095,7 @@
                         question_list = null;
 
                         // init 第1道题目
-                        (function(){
+                        (function() {
                             var question_index = byId('question_index'),
                                 question_title = byId('question_title'),
                                 question_item1 = byId('question_item1'),
@@ -1177,157 +1120,166 @@
                             effect: 'fade',
                             direction: 'vertical',
                             noSwiping: true,
-                            onSlideChangeEnd: function(swiper){
+                            onSlideChangeEnd: function(swiper) {
                                 var index = swiper.activeIndex;
-                                if(play_list[index]){
+                                if (play_list[index]) {
                                     byId('up_logo').style.display = 'none';
                                     play_list[index] = false;
                                     var animate = byClassName('animate', byId('page' + (index + 1)));
-                                    while(animate.length > 0){
+                                    while (animate.length > 0) {
                                         animate[0].className = animate[0].className.replace(/animate/, 'animated');
                                     }
                                 }
-                                switch(index){
-                                    case 3: {
-                                        if(music_status){
-                                            var music_part1 = byId('music_part1');
-                                            byId('music_part2').pause();
-                                            if(music_part1.paused){
-                                                music_part1.play();
+                                switch (index) {
+                                    case 3:
+                                        {
+                                            if (music_status) {
+                                                var music_part1 = byId('music_part1');
+                                                byId('music_part2').pause();
+                                                if (music_part1.paused) {
+                                                    music_part1.play();
+                                                }
                                             }
+                                            break;
                                         }
-                                        break;
-                                    }
-                                    case 4: {
-                                        if(music_status){
-                                            var music_part2 = byId('music_part2');
-                                            byId('music_part1').pause();
-                                            byId('music_part3').pause();
-                                            if(music_part2.paused){
-                                                music_part2.play();
+                                    case 4:
+                                        {
+                                            if (music_status) {
+                                                var music_part2 = byId('music_part2');
+                                                byId('music_part1').pause();
+                                                byId('music_part3').pause();
+                                                if (music_part2.paused) {
+                                                    music_part2.play();
+                                                }
                                             }
+                                            break;
                                         }
-                                        break;
-                                    }
-                                    case 5: {
-                                        if(music_status){
-                                            var music_part3 = byId('music_part3');
-                                            byId('music_part2').pause();
-                                            if(music_part3.paused){
-                                                music_part3.play();
+                                    case 5:
+                                        {
+                                            if (music_status) {
+                                                var music_part3 = byId('music_part3');
+                                                byId('music_part2').pause();
+                                                if (music_part3.paused) {
+                                                    music_part3.play();
+                                                }
                                             }
+                                            break;
                                         }
-                                        break;
-                                    }
                                 }
                             }
                         });
 
-                        byTagName('body')[0].addEventListener('touchmove', function (e) {
+                        byTagName('body')[0].addEventListener('touchmove', function(e) {
                             e.preventDefault();
                         });
 
                         // 音乐按钮点击事件
-                        byId('music').addEventListener('click', function(e){
-                            if(music_status){ // 暂停音乐逻辑
+                        byId('music').addEventListener('click', function(e) {
+                            if (music_status) { // 暂停音乐逻辑
                                 var music = byId('music');
                                 music_status = false;
-                                switch(swiper.activeIndex){
+                                switch (swiper.activeIndex) {
                                     case 0:
                                     case 1:
                                     case 2:
-                                    case 3: {
-                                        byId('music_part1').pause();
-                                        break;
-                                    }
-                                    case 4: {
-                                        byId('music_part2').pause();
-                                        if(!byId('music_correct').paused){
-                                            byId('music_correct').pause();
+                                    case 3:
+                                        {
+                                            byId('music_part1').pause();
+                                            break;
                                         }
-                                        if(!byId('music_incorrect').paused){
-                                            byId('music_incorrect').pause();
+                                    case 4:
+                                        {
+                                            byId('music_part2').pause();
+                                            if (!byId('music_correct').paused) {
+                                                byId('music_correct').pause();
+                                            }
+                                            if (!byId('music_incorrect').paused) {
+                                                byId('music_incorrect').pause();
+                                            }
+                                            break;
                                         }
-                                        break;
-                                    }
-                                    default: {
-                                        byId('music_part3').pause();
-                                    }
+                                    default:
+                                        {
+                                            byId('music_part3').pause();
+                                        }
                                 }
                                 music.className = music.className.replace(/on/, 'off');
-                            }else{ // 播放音乐逻辑
+                            } else { // 播放音乐逻辑
                                 var music = byId('music');
                                 music_status = true;
-                                switch(swiper.activeIndex){
+                                switch (swiper.activeIndex) {
                                     case 0:
                                     case 1:
                                     case 2:
-                                    case 3: {
-                                        byId('music_part1').play();
-                                        break;
-                                    }
-                                    case 4: {
-                                        byId('music_part2').play();
-                                        break;
-                                    }
-                                    default: {
-                                        byId('music_part3').play();
-                                    }
+                                    case 3:
+                                        {
+                                            byId('music_part1').play();
+                                            break;
+                                        }
+                                    case 4:
+                                        {
+                                            byId('music_part2').play();
+                                            break;
+                                        }
+                                    default:
+                                        {
+                                            byId('music_part3').play();
+                                        }
                                 }
                                 music.className = music.className.replace(/off/, 'on');
                             }
                         });
 
                         // 绑定animationend事件
-                        byId('swiper-wrapper').addEventListener('webkitAnimationEnd', function(e){
+                        byId('swiper-wrapper').addEventListener('webkitAnimationEnd', function(e) {
                             var target = e.target,
                                 className = target.className;
-                            if(/end/.test(className)){
+                            if (/end/.test(className)) {
                                 var index = target.dataset.index;
                                 byId('up_logo').style.display = 'block';
                                 byId('page' + index).classList.remove('swiper-no-swiping');
                             }
-                            if(/finish/.test(className)){
-                                if(/bottom/.test(className)){
+                            if (/finish/.test(className)) {
+                                if (/bottom/.test(className)) {
                                     target.className = 'finish bottom';
-                                }else if(/top/.test(className)){
+                                } else if (/top/.test(className)) {
                                     target.className = 'finish top';
-                                }else{
+                                } else {
                                     target.className = 'finish';
                                 }
-                            }else{
+                            } else {
                                 target.className = 'animate';
                             }
                         });
 
                         // 绑定红包点击事件
-                        byId('redBagClick').addEventListener('click', function(e){
+                        byId('redBagClick').addEventListener('click', function(e) {
                             byId('page5_sub_page1').style.display = 'none';
                         });
 
                         // 绑定答题事件
-                        byId('question_item').addEventListener('click', function(e){
+                        byId('question_item').addEventListener('click', function(e) {
                             byId('redBagClick').onclick = null;
                             var target = e.target;
-                            if(answer_status && /item_control/.test(target.className)){
+                            if (answer_status && /item_control/.test(target.className)) {
                                 // 将状态设置为不可答题，避免重复答题
                                 answer_status = false;
 
                                 var currentTarget = target.parentNode;
-                                if(target.nodeName == 'SPAN'){
+                                if (target.nodeName == 'SPAN') {
                                     target = target.previousElementSibling;
                                 }
                                 target.classList.add('current');
 
-                                if(/correct/.test(currentTarget.classList)){
+                                if (/correct/.test(currentTarget.classList)) {
                                     // 回答正确的逻辑
-                                    if(music_status){
+                                    if (music_status) {
                                         byId('music_correct').play();
                                     }
                                     byId('img_correct').style.display = 'block';
-                                }else{
+                                } else {
                                     // 回答错误的逻辑
-                                    if(music_status){
+                                    if (music_status) {
                                         byId('music_incorrect').play();
                                     }
                                     byId('img_incorrect').style.display = 'block';
@@ -1336,8 +1288,8 @@
                         });
 
                         // 绑定提示音乐事件
-                        var musicEnd = function(){
-                            if(question_current_index != 10){
+                        var musicEnd = function() {
+                            if (question_current_index != 10) {
                                 var question_index = byId('question_index'),
                                     question_title = byId('question_title'),
                                     question_item1 = byId('question_item1'),
@@ -1346,7 +1298,7 @@
                                     question_item2_span = byTagName('span', question_item2)[0],
                                     current_i = byTagName('i', byId('question_item1'))[0];
 
-                                if(music_status){
+                                if (music_status) {
                                     // 处理iPhone6以下的多个音频同时播放问题
                                     byId('music_part2').play();
                                 }
@@ -1359,16 +1311,34 @@
                                 /correct/.test(question_item1.className) ? question_item1.classList.remove('correct') : question_item2.classList.remove('correct');
 
                                 // 渲染下一道题
-                                switch(question_current_index){
-                                    case 1: question_index.innerHTML = '第二题'; break;
-                                    case 2: question_index.innerHTML = '第三题'; break;
-                                    case 3: question_index.innerHTML = '第四题'; break;
-                                    case 4: question_index.innerHTML = '第五题'; break;
-                                    case 5: question_index.innerHTML = '第六题'; break;
-                                    case 6: question_index.innerHTML = '第七题'; break;
-                                    case 7: question_index.innerHTML = '第八题'; break;
-                                    case 8: question_index.innerHTML = '第九题'; break;
-                                    case 9: question_index.innerHTML = '第十题'; break;
+                                switch (question_current_index) {
+                                    case 1:
+                                        question_index.innerHTML = '第二题';
+                                        break;
+                                    case 2:
+                                        question_index.innerHTML = '第三题';
+                                        break;
+                                    case 3:
+                                        question_index.innerHTML = '第四题';
+                                        break;
+                                    case 4:
+                                        question_index.innerHTML = '第五题';
+                                        break;
+                                    case 5:
+                                        question_index.innerHTML = '第六题';
+                                        break;
+                                    case 6:
+                                        question_index.innerHTML = '第七题';
+                                        break;
+                                    case 7:
+                                        question_index.innerHTML = '第八题';
+                                        break;
+                                    case 8:
+                                        question_index.innerHTML = '第九题';
+                                        break;
+                                    case 9:
+                                        question_index.innerHTML = '第十题';
+                                        break;
                                 }
                                 question_title.innerHTML = question_current[question_current_index].question;
                                 question_current[question_current_index].answer[0].correct ? question_item1.classList.add('correct') : question_item2.classList.add('correct');
@@ -1376,15 +1346,15 @@
                                 question_item2_span.innerHTML = 'B.' + question_current[question_current_index].answer[1].content;
                                 question_current_index++; // 题号自增
 
-                                if(!/current/.test(current_i.className)){
+                                if (!/current/.test(current_i.className)) {
                                     current_i = byTagName('i', byId('question_item2'))[0];
                                 }
                                 current_i.classList.remove('current'); // 删除选中状态
 
                                 // 将状态设置为可答题
                                 answer_status = true;
-                            }else{
-                                if(music_status){
+                            } else {
+                                if (music_status) {
                                     // 处理iPhone6以下的多个音频同时播放问题
                                     byId('music_part2').play();
                                 }
@@ -1400,26 +1370,26 @@
                         byId('music_incorrect').addEventListener('ended', musicEnd);
 
                         // 绑定另一个红包点击事件
-                        byId('redBagOtherClick').addEventListener('click', function(e){
+                        byId('redBagOtherClick').addEventListener('click', function(e) {
                             byId('music_correct').onended = null;
                             byId('music_incorrect').onended = null;
                             byId('page7_sub_page1').style.display = 'none';
                         });
 
                         // 处理适配
-                        (function(){
+                        (function() {
                             var clientWidth = document.body.clientWidth,
                                 clientHeight = document.body.clientHeight,
                                 img_width = 640,
                                 img_height = 1136,
                                 redBagClick_width = 165;
-                                redBagClick_bottom = 350,
+                            redBagClick_bottom = 350,
                                 question_top = 510,
                                 redBagOtherClick_height = 585,
                                 redBagOtherClick_bottom = 273,
                                 two_dimensional_code_width = 181,
                                 two_dimensional_code_top = 459;
-                            if(clientHeight <= 420){
+                            if (clientHeight <= 420) {
                                 clientWidth = clientWidth * 0.8;
                             }
                             var real_height = (clientWidth / img_width) * img_height,
@@ -1449,81 +1419,80 @@
                         })();
 
                         // 微信JSSDK
-                        // $.ajax({
-                        //     async:true,
-                        //     type:"GET",
-                        //     url:"http://m.china.com.cn/h5/pai/doCheck?url="+encodeURIComponent(window.location.href),
-                        //     success:function(data){
-                        //         setData(data);
-                        //     },
-                        //     error:function(msg){
-                        //     }
-                        // });
+                        function setData(data) {
+                            wx.config({
+                                debug: false,
+                                appId: data.appId,
+                                timestamp: data.timestamp,
+                                nonceStr: data.nonceStr,
+                                signature: data.signature,
+                                jsApiList: [
+                                    'checkJsApi',
+                                    'onMenuShareTimeline',
+                                    'onMenuShareAppMessage',
+                                    'onMenuShareQQ',
+                                    'onMenuShareWeibo'
+                                ]
+                            });
+                            wx.ready(function() {
+                                wx.checkJsApi({
+                                    jsApiList: [
+                                        'getNetworkType',
+                                        'previewImage'
+                                    ],
+                                    success: function(res) {}
+                                });
+                                wx.showMenuItems({
+                                    menuList: [
+                                        'menuItem:share:appMessage',
+                                        'menuItem:share:timeline'
+                                    ]
+                                });
 
-                        // function setData(data){
-                        //     wx.config({
-                        //         debug: false,
-                        //         appId: data.appId,
-                        //         timestamp: data.timestamp,
-                        //         nonceStr: data.nonceStr,
-                        //         signature: data.signature,
-                        //         jsApiList: [
-                        //             'checkJsApi',
-                        //             'onMenuShareTimeline',
-                        //             'onMenuShareAppMessage',
-                        //             'onMenuShareQQ',
-                        //             'onMenuShareWeibo'
-                        //         ]
-                        //     });
-                        //     wx.ready(function () {
-                        //         wx.checkJsApi({
-                        //             jsApiList: [
-                        //                 'getNetworkType',
-                        //                 'previewImage'
-                        //             ],
-                        //             success: function (res) {
-                        //             }
-                        //         });
-                        //         wx.showMenuItems({
-                        //             menuList: [
-                        //                 'menuItem:share:appMessage',
-                        //                 'menuItem:share:timeline'
-                        //             ]
-                        //         });
+                                // 微信JSSDK接口用到的参数
+                                var imgUrl = "http://h5.china.com.cn/cxwb/20151230/zhihui2015special/images/share.jpg",
+                                    lineLink = "http://h5.china.com.cn/cxwb/20151230/zhihui2015special/index.html",
+                                    descContent = '再见2015，相聚2016',
+                                    shareTitle = '“智”回家的你：马上领取红包，再见2015，相聚2016';
 
-                        //         // 微信JSSDK接口用到的参数
-                        //         var imgUrl = "http://h5.china.com.cn/cxwb/20151230/zhihui2015special/images/share.jpg";
-                        //         var lineLink = "http://h5.china.com.cn/cxwb/20151230/zhihui2015special/index.html";
-                        //         var descContent = '再见2015，相聚2016';
-                        //         var shareTitle = '“智”回家的你：马上领取红包，再见2015，相聚2016';
+                                // 分享到朋友圈
+                                wx.onMenuShareTimeline({
+                                    "title": shareTitle,
+                                    "link": lineLink,
+                                    "imgUrl": imgUrl,
+                                    success: function() {
+                                        byId('share_tips').style.display = 'none';
+                                        byId('key_wrapper').style.display = 'block';
+                                    }
+                                });
 
-                        //         // 分享到朋友圈
-                        //         wx.onMenuShareTimeline({
-                        //             "title": shareTitle,
-                        //             "link": lineLink,
-                        //             "imgUrl": imgUrl,
-                        //             success: function () {
-                        //                 byId('share_tips').style.display = 'none';
-                        //                 byId('key_wrapper').style.display = 'block';
-                        //             }
-                        //         });
-
-                        //         // 分享给朋友
-                        //         wx.onMenuShareAppMessage({
-                        //             "title": shareTitle,
-                        //             "desc": descContent,
-                        //             "link": lineLink,
-                        //             "imgUrl": imgUrl,
-                        //             success: function () {
-                        //                 byId('share_tips').style.display = 'none';
-                        //                 byId('key_wrapper').style.display = 'block';
-                        //             }
-                        //         });
-                        //     });
-                        // }
+                                // 分享给朋友
+                                wx.onMenuShareAppMessage({
+                                    "title": shareTitle,
+                                    "desc": descContent,
+                                    "link": lineLink,
+                                    "imgUrl": imgUrl,
+                                    success: function() {
+                                        byId('share_tips').style.display = 'none';
+                                        byId('key_wrapper').style.display = 'block';
+                                    }
+                                });
+                            });
+                        }
+                        (function() {
+                            $.ajax({
+                                async: true,
+                                type: "GET",
+                                url: "http://m.china.com.cn/h5/pai/doCheck?url=" + encodeURIComponent(window.location.href),
+                                success: function(data) {
+                                    setData(data);
+                                },
+                                error: function(msg) {}
+                            });
+                        })();
 
                         // 页面加载好后开始播放
-                        Pace.once('done', function(){
+                        Pace.once('done', function() {
                             // 初始化第1页的操作
                             var img = byId('page1_img'),
                                 swiper_wrapper = byId('swiper-wrapper');
@@ -1534,11 +1503,11 @@
                             byId('music').style.visibility = 'visible';
                             byId('music_part1').play();
                         });
-                    }else{
+                    } else {
                         byTagName('body')[0].innerHTML = '听说服务器挂了，请重试~';
                     }
                 },
-                "error": function(json) {
+                error: function(json) {
                     byTagName('body')[0].innerHTML = '听说服务器挂了，请重试~';
                 }
             });
