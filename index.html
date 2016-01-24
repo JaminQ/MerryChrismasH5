@@ -529,10 +529,6 @@
             margin: 0 auto;
         }
 
-        .nothing {
-            display: none;
-        }
-
         @media screen and (max-height: 420px) {
             .swiper-slide img {
                 width: 80%;
@@ -704,7 +700,7 @@
             </div>
         </div>
     </div>
-    <div class="nothing">
+    <div class="animate">
         <img src="images/music-2.png" />
         <img src="images/5-2.png" />
     </div>
@@ -1285,28 +1281,23 @@
 
                         // 绑定animationend事件
                         byId('swiper-wrapper').addEventListener('webkitAnimationEnd', function(e){
-                            var target = e.target;
-                            if(/end/.test(target.classList)){
-                                var index = target.dataset.index,
-                                    animated = byClassName('animated', byId('page' + index)),
-                                    className;
-
+                            var target = e.target,
+                                className = target.className;
+                            if(/end/.test(className)){
+                                var index = target.dataset.index;
                                 byId('up_logo').style.display = 'block';
                                 byId('page' + index).classList.remove('swiper-no-swiping');
-                                while(animated.length > 0){
-                                    className = animated[0].className;
-                                    if(/finish/.test(className)){
-                                        if(/bottom/.test(className)){
-                                            animated[0].className = 'finish bottom';
-                                        }else if(/top/.test(className)){
-                                            animated[0].className = 'finish top';
-                                        }else{
-                                            animated[0].className = 'finish';
-                                        }
-                                    }else{
-                                        animated[0].className = 'animate';
-                                    }
+                            }
+                            if(/finish/.test(className)){
+                                if(/bottom/.test(className)){
+                                    target.className = 'finish bottom';
+                                }else if(/top/.test(className)){
+                                    target.className = 'finish top';
+                                }else{
+                                    target.className = 'finish';
                                 }
+                            }else{
+                                target.className = 'animate';
                             }
                         });
 
