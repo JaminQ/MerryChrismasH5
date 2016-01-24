@@ -624,7 +624,7 @@
         <img class="animated infinite slideOutUp duration1s bottom" src="images/up.png" />
     </div>
     <div class="swiper-container">
-        <div id="swiper-wrapper" class="swiper-wrapper">
+        <div id="swiper-wrapper" class="swiper-wrapper swiper-no-swiping">
             <div id="page1" class="swiper-slide swiper-no-swiping">
                 <img id="page1_img" class="animate fadeIn duration3s center end finish" src="images/0-2.png" data-index="1" />
             </div>
@@ -672,7 +672,6 @@
                 <div id="page5_sub_page3" class="sub_page">
                     <p>您是第<em id="num"></em>位帮助小智回家的人</p>
                 </div>
-                <div id="page5_sub_page4" class="sub_page"></div>
             </div>
             <div id="page6" class="swiper-slide swiper-no-swiping">
                 <img class="animate fadeInOut duration3s center" src="images/7-1.png" />
@@ -1526,9 +1525,11 @@
                         // 页面加载好后开始播放
                         Pace.once('done', function(){
                             // 初始化第1页的操作
-                            var img = byId('page1_img');
+                            var img = byId('page1_img'),
+                                swiper_wrapper = byId('swiper-wrapper');
                             img.className = img.className.replace(/animate/, 'animated');
-                            byId('swiper-wrapper').style.backgroundColor = 'transparent';
+                            swiper_wrapper.style.backgroundColor = 'transparent';
+                            swiper_wrapper.classList.remove('swiper-no-swiping');
                             byId('page1').style.visibility = 'visible';
                             byId('music').style.visibility = 'visible';
                             byId('music_part1').play();
