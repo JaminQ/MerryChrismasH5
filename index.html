@@ -475,6 +475,9 @@
             color: #FD7073;
             font-style: normal;
         }
+        #img_correct, #img_incorrect {
+            display: none;
+        }
 
         #page6 {
             background-color: #FBF4E5;
@@ -657,13 +660,13 @@
                         <p id="question_index"></p>
                         <p id="question_title"></p>
                         <div id="question_item">
-                            <div id="question_item1" class="item">
-                                <i></i>
-                                <span></span>
+                            <div id="question_item1">
+                                <i class="item_control"></i>
+                                <span class="item_control"></span>
                             </div>
-                            <div id="question_item2" class="item">
-                                <i></i>
-                                <span></span>
+                            <div id="question_item2">
+                                <i class="item_control"></i>
+                                <span class="item_control"></span>
                             </div>
                         </div>
                     </div>
@@ -1120,31 +1123,11 @@
                             }]
                         }];
 
-                        var key = json.sn, // 兑换码
-                            num = json.id, // 参与人数
-                            question_current, // 随机挑选的题目
+                        var question_current, // 随机挑选的题目
                             question_current_index = 1, // 当前题目的题号
-                            question_index = byId('question_index'), // 题号DOM
-                            question_title = byId('question_title'), // 题目DOM
-                            question_item1 = byId('question_item1'), // 选项1DOM
-                            question_item1_span = byTagName('span', question_item1)[0], // 选项1内容DOM
-                            question_item2 = byId('question_item2'), // 选项2DOM
-                            question_item2_span = byTagName('span', question_item2)[0], // 选项2内容DOM
                             answer_status = true, // 是否可以答题
-                            music_part1 = byId('music_part1'),
-                            music_part2 = byId('music_part2'),
-                            music_correct = byId('music_correct'),
-                            music_incorrect = byId('music_incorrect'),
-                            music_part3 = byId('music_part3'),
-                            img_correct = byId('img_correct'),
-                            img_incorrect = byId('img_incorrect'),
                             music_status = true, // 音乐全局播放状态
-                            up_logo = byId('up_logo'), // 上划箭头
                             play_list = [false, true, true, true, true, true, true]; // 记录各页播放状态
-
-                        // 默认隐藏图片
-                        img_correct.style.display = 'none';
-                        img_incorrect.style.display = 'none';
 
                         // 随机挑选题目
                         question_current = (function(list){
@@ -1171,9 +1154,16 @@
 
                             return current_list;
                         })(question_list);
+                        question_list = null;
 
                         // init 第1道题目
                         (function(){
+                            var question_index = byId('question_index'),
+                                question_title = byId('question_title'),
+                                question_item1 = byId('question_item1'),
+                                question_item1_span = byTagName('span', question_item1)[0],
+                                question_item2 = byId('question_item2'),
+                                question_item2_span = byTagName('span', question_item2)[0];
                             question_index.innerHTML = '第一题';
                             question_title.innerHTML = question_current[0].question;
                             (question_current[0].answer[0].correct) ? (question_item1.classList.add('correct')) : (question_item2.classList.add('correct'));
@@ -1182,10 +1172,10 @@
                         })();
 
                         // 初始化参与人数
-                        byId('num').innerHTML = num;
+                        byId('num').innerHTML = json.id;
 
                         // 初始化兑换码
-                        byId('key').innerHTML = key;
+                        byId('key').innerHTML = json.sn;
 
                         // init swiper
                         var swiper = new Swiper('.swiper-container', {
@@ -1195,7 +1185,7 @@
                             onSlideChangeEnd: function(swiper){
                                 var index = swiper.activeIndex;
                                 if(play_list[index]){
-                                    up_logo.style.display = 'none';
+                                    byId('up_logo').style.display = 'none';
                                     play_list[index] = false;
                                     var animate = byClassName('animate', byId('page' + (index + 1)));
                                     while(animate.length > 0){
@@ -1205,7 +1195,8 @@
                                 switch(index){
                                     case 3: {
                                         if(music_status){
-                                            music_part2.pause();
+                                            var music_part1 = byId('music_part1');
+                                            byId('music_part2').pause();
                                             if(music_part1.paused){
                                                 music_part1.play();
                                             }
@@ -1214,8 +1205,9 @@
                                     }
                                     case 4: {
                                         if(music_status){
-                                            music_part1.pause();
-                                            music_part3.pause();
+                                            var music_part2 = byId('music_part2');
+                                            byId('music_part1').pause();
+                                            byId('music_part3').pause();
                                             if(music_part2.paused){
                                                 music_part2.play();
                                             }
@@ -1224,7 +1216,8 @@
                                     }
                                     case 5: {
                                         if(music_status){
-                                            music_part2.pause();
+                                            var music_part3 = byId('music_part3');
+                                            byId('music_part2').pause();
                                             if(music_part3.paused){
                                                 music_part3.play();
                                             }
@@ -1241,43 +1234,52 @@
 
                         // 音乐按钮点击事件
                         byId('music').addEventListener('click', function(e){
-                            if(music_status){
-                                // 暂停音乐逻辑
+                            if(music_status){ // 暂停音乐逻辑
+                                var music = byId('music');
                                 music_status = false;
-                                music_part1.pause();
-                                music_part2.pause();
-                                music_part3.pause();
-                                music_correct.pause();
-                                music_incorrect.pause();
-
-                                byId('music').className = byId('music').className.replace(/on/, 'off');
-                            }else{
-                                // 播放音乐逻辑
+                                switch(swiper.activeIndex){
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3: {
+                                        byId('music_part1').pause();
+                                        break;
+                                    }
+                                    case 4: {
+                                        byId('music_part2').pause();
+                                        if(!byId('music_correct').paused){
+                                            byId('music_correct').pause();
+                                        }
+                                        if(!byId('music_incorrect').paused){
+                                            byId('music_incorrect').pause();
+                                        }
+                                        break;
+                                    }
+                                    default: {
+                                        byId('music_part3').pause();
+                                    }
+                                }
+                                music.className = music.className.replace(/on/, 'off');
+                            }else{ // 播放音乐逻辑
+                                var music = byId('music');
                                 music_status = true;
                                 switch(swiper.activeIndex){
                                     case 0:
                                     case 1:
                                     case 2:
                                     case 3: {
-                                        if(music_part1.paused){
-                                            music_part1.play();
-                                        }
+                                        byId('music_part1').play();
                                         break;
                                     }
                                     case 4: {
-                                        if(music_part2.paused){
-                                            music_part2.play();
-                                        }
+                                        byId('music_part2').play();
                                         break;
                                     }
                                     default: {
-                                        if(music_part3.paused){
-                                            music_part3.play();
-                                        }
+                                        byId('music_part3').play();
                                     }
                                 }
-
-                                byId('music').className = byId('music').className.replace(/off/, 'on');
+                                music.className = music.className.replace(/off/, 'on');
                             }
                         });
 
@@ -1289,7 +1291,7 @@
                                     animated = byClassName('animated', byId('page' + index)),
                                     className;
 
-                                up_logo.style.display = 'block';
+                                byId('up_logo').style.display = 'block';
                                 byId('page' + index).classList.remove('swiper-no-swiping');
                                 while(animated.length > 0){
                                     className = animated[0].className;
@@ -1314,83 +1316,103 @@
                         });
 
                         // 绑定答题事件
-                        $('#question_item .item').on('click', function(e){
-                            if(answer_status){
+                        byId('question_item').addEventListener('click', function(e){
+                            byId('redBagClick').onclick = null;
+                            var target = e.target;
+                            if(answer_status && /item_control/.test(target.className)){
                                 // 将状态设置为不可答题，避免重复答题
                                 answer_status = false;
 
-                                var currentTarget = e.currentTarget,
-                                    current_i_classList = byTagName('i', currentTarget)[0].classList;
-
-                                current_i_classList.add('current');
+                                var currentTarget = target.parentNode;
+                                if(target.nodeName == 'SPAN'){
+                                    target = target.previousElementSibling;
+                                }
+                                target.classList.add('current');
 
                                 if(/correct/.test(currentTarget.classList)){
                                     // 回答正确的逻辑
                                     if(music_status){
-                                        music_correct.play();
+                                        byId('music_correct').play();
                                     }
-                                    img_correct.style.display = 'block';
+                                    byId('img_correct').style.display = 'block';
                                 }else{
                                     // 回答错误的逻辑
                                     if(music_status){
-                                        music_incorrect.play();
+                                        byId('music_incorrect').play();
                                     }
-                                    img_incorrect.style.display = 'block';
+                                    byId('img_incorrect').style.display = 'block';
                                 }
-
-                                setTimeout(function(){
-                                    if(question_current_index != 1){
-                                        if(music_status){
-                                            // 处理iPhone6以下的多个音频同时播放问题
-                                            music_part2.play();
-                                        }
-
-                                        // 隐藏图片
-                                        img_correct.style.display = 'none';
-                                        img_incorrect.style.display = 'none';
-
-                                        // 去掉原来的correct类
-                                        /correct/.test(question_item1.className) ? question_item1.classList.remove('correct') : question_item2.classList.remove('correct');
-
-                                        // 渲染下一道题
-                                        switch(question_current_index){
-                                            case 1: question_index.innerHTML = '第二题'; break;
-                                            case 2: question_index.innerHTML = '第三题'; break;
-                                            case 3: question_index.innerHTML = '第四题'; break;
-                                            case 4: question_index.innerHTML = '第五题'; break;
-                                            case 5: question_index.innerHTML = '第六题'; break;
-                                            case 6: question_index.innerHTML = '第七题'; break;
-                                            case 7: question_index.innerHTML = '第八题'; break;
-                                            case 8: question_index.innerHTML = '第九题'; break;
-                                            case 9: question_index.innerHTML = '第十题'; break;
-                                        }
-                                        question_title.innerHTML = question_current[question_current_index].question;
-                                        question_current[question_current_index].answer[0].correct ? question_item1.classList.add('correct') : question_item2.classList.add('correct');
-                                        question_item1_span.innerHTML = 'A.' + question_current[question_current_index].answer[0].content;
-                                        question_item2_span.innerHTML = 'B.' + question_current[question_current_index].answer[1].content;
-                                        question_current_index++; // 题号自增
-
-                                        current_i_classList.remove('current'); // 删除选中状态
-
-                                        // 将状态设置为可答题
-                                        answer_status = true;
-                                    }else{
-                                        if(music_status){
-                                            // 处理iPhone6以下的多个音频同时播放问题
-                                            music_part2.play();
-                                        }
-
-                                        // 已经答完题了，跳转到下一页
-                                        byId('page5_sub_page2').style.display = 'none';
-                                        up_logo.style.display = 'block';
-                                        play_list[4] = false;
-                                    }
-                                }, 1500);
                             }
                         });
 
+                        // 绑定提示音乐事件
+                        var musicEnd = function(){
+                            if(question_current_index != 10){
+                                var question_index = byId('question_index'),
+                                    question_title = byId('question_title'),
+                                    question_item1 = byId('question_item1'),
+                                    question_item1_span = byTagName('span', question_item1)[0],
+                                    question_item2 = byId('question_item2'),
+                                    question_item2_span = byTagName('span', question_item2)[0],
+                                    current_i = byTagName('i', byId('question_item1'))[0];
+
+                                if(music_status){
+                                    // 处理iPhone6以下的多个音频同时播放问题
+                                    byId('music_part2').play();
+                                }
+
+                                // 隐藏图片
+                                byId('img_correct').style.display = 'none';
+                                byId('img_incorrect').style.display = 'none';
+
+                                // 去掉原来的correct类
+                                /correct/.test(question_item1.className) ? question_item1.classList.remove('correct') : question_item2.classList.remove('correct');
+
+                                // 渲染下一道题
+                                switch(question_current_index){
+                                    case 1: question_index.innerHTML = '第二题'; break;
+                                    case 2: question_index.innerHTML = '第三题'; break;
+                                    case 3: question_index.innerHTML = '第四题'; break;
+                                    case 4: question_index.innerHTML = '第五题'; break;
+                                    case 5: question_index.innerHTML = '第六题'; break;
+                                    case 6: question_index.innerHTML = '第七题'; break;
+                                    case 7: question_index.innerHTML = '第八题'; break;
+                                    case 8: question_index.innerHTML = '第九题'; break;
+                                    case 9: question_index.innerHTML = '第十题'; break;
+                                }
+                                question_title.innerHTML = question_current[question_current_index].question;
+                                question_current[question_current_index].answer[0].correct ? question_item1.classList.add('correct') : question_item2.classList.add('correct');
+                                question_item1_span.innerHTML = 'A.' + question_current[question_current_index].answer[0].content;
+                                question_item2_span.innerHTML = 'B.' + question_current[question_current_index].answer[1].content;
+                                question_current_index++; // 题号自增
+
+                                if(!/current/.test(current_i.className)){
+                                    current_i = byTagName('i', byId('question_item2'))[0];
+                                }
+                                current_i.classList.remove('current'); // 删除选中状态
+
+                                // 将状态设置为可答题
+                                answer_status = true;
+                            }else{
+                                if(music_status){
+                                    // 处理iPhone6以下的多个音频同时播放问题
+                                    byId('music_part2').play();
+                                }
+
+                                // 已经答完题了，跳转到下一页
+                                byId('page5_sub_page2').style.display = 'none';
+                                byId('up_logo').style.display = 'block';
+                                play_list[4] = false;
+                                byId('question_item').onclick = null;
+                            }
+                        };
+                        byId('music_correct').addEventListener('ended', musicEnd);
+                        byId('music_incorrect').addEventListener('ended', musicEnd);
+
                         // 绑定另一个红包点击事件
                         byId('redBagOtherClick').addEventListener('click', function(e){
+                            byId('music_correct').onended = null;
+                            byId('music_incorrect').onended = null;
                             byId('page7_sub_page1').style.display = 'none';
                         });
 
@@ -1464,7 +1486,6 @@
                         //         ]
                         //     });
                         //     wx.ready(function () {
-                        //         // 1 判断当前版本是否支持指定 JS 接口，支持批量判断
                         //         wx.checkJsApi({
                         //             jsApiList: [
                         //                 'getNetworkType',
@@ -1477,7 +1498,7 @@
                         //             menuList: [
                         //                 'menuItem:share:appMessage',
                         //                 'menuItem:share:timeline'
-                        //             ] // 要显示的菜单项，所有menu项见附录3
+                        //             ]
                         //         });
 
                         //         // 微信JSSDK接口用到的参数
@@ -1504,11 +1525,10 @@
                         //             "link": lineLink,
                         //             "imgUrl": imgUrl,
                         //             success: function () {
+                        //                 byId('share_tips').style.display = 'none';
+                        //                 byId('key_wrapper').style.display = 'block';
                         //             }
                         //         });
-                        //     });
-
-                        //     wx.error(function (res) {
                         //     });
                         // }
 
@@ -1520,14 +1540,14 @@
                             byId('swiper-wrapper').style.backgroundColor = 'transparent';
                             byId('page1').style.visibility = 'visible';
                             byId('music').style.visibility = 'visible';
-                            music_part1.play();
+                            byId('music_part1').play();
                         });
                     }else{
-                        $('body')[0].innerHTML = '听说服务器挂了，请重试~';
+                        byTagName('body')[0].innerHTML = '听说服务器挂了，请重试~';
                     }
                 },
                 "error": function(json) {
-                    $('body')[0].innerHTML = '听说服务器挂了，请重试~';
+                    byTagName('body')[0].innerHTML = '听说服务器挂了，请重试~';
                 }
             });
         });
