@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>“智”回家的你</title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script src="lib/pace.min.js"></script>
+    <link href="lib/pace-theme-loading-bar.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="lib/swiper.min.css">
+    <script type="text/javascript" src="lib/swiper.min.js"></script>
+    <script type="text/javascript" src="lib/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <link rel="shortcut icon" href="http://h5.china.com.cn/cxwb/20151230/zhihui2015special/images/share.jpg" />
+    <style>
+        /***********************全局reset***********************/
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, font, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            outline: 0;
+            font-size: 100%;
+            vertical-align: baseline;
+            background: transparent;
+        }
+        body {
+            line-height: 1;
+        }
+        ol, ul {
+            list-style: none;
+        }
+        blockquote, q {
+            quotes: none;
+        }
+        blockquote:before, blockquote:after, q:before, q:after {
+            content: '';
+            content: none;
+        }
+        :focus {
+            outline: 0;
+        }
+        ins {
+            text-decoration: none;
+        }
+        del {
+            text-decoration: line-through;
+        }
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+        * {
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+            -moz-tap-highlight-color: rgba(0,0,0,0);
+            -ms-tap-highlight-color: rgba(0,0,0,0);
+            tap-highlight-color: rgba(0,0,0,0);
+            -webkit-tap-highlight-color: transparent; /* For some Androids */
+            -moz-tap-highlight-color: transparent;
+            -ms-tap-highlight-color: transparent;
+            tap-highlight-color: transparent;
+        }
+        .animated {
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+            -webkit-transform: translate3d(0, 0, 0);
+            -moz-transform: translate3d(0, 0, 0);
+            -ms-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+            -webkit-backface-visibility: hidden;
+            -moz-backface-visibility: hidden;
+            -ms-backface-visibility: hidden;
+            backface-visibility: hidden;
+            -webkit-perspective: 1000;
+            -moz-perspective: 1000;
+            -ms-perspective: 1000;
+            perspective: 1000;
+        }
+        .animated.infinite {
+            -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+        }
+        .animate {
+            display: none;
+        }
+        @-webkit-keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        .fadeIn {
+            -webkit-animation-name: fadeIn;
+            animation-name: fadeIn;
+        }
+        @-webkit-keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+        .fadeOut {
+            -webkit-animation-name: fadeOut;
+            animation-name: fadeOut;
+        }
+        @-webkit-keyframes fadeInOut {
+            0% {
+                opacity: 0;
+            }
+            30% {
+                opacity: 1;
+            }
+            70% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+            }
+            30% {
+                opacity: 1;
+            }
+            70% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+        .fadeInOut {
+            -webkit-animation-name: fadeInOut;
+            animation-name: fadeInOut;
+        }
+        @-webkit-keyframes slideOutUp {
+            from {
+                -webkit-transform: translate3d(0, 0, 0);
+                -moz-transform: translate3d(0, 0, 0);
+                -ms-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+            to {
+                visibility: hidden;
+                -webkit-transform: translate3d(0, -100%, 0);
+                -moz-transform: translate3d(0, -100%, 0);
+                -ms-transform: translate3d(0, -100%, 0);
+                transform: translate3d(0, -100%, 0);
+            }
+        }
+        @keyframes slideOutUp {
+            from {
+                -webkit-transform: translate3d(0, 0, 0);
+                -moz-transform: translate3d(0, 0, 0);
+                -ms-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+            to {
+                visibility: hidden;
+                -webkit-transform: translate3d(0, -100%, 0);
+                -moz-transform: translate3d(0, -100%, 0);
+                -ms-transform: translate3d(0, -100%, 0);
+                transform: translate3d(0, -100%, 0);
+            }
+        }
+        .slideOutUp {
+            -webkit-animation-name: slideOutUp;
+            animation-name: slideOutUp;
+        }
+        .duration1s {
+            -webkit-animation-duration: 1s;
+            animation-duration: 1s;
+        }
+        .duration3s {
+            -webkit-animation-duration: 3s;
+            animation-duration: 3s;
+        }
+        .duration4s {
+            -webkit-animation-duration: 4s;
+            animation-duration: 4s;
+        }
+        html, body {
+            position: relative;
+            height: 100%;
+        }
+        body {
+            font-family: Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif;
+            font-size: 0.625em;
+            color: #000;
+            margin: 0;
+            padding: 0;
+        }
+        .swiper-container {
+            width: 100%;
+            height: 100%;
+        }
+        .swiper-wrapper {
+            background-color: #FBF4E5;
+        }
+        .swiper-slide {
+            display: flex;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+        .swiper-slide img {
+            width: 100%;
+            position: absolute;
+            left: 0;
+        }
+        .swiper-slide img.bottom {
+            bottom: 0;
+        }
+        .swiper-slide img.top {
+            top: 0;
+        }
+        #music {
+            position: absolute;
+            background-color: transparent;
+            color: white;
+            z-index: 999;
+            height: 8%;
+            width: 5%;
+            top: 3%;
+            left: 3%;
+            visibility: hidden;
+        }
+        #music.on {
+            background: transparent url('images/music-1.png') center center no-repeat;
+            background-size: 100%;
+        }
+        #music.off {
+            background: transparent url('images/music-2.png') center center no-repeat;
+            background-size: 100%;
+        }
+
+        #up_logo{
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            z-index: 9999999;
+            margin-left: -30px;
+            display: none;
+        }
+        #page1 {
+            background: #FBF4E5 url('images/0-1.png') bottom center no-repeat;
+            background-size: 100%;
+            visibility: hidden;
+        }
+        #page2 {
+            background: #FBF4E5 url('images/1-1.png') center center no-repeat;
+            background-size: 100%;
+        }
+        #page3 {
+            background: #FDD86F url('images/2-1.png') center center no-repeat;
+            background-size: 100%;
+        }
+        #page4 {
+            background: #FDD86F url('images/3-1.png') center center no-repeat;
+            background-size: 100%;
+        }
+        #page5 .sub_page {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+        }
+        #page5 #page5_sub_page1 {
+            background: #FDD86F url('images/4-1.png');
+            background-size: 100%;
+            z-index: 99;
+        }
+        #page5 #page5_sub_page1 #redBagClick {
+            position: absolute;
+            left: 37.5%;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        #page5 #page5_sub_page2 {
+            background: #FDD86F url('images/4-1.png');
+            background-size: 100%;
+            z-index: 98;
+        }
+        #page5 #page5_sub_page2 .question_wrapper {
+            position: absolute;
+            left: 0;
+            width: 100%;
+        }
+        #page5 #page5_sub_page2 .question_wrapper #question_index {
+            color: white;
+            font-size: 2em;
+        }
+        #page5 #page5_sub_page2 .question_wrapper #question_title {
+            color: #F8D36A;
+            line-height: 1.6em;
+            font-size: 1.4em;
+            width: 60%;
+            margin: 15px auto 0;
+            text-align: left;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #D34649;
+            box-shadow: 0 2px 1px #C63B3F inset, 0 -2px 1px #EB6668 inset;
+            white-space: pre-wrap;
+        }
+        #page5 #page5_sub_page2 .question_wrapper #question_item {
+            color: #F8D36A;
+            overflow: hidden;
+            width: 60%;
+            margin: 25px auto 0;
+        }
+        #page5 #page5_sub_page2 .question_wrapper #question_item div {
+            float: left;
+            width: 50%;
+            text-align: left;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+        #page5 #page5_sub_page2 .question_wrapper #question_item div#question_item1 {
+            padding-right: 2%;
+        }
+        #page5 #page5_sub_page2 .question_wrapper #question_item div#question_item2 {
+            padding-left: 2%;
+        }
+        #page5 #page5_sub_page2 .question_wrapper #question_item div i {
+            float: left;
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            border-radius: 5px;
+            background-color: #D34649;
+            box-shadow: 0 2px 1px #C63B3F inset, 0 -2px 1px #EB6668 inset;
+        }
+        #page5 #page5_sub_page2 .question_wrapper #question_item div i.current {
+            background: #D34649 url('images/5-2.png') center center no-repeat;
+            background-size: 15px 20px;
+        }
+        #page5 #page5_sub_page2 .question_wrapper #question_item div span {
+            font-size: 1.4em;
+            line-height: 1.4em;
+        }
+        #page5 #page5_sub_page3 {
+            background: #FBF4E5 url('images/6-1.png') center center no-repeat;
+            background-size: 100%;
+            z-index: 97;
+        }
+        #page5 #page5_sub_page3 p {
+            position: absolute;
+            width: 100%;
+            top: 65%;
+            color: #886C50;
+            font-size: 1.6em;
+            padding: 0 30px;
+            box-sizing: border-box;
+        }
+        #page5 #page5_sub_page3 p em {
+            font-size: 2em;
+            display: inline-block;
+            margin: 0 8px;
+            color: #FD7073;
+            font-style: normal;
+        }
+        #img_correct, #img_incorrect {
+            display: none;
+        }
+        #page6 {
+            background-color: #FBF4E5;
+        }
+        #page7 .sub_page {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+        }
+        #page7 #page7_sub_page1 {
+            background: #FBF4E5 url('images/8-1.png') center center no-repeat;
+            background-size: 100%;
+            z-index: 99;
+        }
+        #page7 #page7_sub_page1 #redBagOtherClick {
+            width: 64%;
+            position: absolute;
+            left: 18%;
+            cursor: pointer;
+        }
+        #page7 #page7_sub_page2 {
+            background: #FBF4E5 url('images/9-1.png') center center no-repeat;
+            background-size: 100%;
+            z-index: 98;
+            display: flex;
+        }
+        #page7 #page7_sub_page2 .two_dimensional_code {
+            position: absolute;
+            z-index: 99999;
+        }
+        #page7 #page7_sub_page2 #key_wrapper {
+            height: 100px;
+            width: 100%;
+            margin-top: 7em;
+            background: transparent url('images/9-4.png') bottom center no-repeat;
+            background-size: 100%;
+            display: none;
+        }
+        #page7 #page7_sub_page2 #key_wrapper #key {
+            background-color: #707070;
+            color: white;
+            padding: 10px;
+            font-size: 1.8em;
+            width: 12em;
+            margin: 0 auto;
+        }
+        @media screen and (max-height: 420px) {
+            .swiper-slide img {
+                width: 80%;
+                left: 10%;
+            }
+            #page1 {
+                background-size: 80%;
+            }
+            #page2 {
+                background-size: 80%;
+            }
+            #page3 {
+                background-size: 80%;
+            }
+            #page4 {
+                background-size: 80%;
+            }
+            #page5 #page5_sub_page2 .question_wrapper #question_index {
+                font-size: 1.5em;
+            }
+            #page5 #page5_sub_page2 .question_wrapper #question_title {
+                line-height: 1.4em;
+                font-size: 1.2em;
+                width: 50%;
+                margin: 10px auto 0;
+                padding: 5px;
+            }
+            #page5 #page5_sub_page2 .question_wrapper #question_item {
+                width: 50%;
+                margin: 15px auto 0;
+            }
+            #page5 #page5_sub_page2 .question_wrapper #question_item div#question_item1 {
+                padding-right: 2%;
+            }
+            #page5 #page5_sub_page2 .question_wrapper #question_item div#question_item2 {
+                padding-left: 2%;
+            }
+            #page5 #page5_sub_page2 .question_wrapper #question_item div i {
+                width: 15px;
+                height: 15px;
+                margin-right: 4px;
+            }
+            #page5 #page5_sub_page2 .question_wrapper #question_item div i.current {
+                background-size: 10px 15px;
+            }
+            #page5 #page5_sub_page2 .question_wrapper #question_item div span {
+                font-size: 1.2em;
+                line-height: 1.2em;
+            }
+            #page5 #page5_sub_page1 #redBagClick {
+                left: 40%;
+            }
+            #page7 #page7_sub_page1 {
+                background-size: 80%;
+            }
+            #page7 #page7_sub_page1 #redBagOtherClick {
+                width: 51.2%;
+                left: 24.4%;
+            }
+            #page7 #page7_sub_page2 {
+                background-size: 80%;
+            }
+            #page7 #page7_sub_page2 #key_wrapper {
+                background-size: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="music" class="on">
+        <audio id="music_part1" loop preload>
+            <source src="music/part1.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="music_part2" loop preload>
+            <source src="music/part2.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="music_correct" preload>
+            <source src="music/correct.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="music_incorrect" preload>
+            <source src="music/incorrect.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="music_part3" loop preload>
+            <source src="music/part3.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+    <div id="up_logo">
+        <img class="animated infinite slideOutUp duration1s bottom" src="images/up.png" />
+    </div>
+    <div class="swiper-container">
+        <div id="swiper-wrapper" class="swiper-wrapper swiper-no-swiping">
+            <div id="page1" class="swiper-slide swiper-no-swiping">
+                <img id="page1_img" class="animate fadeIn duration3s center end finish" src="images/0-2.png" data-index="1" />
+            </div>
+            <div id="page2" class="swiper-slide swiper-no-swiping">
+                <img id="page2_img" class="animate fadeInOut duration3s center" src="images/1-2.png" />
+                <img class="animate fadeInOut duration3s center" src="images/1-3.png" />
+                <img class="animate fadeInOut duration3s center" src="images/1-4.png" />
+                <img class="animate fadeIn duration1s bottom finish" src="images/1-5.png" />
+                <img class="animate fadeIn duration1s center end finish" src="images/1-6.png" data-index="2" />
+            </div>
+            <div id="page3" class="swiper-slide swiper-no-swiping">
+                <img id="page3_img" class="animate fadeInOut duration3s center" src="images/2-2.png" />
+                <img class="animate fadeInOut duration4s center" src="images/2-3.png" />
+                <img class="animate fadeIn duration1s center end finish" src="images/2-4.png" data-index="3" />
+            </div>
+            <div id="page4" class="swiper-slide swiper-no-swiping">
+                <img id="page4_img" class="animate fadeInOut duration3s center" src="images/3-2.png" />
+                <img class="animate fadeInOut duration3s center" src="images/3-3.png" />
+                <img class="animate fadeIn duration1s center end finish" src="images/3-4.png" data-index="4" />
+            </div>
+            <div id="page5" class="swiper-slide">
+                <div id="page5_sub_page1" class="sub_page swiper-no-swiping">
+                    <img class="bottom" src="images/4-2.png" />
+                    <div id="redBagClick"></div>
+                </div>
+                <div id="page5_sub_page2" class="sub_page swiper-no-swiping">
+                    <img class="bottom" src="images/5-1.png" />
+                    <div class="question_wrapper">
+                        <p id="question_index"></p>
+                        <p id="question_title"></p>
+                        <div id="question_item">
+                            <div id="question_item1">
+                                <i class="item_control"></i>
+                                <span class="item_control"></span>
+                            </div>
+                            <div id="question_item2">
+                                <i class="item_control"></i>
+                                <span class="item_control"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <img id="img_incorrect" class="bottom" src="images/5-3.png" />
+                    <img id="img_correct" class="bottom" src="images/5-4.png" />
+                </div>
+                <div id="page5_sub_page3" class="sub_page">
+                    <p>您是第<em id="num"></em>位帮助小智回家的人</p>
+                </div>
+            </div>
+            <div id="page6" class="swiper-slide swiper-no-swiping">
+                <img id="page6_img" class="animate fadeInOut duration3s center" src="images/7-1.png" />
+                <img class="animate fadeInOut duration3s center" src="images/7-2.png" />
+                <img class="animate fadeInOut duration3s center" src="images/7-3.png" />
+                <img class="animate fadeInOut duration3s center" src="images/7-4.png" />
+                <img class="animate fadeInOut duration3s center" src="images/7-5.png" />
+                <img class="animate fadeInOut duration3s center" src="images/7-6.png" />
+                <img class="animate fadeInOut duration3s center" src="images/7-7.png" />
+                <img class="animate fadeIn duration1s top finish" src="images/7-8.png" />
+                <img class="animate fadeIn duration1s bottom end finish" src="images/7-9.png" data-index="6" />
+            </div>
+            <div id="page7" class="swiper-slide swiper-no-swiping">
+                <div id="page7_sub_page1" class="sub_page">
+                    <div id="redBagOtherClick"></div>
+                </div>
+                <div id="page7_sub_page2" class="sub_page">
+                    <img id="share_tips" class="top" src="images/9-2.png" />
+                    <img id="two_dimensional_code" class="two_dimensional_code" src="images/9-3.png" />
+                    <img class="bottom" src="images/9-5.png" />
+                    <div id="key_wrapper">
+                        <p id="key"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="animate">
+        <img src="images/music-2.png" />
+        <img src="images/5-2.png" />
+    </div>
+    <script>
+        // helper function
+        function byId(id, context) {
+            context = context || document;
+            return context.getElementById(id);
+        };
+
+        function byClassName(className, context) {
+            context = context || document;
+            return context.getElementsByClassName(className);
+        }
+
+        function byTagName(tagName, context) {
+            context = context || document;
+            return context.getElementsByTagName(tagName);
+        }
+
+        // here we go
+        $(function() {
+            $.ajax({
+                "url": "http://wx.china.cn/prizesn.do",
+                "dataType": "jsonp",
+                success: function(json) {
+                    if (json.result == 'success') {
+                        // 题目
+                        var question_list = [{
+                            "question": "15年，(    )三国签署了今年启动的欧亚经济联盟条约",
+                            "answer": [{
+                                "content": "俄 白 哈",
+                                "correct": true
+                            }, {
+                                "content": "魏 蜀 吴",
+                                "correct": false
+                            }]
+                        }, {
+                            "question": "15年，法国讽刺杂志(    )遭恐袭引全球关注",
+                            "answer": [{
+                                "content": "《查理周刊》",
+                                "correct": true
+                            }, {
+                                "content": "《时尚芭莎》",
+                                "correct": false
+                            }]
+                        }, {
+                            "question": "15年，泰国前总理英拉因(    )被弹劾",
+                            "answer": [{
+                                "content": "大米收购案",
+                                "correct": true
+                            }, {
+                                "content": "长得美",
+                                "correct": false
+                            }]
+                        }, {
+                            "question": "15年，滑雪胜地(    )举行世界经济论坛2015年年会",
+                            "answer": [{
+                                "content": "瑞士达沃斯",
+                                "correct": true
+                            }, {
+                                "content": "迪士尼",
+                                "correct": false
+                            }]
+                        }, {
+                            "question": "15年，俄德法乌四国会谈间50辆(    )由俄开进乌领土",
+                            "answer": [{
+                                "content": "坦克",
+                                "correct": true
+                            }, {
+                                "content": "变形金刚",
+                                "correct": false
+                            }]
+                        }, {
+                            "question": "15年，载有约150名乘客的渡船在(    )帕德玛河沉没",
+                            "answer": [{
+                                "content": "孟加拉",
+                                "correct": true
+                            }, {
+                                "content": "布吉岛",
+                                "correct": false
+                            }]
+                        }, {
+                            "question": "15年，(    )前总理李光耀去世",
+                            "answer": [{
+                                "content": "新加坡",
+                                "correct": true
+                            }, {
+                                "content": "吉隆坡",
+                                "correct": false
+                            }]
+                        }, {
+                            "question": "15年，美古两国领导人时隔(    )再聚首",
+                            "answer": [{
+                                "content": "半世纪",
+                                "correct": true
+                            }, {
+                                "content": "5千年",
+                                "correct": false
+                            }]
+                        }, {
+                            "question": "15年，希拉里正式宣布参加2016年美国(    )",
+                            "answer": [{
+                                "content": "总统大选",
+                                "correct": true
+                            }, {
+                                "content": "州长大选",
+                                "correct": false
+                            }]
+                        }, {
+                            "question": "15年，习大大又对老朋友(    )进行了国事访问",
+                            "answer": [{
+                                "content": "巴基斯坦",
+                                "correct": true
+                            }, {
+                                "content": "巴勒斯坦",
+                                "correct": false
+                            }]
+                        }, {
+                            "question": "15年，俄罗斯迎来纪念(    )胜利70周年",
+                            "answer": [{
+                                "content": "卫国战争",
+                                "correct": true
+                            }, {
+                                "content": "抗日战争",
+                                "correct": false
+                            }]
+                        }, {
+                            "question": "吃货天堂——第42届米兰世博会主题为( )",
+                            "answer": [{
+                                "content": "食物",
+                                "correct": true
+                            }, {
+                                "content": "贪吃蛇",
+                                "correct": false
+                            }]
+                        }, {
+                            "question": "15年，1只中东骆驼带着MERS病毒到(    )旅了趟游",
+                            "answer": [{
+                                "content": "火星",
+                                "correct": false
+                            }, {
+                                "content": "韩国",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "15年，中韩FTA签署，买(    )同款终于不用再剁手",
+                            "answer": [{
+                                "content": "千颂伊",
+                                "correct": true
+                            }, {
+                                "content": "琅琊榜",
+                                "correct": false
+                            }]
+                        }, {
+                            "question": "15年，连任仅(    )的国际足联主席布拉特辞职",
+                            "answer": [{
+                                "content": "四天",
+                                "correct": true
+                            }, {
+                                "content": "四十年",
+                                "correct": false
+                            }]
+                        }, {
+                            "question": "美国心塞了？“好哥们”(    )抢先加入亚投行",
+                            "answer": [{
+                                "content": "腐国",
+                                "correct": true
+                            }, {
+                                "content": "霓虹国",
+                                "correct": false
+                            }]
+                        }, {
+                            "question": "习大大应(    )邀请，参加金砖国家领导人第七次会晤",
+                            "answer": [{
+                                "content": "普京",
+                                "correct": true
+                            }, {
+                                "content": "朴槿惠",
+                                "correct": false
+                            }]
+                        }, {
+                            "question": "15年，(    )和美国恢复外交后有了美国大使馆",
+                            "answer": [{
+                                "content": "英国",
+                                "correct": false
+                            }, {
+                                "content": "古巴",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "“新视野”号探测器历经(    )“终见”冥王星",
+                            "answer": [{
+                                "content": "9年",
+                                "correct": true
+                            }, {
+                                "content": "3天",
+                                "correct": false
+                            }]
+                        }, {
+                            "question": "史上最酷“双奥”城市(    )将举办2022年冬奥会",
+                            "answer": [{
+                                "content": "北京",
+                                "correct": true
+                            }, {
+                                "content": "东京",
+                                "correct": false
+                            }]
+                        }, {
+                            "question": "伊朗核问题六国今年达成全面协议，各国(    )",
+                            "answer": [{
+                                "content": "累觉不爱",
+                                "correct": false
+                            }, {
+                                "content": "喜大普奔",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "(    )发表战后70周年讲话，未直接向中国道歉",
+                            "answer": [{
+                                "content": "蜡笔小新",
+                                "correct": false
+                            }, {
+                                "content": "安倍晋三",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "15年，难民涌入欧洲，卷福男神呼吁捐助(    )",
+                            "answer": [{
+                                "content": "美国",
+                                "correct": false
+                            }, {
+                                "content": "叙利亚",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "抗战胜利70周年， 中国在(    )举行盛大阅兵",
+                            "answer": [{
+                                "content": "人民广场",
+                                "correct": false
+                            }, {
+                                "content": "天安门广场",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "(    )不顾民众抗议反对，强行通过新安保法",
+                            "answer": [{
+                                "content": "奥巴马",
+                                "correct": false
+                            }, {
+                                "content": "安倍晋三",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "15年，模范CP习大大彭麻麻访美，获学生赠(    )",
+                            "answer": [{
+                                "content": "和服",
+                                "correct": false
+                            }, {
+                                "content": "橄榄球球服",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "15年，美航天局宣布火星表面有(    )活动的证据",
+                            "answer": [{
+                                "content": "雾霾",
+                                "correct": false
+                            }, {
+                                "content": "液态水",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "15年，法国宣布发现14年失踪的马航(    )残骸",
+                            "answer": [{
+                                "content": "DL007",
+                                "correct": false
+                            }, {
+                                "content": "MH370",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "今年，土豪国(    )的圣城麦加发生朝觐者踩踏事故",
+                            "answer": [{
+                                "content": "柬埔寨",
+                                "correct": false
+                            }, {
+                                "content": "沙特阿拉伯",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "15年，俄罗斯在叙利亚展开针对(    )的军事行动",
+                            "answer": [{
+                                "content": "基地组织",
+                                "correct": false
+                            }, {
+                                "content": "ISIS",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "(    )获得2015年诺贝尔生理学或医学奖",
+                            "answer": [{
+                                "content": "村上春树",
+                                "correct": false
+                            }, {
+                                "content": "屠呦呦",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "网传朝鲜15年阅兵(    )是魔鬼的步伐 摩擦摩擦",
+                            "answer": [{
+                                "content": "小碎步",
+                                "correct": false
+                            }, {
+                                "content": "鹅式步伐",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "(    )和11个亚太国家达成TPP协议",
+                            "answer": [{
+                                "content": "泰国",
+                                "correct": false
+                            }, {
+                                "content": "美国",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "英超球员(    )晒与习大大和卡梅伦的最强自拍",
+                            "answer": [{
+                                "content": "鲁尼",
+                                "correct": false
+                            }, {
+                                "content": "阿圭罗",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "15年，《南京大屠杀档案》被列入世界(    )",
+                            "answer": [{
+                                "content": "文化遗产",
+                                "correct": false
+                            }, {
+                                "content": "记忆名录",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "15年，美军舰(    )到中国南海海域 公然挑衅！",
+                            "answer": [{
+                                "content": "泰坦尼克号",
+                                "correct": false
+                            }, {
+                                "content": "拉森号",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "全球聚焦(    )，两岸领导人时隔66年首会面",
+                            "answer": [{
+                                "content": "习奥会",
+                                "correct": false
+                            }, {
+                                "content": "习马会",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "(    )出席2015年APEC，爸爸你咋不上天呢？",
+                            "answer": [{
+                                "content": "王思聪",
+                                "correct": false
+                            }, {
+                                "content": "马云",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "15年，习大大参加在星月之国(    )举办的G20峰会",
+                            "answer": [{
+                                "content": "彩云国",
+                                "correct": false
+                            }, {
+                                "content": "土耳其",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "15年(    )发生后，世界掀起共同打击恐怖主义热潮",
+                            "answer": [{
+                                "content": "9·11事件",
+                                "correct": false
+                            }, {
+                                "content": "巴黎恐袭",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "土耳其击毁战斗民族(    )战机，土耳其烤肉卒",
+                            "answer": [{
+                                "content": "白俄罗斯",
+                                "correct": false
+                            }, {
+                                "content": "俄罗斯",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "马云在(    )演讲称，雾霾太可怕,想回外星去",
+                            "answer": [{
+                                "content": "火星",
+                                "correct": false
+                            }, {
+                                "content": "巴黎气候大会",
+                                "correct": true
+                            }]
+                        }, {
+                            "question": "习大大乌镇视察互联网之光博览会问过啥？",
+                            "answer": [{
+                                "content": "小笼包",
+                                "correct": false
+                            }, {
+                                "content": "微信红包",
+                                "correct": true
+                            }]
+                        }];
+
+                        var question_current, // 随机挑选的题目
+                            question_current_index = 1, // 当前题目的题号
+                            answer_status = true, // 是否可以答题
+                            music_status = true, // 音乐全局播放状态
+                            play_list = [false, true, true, true, true, true, true]; // 记录各页播放状态
+
+                        // 随机挑选题目
+                        question_current = (function(list) {
+                            var current_list_index = [], // 用于保存题号
+                                current_list = [], // 用于保存题目
+                                length = list.length,
+                                temp,
+                                i = 9; // 随机挑9道题，并外加最后1题，共10题
+
+                            while (i > 0) {
+                                temp = Math.floor(Math.random() * (length - 2)); // 因为最后一题是固定的，所以要减2
+                                if ($.inArray(temp, current_list_index) == -1) {
+                                    current_list_index.push(temp);
+                                    i--;
+                                }
+                            }
+
+                            current_list_index.push(length - 1); // 增加最后1道题
+
+                            // 将题号转化为对应的题目
+                            for (i = 0, length = current_list_index.length; i < length; i++) {
+                                current_list.push(list[current_list_index[i]]);
+                            }
+
+                            return current_list;
+                        })(question_list);
+                        question_list = null;
+
+                        // init 第1道题目
+                        (function() {
+                            var question_index = byId('question_index'),
+                                question_title = byId('question_title'),
+                                question_item1 = byId('question_item1'),
+                                question_item1_span = byTagName('span', question_item1)[0],
+                                question_item2 = byId('question_item2'),
+                                question_item2_span = byTagName('span', question_item2)[0];
+                            question_index.innerHTML = '第一题';
+                            question_title.innerHTML = question_current[0].question;
+                            (question_current[0].answer[0].correct) ? (question_item1.classList.add('correct')) : (question_item2.classList.add('correct'));
+                            question_item1_span.innerHTML = 'A.' + question_current[0].answer[0].content;
+                            question_item2_span.innerHTML = 'B.' + question_current[0].answer[1].content;
+                        })();
+
+                        // 初始化参与人数
+                        byId('num').innerHTML = json.id;
+
+                        // 初始化兑换码
+                        byId('key').innerHTML = json.sn;
+
+                        // init swiper
+                        var swiper = new Swiper('.swiper-container', {
+                            effect: 'fade',
+                            direction: 'vertical',
+                            noSwiping: true,
+                            onSlideChangeEnd: function(swiper) {
+                                var index = swiper.activeIndex;
+                                if (play_list[index]) {
+                                    byId('up_logo').style.display = 'none';
+                                    play_list[index] = false;
+                                    var img = byId('page' + (index + 1) + '_img');
+                                    if(img != null){
+                                        img.className = img.className.replace(/animate/, 'animated');
+                                    }
+                                }
+                                switch (index) {
+                                    case 3:
+                                        {
+                                            if (music_status) {
+                                                var music_part1 = byId('music_part1');
+                                                byId('music_part2').pause();
+                                                if (music_part1.paused) {
+                                                    music_part1.play();
+                                                }
+                                            }
+                                            break;
+                                        }
+                                    case 4:
+                                        {
+                                            if (music_status) {
+                                                var music_part2 = byId('music_part2');
+                                                byId('music_part1').pause();
+                                                byId('music_part3').pause();
+                                                if (music_part2.paused) {
+                                                    music_part2.play();
+                                                }
+                                            }
+                                            break;
+                                        }
+                                    case 5:
+                                        {
+                                            if (music_status) {
+                                                var music_part3 = byId('music_part3');
+                                                byId('music_part2').pause();
+                                                if (music_part3.paused) {
+                                                    music_part3.play();
+                                                }
+                                            }
+                                            break;
+                                        }
+                                }
+                            }
+                        });
+
+                        byTagName('body')[0].addEventListener('touchmove', function(e) {
+                            e.preventDefault();
+                        });
+
+                        // 音乐按钮点击事件
+                        byId('music').addEventListener('click', function(e) {
+                            var music = byId('music');
+                            if (music_status) { // 暂停音乐逻辑
+                                music_status = false;
+                                switch (swiper.activeIndex) {
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        {
+                                            byId('music_part1').pause();
+                                            break;
+                                        }
+                                    case 4:
+                                        {
+                                            byId('music_part2').pause();
+                                            if (!byId('music_correct').paused) {
+                                                byId('music_correct').pause();
+                                            }
+                                            if (!byId('music_incorrect').paused) {
+                                                byId('music_incorrect').pause();
+                                            }
+                                            break;
+                                        }
+                                    default:
+                                        {
+                                            byId('music_part3').pause();
+                                        }
+                                }
+                                music.className = music.className.replace(/on/, 'off');
+                            } else { // 播放音乐逻辑
+                                music_status = true;
+                                switch (swiper.activeIndex) {
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        {
+                                            byId('music_part1').play();
+                                            break;
+                                        }
+                                    case 4:
+                                        {
+                                            byId('music_part2').play();
+                                            break;
+                                        }
+                                    default:
+                                        {
+                                            byId('music_part3').play();
+                                        }
+                                }
+                                music.className = music.className.replace(/off/, 'on');
+                            }
+                        });
+
+                        // 绑定animationend事件
+                        byId('swiper-wrapper').addEventListener('webkitAnimationEnd', function(e) {
+                            var target = e.target,
+                                className = target.className,
+                                next = target.nextElementSibling;
+                            if (/end/.test(className)) {
+                                var index = target.dataset.index;
+                                byId('up_logo').style.display = 'block';
+                                byId('page' + index).classList.remove('swiper-no-swiping');
+                            }
+                            if (/finish/.test(className)) {
+                                if (/bottom/.test(className)) {
+                                    target.className = 'finish bottom';
+                                } else if (/top/.test(className)) {
+                                    target.className = 'finish top';
+                                } else {
+                                    target.className = 'finish';
+                                }
+                            } else {
+                                target.className = 'animate';
+                            }
+                            if(next != null){
+                                next.className = next.className.replace(/animate/, 'animated');
+                            }
+                        });
+
+                        // 绑定红包点击事件
+                        byId('redBagClick').addEventListener('click', function(e) {
+                            byId('page5_sub_page1').style.display = 'none';
+                        });
+
+                        // 绑定答题事件
+                        byId('question_item').addEventListener('click', function(e) {
+                            byId('redBagClick').onclick = null;
+                            var target = e.target;
+                            if (answer_status && /item_control/.test(target.className)) {
+                                // 将状态设置为不可答题，避免重复答题
+                                answer_status = false;
+
+                                var currentTarget = target.parentNode;
+                                if (target.nodeName == 'SPAN') {
+                                    target = target.previousElementSibling;
+                                }
+                                target.classList.add('current');
+
+                                if (/correct/.test(currentTarget.classList)) {
+                                    // 回答正确的逻辑
+                                    if (music_status) {
+                                        byId('music_correct').play();
+                                    }
+                                    byId('img_correct').style.display = 'block';
+                                } else {
+                                    // 回答错误的逻辑
+                                    if (music_status) {
+                                        byId('music_incorrect').play();
+                                    }
+                                    byId('img_incorrect').style.display = 'block';
+                                }
+                            }
+                        });
+
+                        // 绑定提示音乐事件
+                        var musicEnd = function() {
+                            if (question_current_index != 10) {
+                                var question_index = byId('question_index'),
+                                    question_title = byId('question_title'),
+                                    question_item1 = byId('question_item1'),
+                                    question_item1_span = byTagName('span', question_item1)[0],
+                                    question_item2 = byId('question_item2'),
+                                    question_item2_span = byTagName('span', question_item2)[0],
+                                    current_i = byTagName('i', byId('question_item1'))[0];
+
+                                if (music_status) {
+                                    // 处理iPhone6以下的多个音频同时播放问题
+                                    byId('music_part2').play();
+                                }
+
+                                // 隐藏图片
+                                byId('img_correct').style.display = 'none';
+                                byId('img_incorrect').style.display = 'none';
+
+                                // 去掉原来的correct类
+                                /correct/.test(question_item1.className) ? question_item1.classList.remove('correct') : question_item2.classList.remove('correct');
+
+                                // 渲染下一道题
+                                switch (question_current_index) {
+                                    case 1:
+                                        question_index.innerHTML = '第二题';
+                                        break;
+                                    case 2:
+                                        question_index.innerHTML = '第三题';
+                                        break;
+                                    case 3:
+                                        question_index.innerHTML = '第四题';
+                                        break;
+                                    case 4:
+                                        question_index.innerHTML = '第五题';
+                                        break;
+                                    case 5:
+                                        question_index.innerHTML = '第六题';
+                                        break;
+                                    case 6:
+                                        question_index.innerHTML = '第七题';
+                                        break;
+                                    case 7:
+                                        question_index.innerHTML = '第八题';
+                                        break;
+                                    case 8:
+                                        question_index.innerHTML = '第九题';
+                                        break;
+                                    case 9:
+                                        question_index.innerHTML = '第十题';
+                                        break;
+                                }
+                                question_title.innerHTML = question_current[question_current_index].question;
+                                question_current[question_current_index].answer[0].correct ? question_item1.classList.add('correct') : question_item2.classList.add('correct');
+                                question_item1_span.innerHTML = 'A.' + question_current[question_current_index].answer[0].content;
+                                question_item2_span.innerHTML = 'B.' + question_current[question_current_index].answer[1].content;
+                                question_current_index++; // 题号自增
+
+                                if (!/current/.test(current_i.className)) {
+                                    current_i = byTagName('i', byId('question_item2'))[0];
+                                }
+                                current_i.classList.remove('current'); // 删除选中状态
+
+                                // 将状态设置为可答题
+                                answer_status = true;
+                            } else {
+                                if (music_status) {
+                                    // 处理iPhone6以下的多个音频同时播放问题
+                                    byId('music_part2').play();
+                                }
+
+                                // 已经答完题了，跳转到下一页
+                                byId('page5_sub_page2').style.display = 'none';
+                                byId('up_logo').style.display = 'block';
+                                play_list[4] = false;
+                                byId('question_item').onclick = null;
+                            }
+                        };
+                        byId('music_correct').addEventListener('ended', musicEnd);
+                        byId('music_incorrect').addEventListener('ended', musicEnd);
+
+                        // 绑定另一个红包点击事件
+                        byId('redBagOtherClick').addEventListener('click', function(e) {
+                            byId('music_correct').onended = null;
+                            byId('music_incorrect').onended = null;
+                            byId('page7_sub_page1').style.display = 'none';
+                        });
+
+                        // 处理适配
+                        (function() {
+                            var clientWidth = document.body.clientWidth,
+                                clientHeight = document.body.clientHeight,
+                                img_width = 640,
+                                img_height = 1136,
+                                redBagClick_width = 165;
+                            redBagClick_bottom = 350,
+                                question_top = 510,
+                                redBagOtherClick_height = 585,
+                                redBagOtherClick_bottom = 273,
+                                two_dimensional_code_width = 181,
+                                two_dimensional_code_top = 459;
+                            if (clientHeight <= 420) {
+                                clientWidth = clientWidth * 0.8;
+                            }
+                            var real_height = (clientWidth / img_width) * img_height,
+                                diff_height = clientHeight - real_height;
+                            $('#page5_sub_page2 .question_wrapper').css({
+                                "top": (clientWidth / img_width) * question_top + diff_height + 'px'
+                            });
+                            $('#redBagClick').css({
+                                "width": (redBagClick_width / img_width) * clientWidth,
+                                "height": (redBagClick_width / img_width) * clientWidth,
+                                "bottom": (redBagClick_bottom / img_height) * real_height + 'px'
+                            });
+                            $('#redBagOtherClick').css({
+                                "height": (redBagOtherClick_height / img_height) * real_height,
+                                "bottom": (redBagOtherClick_bottom / img_height) * real_height + diff_height / 2 + 'px'
+                            });
+                            $('#two_dimensional_code').css({
+                                "width": (two_dimensional_code_width / img_width) * clientWidth,
+                                "height": (two_dimensional_code_width / img_width) * clientWidth,
+                                "top": (clientWidth / img_width) * two_dimensional_code_top + diff_height / 2 + 'px',
+                                "left": '50%',
+                                "margin-left": '-' + ((two_dimensional_code_width / img_width) * clientWidth) / 2 + 'px'
+                            });
+                            $('.swiper-slide .center').css({
+                                "top": diff_height / 2
+                            });
+                        })();
+
+                        // 微信JSSDK
+                        function setData(data) {
+                            wx.config({
+                                debug: false,
+                                appId: data.appId,
+                                timestamp: data.timestamp,
+                                nonceStr: data.nonceStr,
+                                signature: data.signature,
+                                jsApiList: [
+                                    'checkJsApi',
+                                    'onMenuShareTimeline',
+                                    'onMenuShareAppMessage',
+                                    'onMenuShareQQ',
+                                    'onMenuShareWeibo'
+                                ]
+                            });
+                            wx.ready(function() {
+                                wx.checkJsApi({
+                                    jsApiList: [
+                                        'getNetworkType',
+                                        'previewImage'
+                                    ],
+                                    success: function(res) {}
+                                });
+                                wx.showMenuItems({
+                                    menuList: [
+                                        'menuItem:share:appMessage',
+                                        'menuItem:share:timeline'
+                                    ]
+                                });
+
+                                // 微信JSSDK接口用到的参数
+                                var imgUrl = "http://h5.china.com.cn/cxwb/20151230/zhihui2015special/images/share.jpg",
+                                    lineLink = "http://h5.china.com.cn/cxwb/20151230/zhihui2015special/index.html",
+                                    descContent = '再见2015，相聚2016',
+                                    shareTitle = '“智”回家的你：马上领取红包，再见2015，相聚2016';
+
+                                // 分享到朋友圈
+                                wx.onMenuShareTimeline({
+                                    "title": shareTitle,
+                                    "link": lineLink,
+                                    "imgUrl": imgUrl,
+                                    success: function() {
+                                        byId('share_tips').style.display = 'none';
+                                        byId('key_wrapper').style.display = 'block';
+                                    }
+                                });
+
+                                // 分享给朋友
+                                wx.onMenuShareAppMessage({
+                                    "title": shareTitle,
+                                    "desc": descContent,
+                                    "link": lineLink,
+                                    "imgUrl": imgUrl,
+                                    success: function() {
+                                        byId('share_tips').style.display = 'none';
+                                        byId('key_wrapper').style.display = 'block';
+                                    }
+                                });
+                            });
+                        }
+                        (function() {
+                            $.ajax({
+                                async: true,
+                                type: "GET",
+                                url: "http://m.china.com.cn/h5/pai/doCheck?url=" + encodeURIComponent(window.location.href),
+                                success: function(data) {
+                                    setData(data);
+                                },
+                                error: function(msg) {}
+                            });
+                        })();
+
+                        // 页面加载好后开始播放
+                        Pace.once('done', function() {
+                            // 初始化第1页的操作
+                            var img = byId('page1_img'),
+                                swiper_wrapper = byId('swiper-wrapper');
+                            img.className = img.className.replace(/animate/, 'animated');
+                            swiper_wrapper.style.backgroundColor = 'transparent';
+                            swiper_wrapper.classList.remove('swiper-no-swiping');
+                            byId('page1').style.visibility = 'visible';
+                            byId('music').style.visibility = 'visible';
+                            byId('music_part1').play();
+                        });
+                    } else {
+                        byTagName('body')[0].innerHTML = '听说服务器挂了，请重试~';
+                    }
+                },
+                error: function(json) {
+                    byTagName('body')[0].innerHTML = '听说服务器挂了，请重试~';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
