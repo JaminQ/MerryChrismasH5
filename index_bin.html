@@ -1069,7 +1069,7 @@
                         })();
 
                         // 初始化参与人数
-                        byId('num').innerHTML = json.id;
+                        byId('num').innerHTML = ((parseInt(json.id) - 2150) <= 0) ? 1 : (parseInt(json.id) - 2150);
 
                         // 初始化兑换码
                         byId('key').innerHTML = json.sn;
