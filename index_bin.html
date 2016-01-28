@@ -511,18 +511,6 @@
         <audio id="music_part1" loop preload>
             <source src="music/part1.mp3" type="audio/mpeg">
         </audio>
-        <audio id="music_part2" loop preload>
-            <source src="music/part2.mp3" type="audio/mpeg">
-        </audio>
-        <audio id="music_correct" preload>
-            <source src="music/correct.mp3" type="audio/mpeg">
-        </audio>
-        <audio id="music_incorrect" preload>
-            <source src="music/incorrect.mp3" type="audio/mpeg">
-        </audio>
-        <audio id="music_part3" loop preload>
-            <source src="music/part3.mp3" type="audio/mpeg">
-        </audio>
     </div>
     <div id="up_logo">
         <img class="animated infinite slideOutUp duration1s bottom" src="images/up.png" />
@@ -631,6 +619,9 @@
                 "dataType": "jsonp",
                 success: function(json) {
                     if (json.result == 'success') {
+                        // 加载音频
+                        $('#music').append('<audio id="music_part2" loop preload><source src="music/part2.mp3" type="audio/mpeg"></audio><audio id="music_correct" preload><source src="music/correct.mp3" type="audio/mpeg"></audio><audio id="music_incorrect" preload><source src="music/incorrect.mp3" type="audio/mpeg"></audio><audio id="music_part3" loop preload><source src="music/part3.mp3" type="audio/mpeg"></audio>');
+
                         // 题目
                         var question_list = [{
                             "question": "15年，(    )三国签署了今年启动的欧亚经济联盟条约",
