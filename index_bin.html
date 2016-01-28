@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="lib/swiper.min.css">
     <script type="text/javascript" src="lib/swiper.min.js"></script>
     <script type="text/javascript" src="lib/jquery-2.1.3.min.js"></script>
-    <!-- <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script> -->
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <link rel="shortcut icon" href="http://h5.china.com.cn/cxwb/20151230/zhihui2015special/images/share.jpg" />
     <link rel="prefetch" />
     <style>
@@ -1061,7 +1061,7 @@
                         })();
 
                         // 初始化参与人数
-                        byId('num').innerHTML = ((parseInt(json.id) - 2150) <= 0) ? 1 : (parseInt(json.id) - 2150);
+                        byId('num').innerHTML = ((parseInt(json.id) - 2250) <= 0) ? 1 : (parseInt(json.id) - 2250);
 
                         // 初始化兑换码
                         byId('key').innerHTML = json.sn;
@@ -1373,77 +1373,77 @@
                         })();
 
                         // 微信JSSDK
-                        // function setData(data) {
-                        //     wx.config({
-                        //         debug: false,
-                        //         appId: data.appId,
-                        //         timestamp: data.timestamp,
-                        //         nonceStr: data.nonceStr,
-                        //         signature: data.signature,
-                        //         jsApiList: [
-                        //             'checkJsApi',
-                        //             'onMenuShareTimeline',
-                        //             'onMenuShareAppMessage',
-                        //             'onMenuShareQQ',
-                        //             'onMenuShareWeibo'
-                        //         ]
-                        //     });
-                        //     wx.ready(function() {
-                        //         wx.checkJsApi({
-                        //             jsApiList: [
-                        //                 'getNetworkType',
-                        //                 'previewImage'
-                        //             ],
-                        //             success: function(res) {}
-                        //         });
-                        //         wx.showMenuItems({
-                        //             menuList: [
-                        //                 'menuItem:share:appMessage',
-                        //                 'menuItem:share:timeline'
-                        //             ]
-                        //         });
+                        function setData(data) {
+                            wx.config({
+                                debug: false,
+                                appId: data.appId,
+                                timestamp: data.timestamp,
+                                nonceStr: data.nonceStr,
+                                signature: data.signature,
+                                jsApiList: [
+                                    'checkJsApi',
+                                    'onMenuShareTimeline',
+                                    'onMenuShareAppMessage',
+                                    'onMenuShareQQ',
+                                    'onMenuShareWeibo'
+                                ]
+                            });
+                            wx.ready(function() {
+                                wx.checkJsApi({
+                                    jsApiList: [
+                                        'getNetworkType',
+                                        'previewImage'
+                                    ],
+                                    success: function(res) {}
+                                });
+                                wx.showMenuItems({
+                                    menuList: [
+                                        'menuItem:share:appMessage',
+                                        'menuItem:share:timeline'
+                                    ]
+                                });
 
-                        //         // 微信JSSDK接口用到的参数
-                        //         var imgUrl = "http://h5.china.com.cn/cxwb/20151230/zhihui2015special/images/share.jpg",
-                        //             lineLink = "http://h5.china.com.cn/cxwb/20151230/zhihui2015special/index.html",
-                        //             descContent = '再见2015，相聚2016',
-                        //             shareTitle = '“智”回家的你：马上领取红包，再见2015，相聚2016';
+                                // 微信JSSDK接口用到的参数
+                                var imgUrl = "http://h5.china.com.cn/cxwb/20151230/zhihui2015special/images/share.jpg",
+                                    lineLink = "http://h5.china.com.cn/cxwb/20151230/zhihui2015special/index.html",
+                                    descContent = '再见2015，相聚2016',
+                                    shareTitle = '“智”回家的你：马上领取红包，再见2015，相聚2016';
 
-                        //         // 分享到朋友圈
-                        //         wx.onMenuShareTimeline({
-                        //             "title": shareTitle,
-                        //             "link": lineLink,
-                        //             "imgUrl": imgUrl,
-                        //             success: function() {
-                        //                 byId('share_tips').style.display = 'none';
-                        //                 byId('key_wrapper').style.display = 'block';
-                        //             }
-                        //         });
+                                // 分享到朋友圈
+                                wx.onMenuShareTimeline({
+                                    "title": shareTitle,
+                                    "link": lineLink,
+                                    "imgUrl": imgUrl,
+                                    success: function() {
+                                        byId('share_tips').style.display = 'none';
+                                        byId('key_wrapper').style.display = 'block';
+                                    }
+                                });
 
-                        //         // 分享给朋友
-                        //         wx.onMenuShareAppMessage({
-                        //             "title": shareTitle,
-                        //             "desc": descContent,
-                        //             "link": lineLink,
-                        //             "imgUrl": imgUrl,
-                        //             success: function() {
-                        //                 byId('share_tips').style.display = 'none';
-                        //                 byId('key_wrapper').style.display = 'block';
-                        //             }
-                        //         });
-                        //     });
-                        // }
-                        // (function() {
-                        //     $.ajax({
-                        //         async: true,
-                        //         type: "GET",
-                        //         url: "http://m.china.com.cn/h5/pai/doCheck?url=" + encodeURIComponent(window.location.href),
-                        //         success: function(data) {
-                        //             setData(data);
-                        //         },
-                        //         error: function(msg) {}
-                        //     });
-                        // })();
+                                // 分享给朋友
+                                wx.onMenuShareAppMessage({
+                                    "title": shareTitle,
+                                    "desc": descContent,
+                                    "link": lineLink,
+                                    "imgUrl": imgUrl,
+                                    success: function() {
+                                        byId('share_tips').style.display = 'none';
+                                        byId('key_wrapper').style.display = 'block';
+                                    }
+                                });
+                            });
+                        }
+                        (function() {
+                            $.ajax({
+                                async: true,
+                                type: "GET",
+                                url: "http://m.china.com.cn/h5/pai/doCheck?url=" + encodeURIComponent(window.location.href),
+                                success: function(data) {
+                                    setData(data);
+                                },
+                                error: function(msg) {}
+                            });
+                        })();
 
                         // 页面加载好后开始播放
                         Pace.once('done', function() {
